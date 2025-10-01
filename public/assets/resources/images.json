@@ -1,0 +1,16 @@
+[
+  {
+    "name": "Ícono de página",
+    "description": "Ícono que se muestra en las pestañas de la página.",
+    "src": "icon.png",
+    "fit": "contain",
+    "aspect": "1"
+  },
+  {
+    "name": "Logo principal",
+    "description": "Logo que se muestra en el header y en el footer",
+    "src": "logo.png",
+    "fit": "contain",
+    "aspect": "13/4"
+  }
+]

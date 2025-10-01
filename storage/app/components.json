@@ -1,0 +1,2525 @@
+[
+    {
+        "id": "top_bar",
+        "icon": "mdi mdi-tag",
+        "name": "Cintillo",
+        "options": [
+            {
+                "id": "TopBarSimple",
+                "name": "Simple - Stech",
+                "image": "top-bar-simple.png",
+                "generals": [
+                    "cintillo"
+                ]
+            },
+            {
+                "id": "TopBarSocials",
+                "name": "Con redes sociales",
+                "image": "top-bar-socials.png",
+                "data": [
+                    "background_color",
+                    "color",
+                    "isCopyright",
+                    "border_color"
+                ],
+                "using": {
+                    "model": "Social"
+                },
+                "generals": [
+                    "cintillo"
+                ]
+            },
+            {
+                "id": "TopBarCart",
+                "name": "Con Carrito",
+                "image": "top-bar-socials.png",
+                "using": {
+                    "model": "Social"
+                },
+                "generals": [
+                    "cintillo"
+                ],
+                "data": [
+                    "link_cart"
+                ]
+            },
+            {
+                "id": "TopBarCopyright",
+                "name": "Copyright",
+                "image": "top-bar-copyright.png",
+                "generals": [
+                    "copyright"
+                ],
+                "data": [
+                    "background"
+                ]
+            },
+            {
+                "id": "TopBarPanni",
+                "name": "Paani con redes sociales",
+                "image": "top-bar-socials.png",
+                "data": [
+                    "background_color",
+                    "color",
+                    "isCopyright",
+                    "border_color"
+                ],
+                "using": {
+                    "model": "Social"
+                },
+                "generals": [
+                    "cintillo"
+                ]
+            }
+        ]
+    },
+    {
+        "id": "menu",
+        "name": "Menu",
+        "icon": "mdi mdi-page-layout-sidebar-left",
+        "options": [
+            {
+                "id": "MenuSimple",
+                "name": "Menu - Stech",
+                "image": "top-bar-simple.png",
+                "data": [
+                    "showCategories"
+                ],
+                "using": {
+                    "model": "Category",
+                    "with": [
+                        "subcategories"
+                    ]
+                }
+            },
+            {
+                "id": "MenuBananaLab",
+                "name": "Menu - Banana Lab",
+                "image": "top-bar-simple.png",
+                "using": {
+                    "model": "Category",
+                    "with": [
+                        "subcategories"
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "id": "header",
+        "icon": "mdi mdi-page-layout-header",
+        "name": "Header",
+        "options": [
+            {
+                "id": "HeaderSearch",
+                "name": "Con barra de búsqueda",
+                "image": "header-with-search.png",
+                "data": [
+                    "class",
+                    "link_cart"
+                ]
+            },
+            {
+                "id": "HeaderSearchB",
+                "name": "HeaderSearchB",
+                "image": "header-with-search.png",
+                "data": [
+                    "class",
+                    "link_cart",
+                    "showLoginCart",
+                    "mobileSearch"
+                ],
+                "using": {
+                    "model": "Category",
+                    "with": [
+                        "subcategories"
+                    ]
+                },
+                "generals": [
+                    "phone_whatsapp",
+                    "message_whatsapp"
+                ]
+            },
+            {
+                "id": "HeaderMakita",
+                "name": "HeaderMakita",
+                "image": "header-with-search.png",
+                "data": [
+                    "class",
+                    "link_cart",
+                    "showLoginCart"
+                ],
+                "using": {
+                    "model": "Item",
+                    "with": [
+                        "category",
+                        "subcategory",
+                        "brand",
+                        "collection",
+                        "variants"
+                    ]
+                },
+                "generals": [
+                    "phone_whatsapp",
+                    "message_whatsapp"
+                ]
+            },
+            {
+                "id": "HeaderSearchContact",
+                "name": "Header - Kuchara",
+                "image": "header-with-search-contact.png",
+                "data": [
+                    "class",
+                    "link_cart",
+                    "path_product"
+                ],
+                "generals": [
+                    "phone_whatsapp",
+                    "message_whatsapp"
+                ]
+            },
+            {
+                "id": "HeaderSearchMenu",
+                "name": "Con busqueda y menu",
+                "image": "header-with-search.png",
+                "data": [
+                    "class",
+                    "link_cart"
+                ]
+            },
+            {
+                "id": "Header - Sala Fabulosa",
+                "name": "Con busqueda y menu SF",
+                "image": "header-with-search.png",
+                "data": [
+                    "class",
+                    "link_cart"
+                ]
+            },
+            {
+                "id": "HeaderBananaLab",
+                "name": "Header - Banana Lab",
+                "image": "header-with-search.png",
+                "data": [
+                    "class",
+                    "link_cart"
+                ],
+                "using": {
+                    "model": "Category",
+                    "with": [
+                        "subcategories"
+                    ]
+                },
+                "generals": [
+                    "phone_whatsapp",
+                    "message_whatsapp"
+                ]
+            },
+            {
+                "id": "HeaderSimple",
+                "name": "Header - Simple",
+                "image": "header-with-search.png",
+                "data": [
+                    "class",
+                    "link_cart"
+                ],
+                "using": {
+                    "model": "Category",
+                    "with": [
+                        "subcategories"
+                    ]
+                },
+                "generals": [
+                    "phone_whatsapp",
+                    "message_whatsapp",
+                    "email_contact"
+                ]
+            }
+        ]
+    },
+    {
+        "id": "floating",
+        "icon": "mdi mdi-ghost",
+        "name": "Flotantes",
+        "options": [
+            {
+                "id": "WhatsApp",
+                "icon": "mdi mdi-whatsapp",
+                "name": "WhatsApp",
+                "image": "floating-whatsapp.png",
+                "generals": [
+                    "phone_whatsapp",
+                    "message_whatsapp"
+                ]
+            }
+        ]
+    },
+    {
+        "id": "carrusel",
+        "icon": "mdi mdi-view-carousel",
+        "name": "Carrusel",
+        "options": [
+            {
+                "id": "CarruselBenefitsInifinite",
+                "name": "Beneficios",
+                "data": [
+                    "background"
+                ],
+                "using": {
+                    "model": "Indicator"
+                }
+            },
+            {
+                "id": "CarruselBenefitsInifinite2dn1",
+                "name": "CarruselBenefitsInifinite2dn1",
+                "data": [
+                    "background"
+                ],
+                "using": {
+                    "model": "Indicator"
+                }
+            },
+            {
+                "id": "CarruselBenefitsPaani",
+                "name": "Beneficios Paani",
+                "using": {
+                    "model": "Indicator"
+                }
+            },
+            {
+                "id": "CarruselBenefitsSimple",
+                "name": "Beneficios Simple",
+                "data": [
+                    "background"
+                ],
+                "using": {
+                    "model": "Indicator"
+                }
+            },
+           
+            {
+                "id": "CarruselBenefitsSwiper",
+                "name": "Beneficios Simple Swiper",
+                "data": [
+                    "background"
+                ],
+                "using": {
+                    "model": "Indicator"
+                }
+            }
+        ]
+    },
+    {
+        "id": "slider",
+        "icon": "mdi mdi-view-array",
+        "name": "Sliders",
+        "options": [
+            {
+                "id": "SliderBoxed",
+                "name": "Boxed",
+                "image": "slider-boxed.png",
+                "using": {
+                    "model": "Slider",
+                    "fields": [
+                        "name",
+                        "description",
+                        "bg_image",
+                        "button_text",
+                        "button_link"
+                    ]
+                }
+            },
+            {
+                "id": "SliderSimple",
+                "name": "Simple",
+                "image": "slider-simple.png",
+                "data": [
+                    "pagination"
+                ],
+                "using": {
+                    "model": "Slider",
+                    "fields": [
+                        "name",
+                        "description",
+                        "bg_image",
+                        "button_text",
+                        "button_link"
+                    ]
+                }
+            },
+            {
+                "id": "SliderJustImage",
+                "name": "Solo Imagen",
+                "image": "slider-just-image.png",
+                "using": {
+                    "model": "Slider",
+                    "fields": [
+                        "bg_type",
+                        "bg_image",
+                        "bg_video",
+                        "button_link"
+                    ]
+                }
+            },
+            {
+                "id": "SliderSearch",
+                "name": "Search",
+                "image": "slider-search.png",
+                "data": [
+                    "link_catalog",
+                    "placeholder"
+                ],
+                "using": {
+                    "model": "Slider",
+                    "fields": [
+                        "name",
+                        "description",
+                        "bg_image",
+                        "button_text",
+                        "button_link"
+                    ]
+                }
+            },
+            {
+                "id": "SliderInteractive",
+                "name": "Interactivo Loop Nav Pag",
+                "image": "slider-simple.png",
+                "data": [
+                    "infiniteLoop",
+                    "paginationAlignment",
+                    "showNavigation",
+                    "imageBgPosition",
+                    "overlayMobile"
+                ],
+                "using": {
+                    "model": "Slider",
+                    "fields": [
+                        "name",
+                        "description",
+                        "bg_image",
+                        "button_text",
+                        "button_link"
+                    ]
+                }
+            },
+            {
+                "id": "SliderFeaturedMakita",
+                "name": "SliderFeaturedMakita",
+                "image": "slider-simple.png",
+                "data": [
+                    "title",
+                    "description"
+                ],
+                "using": {
+                    "model": "Item",
+                    "filters": [
+                        "featured"
+                    ],
+                    "with": [
+                        "brand"
+                    ],
+                    "limit": 10
+                }
+            },
+            {
+                "id": "SliderBananaLab",
+                "name": "SliderBananaLab",
+                "image": "slider-simple.png",
+                "using": {
+                    "model": "Slider",
+                    "fields": [
+                        "name",
+                        "description",
+                        "bg_image",
+                        "button_text",
+                        "button_link"
+                    ]
+                }
+            },
+            {
+                "id": "SliderImagen",
+                "name": "Imagen",
+                "image": "slider-simple.png",
+                "data": [
+                    "title"
+                ],
+                "using": {
+                    "model": "Brand",
+                    "fields": [
+                        "name",
+                        "description",
+                        "image"
+                    ]
+                }
+            },
+            {
+                "id": "SliderBrandsPaani",
+                "name": "Brand Paani",
+                "image": "slider-simple.png",
+                "data": [
+                    "title"
+                ],
+                "using": {
+                    "model": "Brand",
+                    "fields": [
+                        "name",
+                        "description",
+                        "image"
+                    ]
+                }
+            },
+            {
+                "id": "SliderTwoColumnSwiper",
+                "name": "Two Column Swiper",
+                "image": "slider-simple.png",
+                "data": [
+                    "pagination"
+                ],
+                "using": {
+                    "model": "Slider",
+                    "fields": [
+                        "name",
+                        "description",
+                        "bg_image",
+                        "button_text",
+                        "button_link"
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "id": "filter",
+        "icon": "mdi mdi-filter-menu",
+        "name": "Filtros",
+        "options": [
+            {
+                "id": "FilterSimple",
+                "name": "Simple",
+                "image": "filters-simple.png",
+                "data": [
+                    "path",
+                    "title",
+                    "description",
+                    "link_cart"
+                ],
+                "using": {
+                    "model": "Item"
+                }
+            },
+            {
+                "id": "CatalagoFiltros",
+                "name": "Producto Catalogo Filtro",
+                "image": "products-list.png",
+                "data": [
+                    "path",
+                    "title",
+                    "description",
+                    "link_cart"
+                ],
+                "options": [
+                    {
+                        "id": "default",
+                        "name": "Lista estándar",
+                        "using": {
+                            "model": "Item",
+                            "with": [
+                                "category",
+                                "subcategory",
+                                "brand"
+                            ],
+                            "relations": [
+                                "category",
+                                "tags"
+                            ],
+                            "fields": [
+                                "id",
+                                "name",
+                                "slug",
+                                "price",
+                                "final_price",
+                                "image",
+                                "color"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "with_variants",
+                        "name": "Lista con variantes",
+                        "using": {
+                            "model": "Item",
+                            "with": [
+                                "category",
+                                "subcategory",
+                                "brand",
+                                "collection",
+                                "variants"
+                            ],
+                            "relations": [
+                                "category",
+                                "tags"
+                            ],
+                            "fields": [
+                                "id",
+                                "name",
+                                "slug",
+                                "price",
+                                "final_price",
+                                "image",
+                                "color"
+                            ],
+                            "group_by_name": true
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "CatalagoFiltrosAko",
+                "name": "Producto Catalogo Filtro - Ako",
+                "image": "products-list.png",
+                "data": [
+                    "path",
+                    "title",
+                    "description",
+                    "link_cart"
+                ],
+                "options": [
+                    {
+                        "id": "default",
+                        "name": "Lista estándar",
+                        "using": {
+                            "model": "Item",
+                            "with": [
+                                "category",
+                                "subcategory",
+                                "brand"
+                            ],
+                            "relations": [
+                                "category",
+                                "tags"
+                            ],
+                            "fields": [
+                                "id",
+                                "name",
+                                "slug",
+                                "price",
+                                "final_price",
+                                "image",
+                                "color"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "with_variants",
+                        "name": "Lista con variantes",
+                        "using": {
+                            "model": "Item",
+                            "with": [
+                                "category",
+                                "subcategory",
+                                "brand",
+                                "collection"
+                            ],
+                            "relations": [
+                                "category",
+                                "tags",
+                                "collection"
+                            ],
+                            "fields": [
+                                "id",
+                                "name",
+                                "slug",
+                                "price",
+                                "final_price",
+                                "image",
+                                "color"
+                            ],
+                            "group_by_name": true
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "CatalagoFiltrosPaani",
+                "name": "Producto Catalogo Filtro - Paani",
+                "image": "products-list.png",
+                "data": [
+                    "path",
+                    "title",
+                    "description",
+                    "link_cart",
+                    "background",
+                    "backgroundboton"
+                ],
+                "options": [
+                    {
+                        "id": "default",
+                        "name": "Lista estándar",
+                        "using": {
+                            "model": "Item",
+                            "with": [
+                                "category",
+                                "subcategory",
+                                "brand"
+                            ],
+                            "relations": [
+                                "category",
+                                "tags"
+                            ],
+                            "fields": [
+                                "id",
+                                "name",
+                                "slug",
+                                "price",
+                                "final_price",
+                                "image",
+                                "color"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "with_variants",
+                        "name": "Lista con variantes",
+                        "using": {
+                            "model": "Item",
+                            "with": [
+                                "category",
+                                "subcategory",
+                                "brand",
+                                "collection"
+                            ],
+                            "relations": [
+                                "category",
+                                "tags",
+                                "collection"
+                            ],
+                            "fields": [
+                                "id",
+                                "name",
+                                "slug",
+                                "price",
+                                "final_price",
+                                "image",
+                                "color"
+                            ],
+                            "group_by_name": true
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "CatalagoFiltrosPaani",
+                "name": "Producto Catalogo Filtro - Paani",
+                "image": "products-list.png",
+                "data": [
+                    "path",
+                    "title",
+                    "description",
+                    "link_cart",
+                    "background",
+                    "backgroundboton"
+                ],
+                "options": [
+                    {
+                        "id": "default",
+                        "name": "Lista estándar",
+                        "using": {
+                            "model": "Item",
+                            "with": [
+                                "category",
+                                "subcategory",
+                                "brand"
+                            ],
+                            "relations": [
+                                "category",
+                                "tags"
+                            ],
+                            "fields": [
+                                "id",
+                                "name",
+                                "slug",
+                                "price",
+                                "final_price",
+                                "image",
+                                "color"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "with_variants",
+                        "name": "Lista con variantes",
+                        "using": {
+                            "model": "Item",
+                            "with": [
+                                "category",
+                                "subcategory",
+                                "brand"
+                            ],
+                            "relations": [
+                                "category",
+                                "tags"
+                            ],
+                            "fields": [
+                                "id",
+                                "name",
+                                "slug",
+                                "price",
+                                "final_price",
+                                "image",
+                                "color"
+                            ],
+                            "group_by_name": true
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "FilterSalaFabulosa",
+                "name": "Filtro SalaFabulosa",
+                "image": "products-list.png",
+                "data": [
+                    "path",
+                    "title",
+                    "description",
+                    "link_cart",
+                    "collection",
+                    "category",
+                    "brand",
+                    "color"
+                ],
+                "options": [
+                    {
+                        "id": "default",
+                        "name": "Lista estándar",
+                        "using": {
+                            "model": "Item",
+                            "with": [
+                                "category",
+                                "subcategory",
+                                "brand",
+                                "collection"
+                            ],
+                            "relations": [
+                                "category",
+                                "tags",
+                                "collection"
+                            ],
+                            "fields": [
+                                "id",
+                                "name",
+                                "slug",
+                                "price",
+                                "final_price",
+                                "image",
+                                "color"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "with_variants",
+                        "name": "Lista con variantes",
+                        "using": {
+                            "model": "Item",
+                            "with": [
+                                "category",
+                                "subcategory",
+                                "brand",
+                                "collection"
+                            ],
+                            "relations": [
+                                "category",
+                                "tags",
+                                "collection"
+                            ],
+                            "fields": [
+                                "id",
+                                "name",
+                                "slug",
+                                "price",
+                                "final_price",
+                                "image",
+                                "color"
+                            ],
+                            "group_by_name": true
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "FilterBananaLab",
+                "name": "Filtro FilterBananaLab",
+                "image": "products-list.png",
+                "data": [
+                    "path",
+                    "title",
+                    "description",
+                    "link_cart"
+                ],
+                "options": [
+                    {
+                        "id": "default",
+                        "name": "Lista estándar",
+                        "using": {
+                            "model": "Item",
+                            "with": [
+                                "category",
+                                "subcategory",
+                                "brand"
+                            ],
+                            "relations": [
+                                "category",
+                                "tags"
+                            ],
+                            "fields": [
+                                "id",
+                                "name",
+                                "slug",
+                                "price",
+                                "final_price",
+                                "image",
+                                "color"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "with_variants",
+                        "name": "Lista con variantes",
+                        "using": {
+                            "model": "Item",
+                            "with": [
+                                "category",
+                                "subcategory",
+                                "brand"
+                            ],
+                            "relations": [
+                                "category",
+                                "tags"
+                            ],
+                            "fields": [
+                                "id",
+                                "name",
+                                "slug",
+                                "price",
+                                "final_price",
+                                "image",
+                                "color"
+                            ],
+                            "group_by_name": true
+                        }
+                    }
+                ]
+            },
+            {
+                "id": "FilterCategoryImage",
+                "name": "Categoría con Imagen",
+                "image": "filters-category-image.png",
+                "data": [
+                    "path",
+                    "title",
+                    "card"
+                ],
+                "options": [
+                    {
+                        "id": "default",
+                        "name": "Lista estándar",
+                        "using": {
+                            "model": "Item",
+                            "with": [
+                                "category",
+                                "subcategory",
+                                "brand"
+                            ],
+                            "relations": [
+                                "category",
+                                "tags"
+                            ],
+                            "fields": [
+                                "id",
+                                "name",
+                                "slug",
+                                "price",
+                                "final_price",
+                                "image",
+                                "color"
+                            ]
+                        }
+                    },
+                    {
+                        "id": "with_variants",
+                        "name": "Lista con variantes",
+                        "using": {
+                            "model": "Item",
+                            "with": [
+                                "category",
+                                "subcategory",
+                                "brand"
+                            ],
+                            "relations": [
+                                "category",
+                                "tags"
+                            ],
+                            "fields": [
+                                "id",
+                                "name",
+                                "slug",
+                                "price",
+                                "final_price",
+                                "image",
+                                "color"
+                            ],
+                            "group_by_name": true
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": "category",
+        "name": "Categorías",
+        "options": [
+            {
+                "id": "CategorySimple",
+                "name": "Simple",
+                "image": "categories-simple.png",
+                "data": [
+                    "path"
+                ],
+                "using": {
+                    "model": "Category",
+                    "limit": 10
+                }
+            },
+            {
+                "id": "CategoryOneLine",
+                "name": "Una Linea",
+                "image": "categories-one-line.png",
+                "data": [
+                    "path"
+                ],
+                "using": {
+                    "model": "Category"
+                }
+            },
+            {
+                "id": "CategoryPrettyGrid",
+                "name": "Pretty Grid",
+                "image": "categories-pretty-grid.png",
+                "data": [
+                    "path",
+                    "borderRadius"
+                ],
+                "using": {
+                    "model": "Category",
+                    "limit": 3,
+                    "filters": [
+                        "featured",
+                        "ignoreVisibility"
+                    ]
+                }
+            },
+            {
+                "id": "InfiniteCategory",
+                "name": "category-infinito",
+                "image": "categories-simple.png",
+                "data": [
+                    "title",
+                    "path"
+                ],
+                "using": {
+                    "model": "Category",
+                    "limit": 10
+                }
+            },
+            {
+                "id": "PaginationCategory",
+                "name": "paginacion",
+                "image": "categories-simple.png",
+                "data": [
+                    "title",
+                    "path"
+                ],
+                "using": {
+                    "model": "Category",
+                    "limit": 10
+                }
+            },
+            {
+                "id": "CategoryCarousel",
+                "name": "Carousel",
+                "image": "categories-carousel.png",
+                "data": [
+                    "path",
+                    "title",
+                    "description",
+                    "link_catalog"
+                ],
+                "using": {
+                    "model": "Category",
+                    "limit": 10,
+                    "filters": [
+                        "featured"
+                    ]
+                }
+            },
+            {
+                "id": "CategoryBoxSwiper",
+                "name": "Carousel Category Box",
+                "image": "categories-carousel.png",
+                "data": [
+                    "path",
+                    "title",
+                    "description",
+                    "link_catalog"
+                ],
+                "using": {
+                    "model": "Category",
+                    "limit": 10,
+                    "filters": [
+                        "featured"
+                    ]
+                }
+            },
+            {
+                "id": "CategoryFlex",
+                "name": "Flex",
+                "image": "categories-carousel.png",
+                "data": [
+                    "path",
+                    "title",
+                    "description",
+                    "text_button",
+                    "link_catalog"
+                ],
+                "using": {
+                    "model": "Category",
+                    "filters": [
+                        "featured"
+                    ]
+                }
+            },
+            {
+                "id": "CategoryGridInfinite",
+                "name": "CategoryGridInfinite",
+                "image": "categories-carousel.png",
+                "data": [
+                    "path",
+                    "title",
+                    "description",
+                    "link_catalog"
+                ],
+                "using": {
+                    "model": "Category",
+                    "filters": [
+                        "featured"
+                    ]
+                }
+            },
+            {
+                "id": "CategoriesScraping",
+                "name": "CategoriesScraping",
+                "image": "categories-carousel.png",
+                "data": [
+                    "path",
+                    "title",
+                    "description",
+                    "link_catalog"
+                ],
+                "using": {
+                    "model": "Category",
+                    "limit": 10,
+                    "filters": [
+                        "featured"
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "id": "collection",
+        "name": "Colecciones",
+        "options": [
+            {
+                "id": "PaginationCollection",
+                "name": "paginacion",
+                "image": "categories-simple.png",
+                "data": [
+                    "title",
+                    "centrado",
+                    "path"
+                ],
+                "using": {
+                    "model": "Collection",
+                    "limit": 20
+                }
+            }
+        ]
+    },
+    {
+        "id": "indicator",
+        "name": "Indicadores",
+        "options": [
+            {
+                "id": "IndicatorSimple",
+                "name": "Simple",
+                "image": "indicator-simple.png",
+                "using": {
+                    "model": "Indicator"
+                }
+            }
+        ]
+    },
+    {
+        "id": "product",
+        "icon": "mdi mdi-bookshelf",
+        "name": "Productos",
+        "options": [
+            {
+                "id": "Carousel",
+                "name": "Carousel",
+                "image": "products-carousel.png",
+                "data": [
+                    "path",
+                    "title",
+                    "description",
+                    "link_catalog",
+                    "button_text",
+                    "bool:show_summary",
+                    "link_cart"
+                ],
+                "using": {
+                    "model": "Item",
+                    "filters": [
+                        "featured",
+                        "recommended",
+                        "offering",
+                        "is_new"
+                    ],
+                    "with": [
+                        "category",
+                        "subcategory",
+                        "brand"
+                    ],
+                    "limit": 10
+                }
+            },
+            {
+                "id": "List",
+                "name": "Listado",
+                "image": "products-list.png",
+                "data": [
+                    "path",
+                    "title",
+                    "description",
+                    "link_catalog",
+                    "link_cart"
+                ],
+                "using": {
+                    "model": "Item",
+                    "filters": [
+                        "featured",
+                        "recommended",
+                        "offering",
+                        "is_new"
+                    ],
+                    "filters:method": "category",
+                    "limit": 8
+                }
+            },
+            {
+                "id": "ProductSlider",
+                "name": "Slider",
+                "image": "products-slider.png",
+                "data": [
+                    "path",
+                    "title",
+                    "description",
+                    "link_catalog",
+                    "link_cart",
+                    "background_color",
+                    "text_color"
+                ],
+                "using": {
+                    "model": "Item",
+                    "filters": [
+                        "featured",
+                        "recommended",
+                        "offering",
+                        "is_new"
+                    ]
+                }
+            },
+            {
+                "id": "ProductInfinite",
+                "name": "Producto Infinito",
+                "image": "products-list.png",
+                "data": [
+                    "title",
+                    "path",
+                    "description",
+                    "link_catalog",
+                    "link_cart"
+                ],
+                "using": {
+                    "model": "Item",
+                    "filters": [
+                        "featured",
+                        "recommended",
+                        "offering",
+                        "is_new",
+                        "views"
+                    ],
+                    "with": [
+                        "category",
+                        "subcategory",
+                        "brand"
+                    ],
+                    "limit": 12
+                }
+            },
+            {
+                "id": "ProductMakita",
+                "name": "ProductMakita",
+                "image": "products-list.png",
+                "data": [
+                    "title",
+                    "path",
+                    "description",
+                    "link_catalog",
+                    "link_cart"
+                ],
+                "using": {
+                    "model": "Item",
+                    "filters": [
+                        "featured",
+                        "recommended",
+                        "offering",
+                        "is_new",
+                        "views"
+                    ],
+                    "with": [
+                        "category",
+                        "subcategory",
+                        "brand"
+                    ],
+                    "limit": 10
+                }
+            },
+            {
+                "id": "ProductNavigation",
+                "name": "Navegacion",
+                "image": "products-list.png",
+                "data": [
+                    "title",
+                    "path",
+                    "description",
+                    "link_catalog",
+                    "link_cart"
+                ],
+                "using": {
+                    "model": "Item",
+                    "filters": [
+                        "featured",
+                        "recommended",
+                        "offering",
+                        "is_new",
+                        "views"
+                    ],
+                    "with": [
+                        "category",
+                        "subcategory",
+                        "brand"
+                    ],
+                    "limit": 8
+                }
+            },
+            {
+                "id": "ProductNavigationSwiper",
+                "name": "NavegacionSwiper",
+                "image": "products-list.png",
+                "data": [
+                    "title",
+                    "path",
+                    "description",
+                    "link_catalog",
+                    "link_cart"
+                ],
+                "using": {
+                    "model": "Item",
+                    "filters": [
+                        "featured",
+                        "recommended",
+                        "offering",
+                        "is_new",
+                        "views"
+                    ],
+                    "with": ["category", "subcategory", "brand", "variants"],
+                    "limit": 20
+                }
+            },
+            {
+                "id": "ProductNavigationSwiperSimple",
+                "name": "NavegacionSwiper Simple",
+                "image": "products-list.png",
+                "data": [
+                    "title",
+                    "path",
+                    "description",
+                    "link_catalog",
+                    "link_cart"
+                ],
+                "using": {
+                    "model": "Item",
+                    "filters": [
+                        "featured",
+                        "recommended",
+                        "offering",
+                        "is_new",
+                        "views"
+                    ],
+                    "with": [
+                        "category",
+                        "subcategory",
+                        "brand"
+                    ],
+                    "limit": 20
+                }
+            },
+            {
+                "id": "ProductNavigationSwiperPaani",
+                "name": "NavegacionSwiper Paani",
+                "image": "products-list.png",
+                "data": [
+                    "title",
+                    "path",
+                    "description",
+                    "link_catalog",
+                    "link_cart",
+                    "background",
+                    "text_button",
+                    "backgroundboton"
+                ],
+                "using": {
+                    "model": "Item",
+                    "filters": [
+                        "featured",
+                        "recommended",
+                        "offering",
+                        "is_new",
+                        "views"
+                    ],
+                    "with": [
+                        "category",
+                        "subcategory",
+                        "brand"
+                    ],
+                    "limit": 20
+                }
+            },
+            {
+                "id": "ProductFeaturedSwiper",
+                "name": "Navegacion Swiper Featured",
+                "image": "products-list.png",
+                "data": [
+                    "title",
+                    "path",
+                    "description",
+                    "link_catalog",
+                    "link_cart"
+                ],
+                "using": {
+                    "model": "Item",
+                    "filters": [
+                        "featured",
+                        "recommended",
+                        "offering",
+                        "is_new",
+                        "views"
+                    ],
+                    "with": [
+                        "category",
+                        "subcategory",
+                        "brand",
+                        "specifications"
+                    ],
+                    "limit": 20
+                }
+            },
+            {
+                "id": "ProductBananaLab",
+                "name": "ProductBananaLab",
+                "image": "products-list.png",
+                "data": [
+                    "style_offer",
+                    "support_favorite",
+                    "title",
+                    "path",
+                    "description",
+                    "text_button",
+                    "link_catalog",
+                    "link_cart"
+                ],
+                "using": {
+                    "model": "Item",
+                    "filters": [
+                        "featured",
+                        "recommended",
+                        "offering",
+                        "is_new",
+                        "views",
+                        "mas_vendidos"
+                    ],
+                    "with": [
+                        "category",
+                        "subcategory",
+                        "brand"
+                    ],
+                    "limit": 8
+                }
+            },
+            {
+                "id": "Scraping",
+                "name": "Scraping Simple",
+                "image": "products-list.png",
+                "using": {
+                    "model": "Item",
+                    "filters": [
+                        "featured",
+                        "recommended",
+                        "offering",
+                        "is_new"
+                    ],
+                    "with": [
+                        "category",
+                        "subcategory",
+                        "brand"
+                    ],
+                    "limit": 8
+                }
+            }
+        ]
+    },
+    {
+        "id": "banner",
+        "name": "Banners",
+        "options": [
+            {
+                "id": "BannerSimple",
+                "name": "Simple"
+            },
+            {
+                "id": "BannerSimpleD2",
+                "name": "Simple D2en1"
+            },
+            {
+                "id": "BannerAd",
+                "name": "Anuncio",
+                "data": [
+                    "background_color"
+                ]
+            },
+            {
+                "id": "BannerPublicitario",
+                "name": "BannerPublicitario",
+                "data": [
+                    "title",
+                    "image_position"
+                ]
+            },
+            {
+                "id": "CarruselBananaLab",
+                "name": "CarruselBananaLab",
+                "data": [
+                    "background"
+                ],
+                "using": {
+                    "model": "Strength"
+                }
+            },
+            {
+                "id": "BlogCarruselBananaLab",
+                "name": "BlogCarruselBananaLab",
+                "data": [
+                    "title",
+                    "description",
+                    "button_text_section",
+                    "link_blog"
+                ],
+                "using": {
+                    "model": "Post",
+                    "limit": 2,
+                    "with": [
+                        "category"
+                    ]
+                }
+            },
+            {
+                "id": "BannerPublicitarioPaani",
+                "name": "BannerPublicitarioPaani",
+                "data": [
+                    "title",
+                    "image_position"
+                ]
+            },
+            {
+                "id": "BannerCTAMakita",
+                "name": "BannerCTAMakita",
+                "using": {
+                    "model": "Strength"
+                }
+            },
+            {
+                "id": "BannerContactMakita",
+                "name": "BannerContactMakita",
+                "data": [
+                    "title",
+                    "image_position"
+                ]
+            },
+            {
+                "id": "BannerPostSuscriptionPaani",
+                "name": "BannerPostSuscriptionPaani",
+                "data": [
+                    "title",
+                    "text_button",
+                    "link_button"
+                ],
+                "using": {
+                    "model": "Post",
+                    "limit": 2
+                }
+            },
+            {
+                "id": "BannerFullWidth",
+                "name": "Full Width"
+            },
+            {
+                "id": "BannerFlex",
+                "name": "Flex"
+            },
+            {
+                "id": "BannerStatic",
+                "name": "Estatico",
+                "using": {
+                    "model": "Aboutus"
+                }
+            },
+            {
+                "id": "BannerStaticSecond",
+                "name": "Estatico 2",
+                "data": [
+                    "title"
+                ],
+                "using": {
+                    "model": "Certification"
+                }
+            },
+            {
+                "id": "BannerSimpleSF",
+                "name": "SimpleSF"
+            },
+            {
+                "id": "BannerBananaLab",
+                "name": "BannerBananaLab"
+            }
+        ]
+    },
+    {
+        "id": "ads",
+        "name": "Pop-ups",
+        "icon": "mdi mdi-google-ads",
+        "options": [
+            {
+                "id": "AdSubscription",
+                "name": "Suscripción",
+                "using": {
+                    "model": "Ad",
+                    "fields": [
+                        "image",
+                        "name"
+                    ]
+                },
+                "generals": [
+                    "privacy_policy"
+                ]
+            }
+        ]
+    },
+    {
+        "id": "image",
+        "icon": "mdi mdi-image-area",
+        "name": "Imágenes",
+        "options": [
+            {
+                "id": "ImageSimple",
+                "name": "Simple",
+                "data": [
+                    "image",
+                    "aspect_ratio"
+                ]
+            }
+        ]
+    },
+    {
+        "id": "step",
+        "name": "Steps",
+        "options": [
+            {
+                "id": "StepSimple",
+                "name": "Simple",
+                "data": [
+                    "steps",
+                    "selected"
+                ]
+            },
+            {
+                "id": "StepKuchara",
+                "name": "Kuchara",
+                "data": [
+                    "steps",
+                    "selected"
+                ]
+            }
+        ]
+    },
+    {
+        "id": "product-detail",
+        "name": "Detalle de producto",
+        "options": [
+            {
+                "id": "ProductDetailSimple",
+                "name": "Simple",
+                "using": {
+                    "model": "Item",
+                    "with": [
+                        "category",
+                        "subcategory",
+                        "brand"
+                    ]
+                }
+            },
+            {
+                "id": "ProductDetailKuchara",
+                "name": "Kuchara",
+                "using": {
+                    "model": "Item",
+                    "with": [
+                        "category"
+                    ]
+                }
+            },
+            {
+                "id": "ProductDetailB",
+                "name": "ProductDetailB",
+                "data": [
+                    "link_cart"
+                ],
+                "using": {
+                    "model": "Item",
+                    "flied": "slug"
+                },
+                "generals": [
+                    "phone_whatsapp",
+                    "message_whatsapp",
+                    "delivery_policy"
+                ]
+            },
+            {
+                "id": "ProductDetailPaani",
+                "name": "ProductDetailPaani",
+                "data": [
+                    "link_cart",
+                    "background",
+                    "backgroundboton"
+                ],
+                "using": {
+                    "model": "Item",
+                    "flied": "slug"
+                },
+                "generals": [
+                    "phone_whatsapp",
+                    "message_whatsapp"
+                ]
+            },
+            {
+                "id": "ProductDetailSF",
+                "name": "ProductDetailSF",
+                "data": [
+                    "link_cart"
+                ],
+                "using": {
+                    "model": "Item",
+                    "field": "slug",
+                    "with": [
+                        "variants",
+                        "images",
+                        "specifications",
+                        "features"
+                    ],
+                    "relations": [
+                        "category",
+                        "brand",
+                        "subcategory"
+                    ]
+                }
+            },
+            {
+                "id": "ProductDetailAko",
+                "name": "ProductDetailAko",
+                "data": [
+                    "link_cart"
+                ],
+                "using": {
+                    "model": "Item",
+                    "field": "slug",
+                    "with": [
+                        "variants",
+                        "images",
+                        "specifications",
+                        "features"
+                    ],
+                    "relations": [
+                        "category",
+                        "brand",
+                        "subcategory"
+                    ]
+                },
+                "generals": [
+                    "phone_whatsapp",
+                    "message_whatsapp"
+                ]
+            },
+            {
+                "id": "ProductDetailBananaLab",
+                "name": "ProductDetailBananaLab",
+                "using": {
+                    "model": "Item",
+                    "field": "slug",
+                    "with": [
+                        "variants",
+                        "images",
+                        "specifications",
+                        "features"
+                    ],
+                    "relations": [
+                        "category",
+                        "brand",
+                        "subcategory"
+                    ]
+                }
+            },
+            {
+                "id": "ScrapingProductDetail",
+                "name": "ScrapingProductDetail"
+            }
+        ]
+    },
+    {
+        "id": "cart",
+        "icon": "mdi mdi-cart",
+        "name": "Carrito",
+        "options": [
+            {
+                "id": "CartSimple",
+                "name": "Simple",
+                "data": [
+                    "url_catalog",
+                    "url_checkout"
+                ]
+            },
+            {
+                "id": "CartKuchara",
+                "name": "Kuchara",
+                "data": [
+                    "url_catalog",
+                    "url_checkout"
+                ],
+                "generals": [
+                    "igv_checkout"
+                ]
+            }
+        ]
+    },
+    {
+        "id": "checkout",
+        "name": "Checkout",
+        "options": [
+            {
+                "id": "CheckoutCulqi",
+                "name": "Culqi",
+                "data": [
+                    "url_thanks"
+                ]
+            },
+            {
+                "id": "CheckoutKuchara",
+                "name": "Kuchara",
+                "data": [
+                    "url_thanks"
+                ],
+                "json": {
+                    "prefixes": "./prefijocelular.json"
+                },
+                "using": {
+                    "model": "DeliveryPrice",
+                    "field": [
+                        "name",
+                        "price",
+                        "data"
+                    ]
+                },
+                "generals": [
+                    "igv_checkout",
+                    "checkout_culqi",
+                    "checkout_culqi_name",
+                    "checkout_culqi_public_key",
+                    "checkout_dwallet",
+                    "checkout_dwallet_qr",
+                    "checkout_dwallet_name",
+                    "checkout_dwallet_description",
+                    "checkout_transfer",
+                    "checkout_transfer_cci",
+                    "checkout_transfer_name",
+                    "checkout_transfer_description"
+                ]
+            },
+            {
+                "id": "CheckoutSteps",
+                "name": "Steps",
+                "data": [
+                    "title"
+                ]
+            },
+            {
+                "id": "CheckoutStepsSF",
+                "name": "StepsSF",
+                "data": [
+                    "title"
+                ],
+                "json": {
+                    "prefixes": "./prefijocelular.json"
+                },
+                "generals": [
+                    "igv_checkout",
+                    "checkout_culqi",
+                    "checkout_culqi_name",
+                    "checkout_culqi_public_key",
+                    "checkout_dwallet",
+                    "checkout_dwallet_qr",
+                    "checkout_dwallet_name",
+                    "checkout_dwallet_description",
+                    "checkout_transfer",
+                    "checkout_transfer_cci",
+                    "checkout_transfer_name",
+                    "checkout_transfer_description"
+                ]
+            }
+        ]
+    },
+    {
+        "id": "contact",
+        "name": "Contacto",
+        "options": [
+            {
+                "id": "ContactSimple",
+                "name": "Simple",
+                "data": [
+                    "redirect"
+                ]
+            },
+            {
+                "id": "ContactGrid",
+                "name": "Grid",
+                "data": [
+                    "redirect"
+                ]
+            },
+            {
+                "id": "ContactAko",
+                "name": "ContactAko",
+                "data": [
+                    "redirect",
+                    "title",
+                    "description"
+                ]
+            }
+        ]
+    },
+    {
+        "id": "frame",
+        "name": "Frame",
+        "options": [
+            {
+                "id": "Simple",
+                "name": "Simple",
+                "data": [
+                    "code:html"
+                ]
+            },
+            {
+                "id": "Full",
+                "name": "Full Width",
+                "data": [
+                    "code:html"
+                ]
+            }
+        ]
+    },
+    {
+        "id": "faq",
+        "name": "Faqs",
+        "options": [
+            {
+                "id": "FaqSimple",
+                "name": "Simple",
+                "data": [
+                    "title"
+                ]
+            },
+            {
+                "id": "FaqAko",
+                "name": "Faqs Ako",
+                "data": [
+                    "title",
+                    "description"
+                ]
+            }
+        ]
+    },
+    {
+        "id": "blog",
+        "name": "Blogs",
+        "options": [
+            {
+                "id": "BlogSimple",
+                "name": "Simple",
+                "data": [
+                    "title",
+                    "description",
+                    "second_title",
+                    "second_description",
+                    "bool:show_seen"
+                ]
+            },
+            {
+                "id": "BlogCarousel",
+                "name": "Carousel",
+                "data": [
+                    "title",
+                    "description",
+                    "button_text",
+                    "link_blog",
+                    "url_video",
+                    "button_video_text",
+                    "button_video_link"
+                ],
+                "using": {
+                    "model": "Post",
+                    "limit": 3,
+                    "with": [
+                        "category"
+                    ]
+                }
+            },
+            
+            {
+                "id": "BlogSectionMakita",
+                "name": "BlogSectionMakita",
+                "data": [
+                    "title",
+                    "description",
+                    "button_text",
+                    "link_blog"
+                ],
+                "using": {
+                    "model": "Post",
+                    "limit": 4,
+                    "with": [
+                        "category"
+                    ]
+                }
+            },
+            {
+                "id": "BlogSectionAko",
+                "name": "BlogSectionAko",
+                "data": [
+                    "title",
+                    "description",
+                    "button_text",
+                    "link_blog"
+                ],
+                "using": {
+                    "model": "Post",
+                    "limit": 4,
+                    "with": [
+                        "category"
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "id": "delivery-zones",
+        "icon": "mdi mdi-map-marker-radius",
+        "name": "Zonas de Cobertura",
+        "options": [
+            {
+                "id": "DeliveryZonesKuchara",
+                "name": "Kuchara",
+                "image": "delivery-zones-kuchara.png",
+                "data": [
+                    "image"
+                ],
+                "using": {
+                    "model": "DeliveryZone"
+                }
+            }
+        ]
+    },
+    {
+        "id": "thank",
+        "name": "Thanks",
+        "options": [
+            {
+                "id": "ThankSimple",
+                "name": "Simple",
+                "data": [
+                    "url_catalog",
+                    "bool:send_whatsapp"
+                ],
+                "generals": [
+                    "phone_whatsapp"
+                ]
+            }
+        ]
+    },
+    {
+        "id": "track",
+        "name": "Tracking",
+        "options": [
+            {
+                "id": "TrackSimple",
+                "name": "Simple"
+            }
+        ]
+    },
+    {
+        "id": "post-detail",
+        "name": "Post Detalle",
+        "options": [
+            {
+                "id": "PostDetailSimple",
+                "name": "Simple",
+                "data": [
+                    "title"
+                ],
+                "using": {
+                    "model": "Post",
+                    "field": "slug",
+                    "with": [
+                        "category"
+                    ],
+                    "relations": [
+                        "category"
+                    ]
+                }
+            }
+        ]
+    },
+    {
+        "id": "about",
+        "name": "Acerca de Nosotros",
+        "options": [
+            {
+                "id": "AboutSimple",
+                "name": "Simple",
+                "data": [
+                    "title"
+                ],
+                "using": {
+                    "model": "Aboutus"
+                }
+            },
+            {
+                "id": "AboutImage",
+                "name": "Con Imagen",
+                "data": [
+                    "url_imagen",
+                    "title",
+                    "description",
+                    "about_url"
+                ]
+            },
+            {
+                "id": "AboutAko",
+                "name": "AboutAko",
+                "data": [
+                    "url_imagen",
+                    "title",
+                    "description",
+                    "about_url"
+                ],
+                "using": {
+                    "model": "Aboutus"
+                }
+            },
+            {
+                "id": "AboutPaani",
+                "name": "AboutPaani",
+                "data": [
+                    "url_imagen",
+                    "title",
+                    "description",
+                    "about_url"
+                ],
+                "using": {
+                    "model": "Aboutus"
+                }
+            }
+        ]
+    },
+    {
+        "id": "login",
+        "name": "Login",
+        "options": [
+            {
+                "id": "LoginSimple",
+                "name": "Simple"
+            },
+            {
+                "id": "LoginSimpleSF",
+                "name": "SimpleSF"
+            },
+            {
+                "id": "LoginBananaLab",
+                "name": "LoginBananaLab"
+            }
+        ]
+    },
+    {
+        "id": "signup",
+        "name": "Signup",
+        "options": [
+            {
+                "id": "SignUpSimple",
+                "name": "Simple"
+            },
+            {
+                "id": "SignUpSimpleSF",
+                "name": "SimpleSF"
+            }
+        ]
+    },
+    {
+        "id": "forgot-password",
+        "name": "ForgotPassword",
+        "options": [
+            {
+                "id": "ForgotPasswordSimple",
+                "name": "Simple"
+            },
+            {
+                "id": "ForgotBananaLab",
+                "name": "ForgotBananaLab"
+            }
+        ]
+    },
+    {
+        "id": "reset-password",
+        "name": "ResetPassword",
+        "options": [
+            {
+                "id": "ResetPasswordSimple",
+                "name": "Simple"
+            }
+        ]
+    },
+    {
+        "id": "footer",
+        "name": "Footer",
+        "options": [
+            {
+                "id": "FooterB",
+                "name": "FooterB",
+                "image": "footer-simple.png",
+                "using": {
+                    "model": "Social",
+                    "limit": 10
+                },
+                "generals": [
+                    "terms_conditions",
+                    "privacy_policy",
+                    "delivery_policy",
+                    "saleback_policy",
+                    "address",
+                    "support_phone",
+                    "support_email"
+                ]
+            },
+            {
+                "id": "FooterBananaLab",
+                "name": "FooterBananaLab",
+                "image": "footer-simple.png",
+                "using": {
+                    "model": "Social",
+                    "limit": 10
+                },
+                "generals": [
+                    "terms_conditions",
+                    "privacy_policy",
+                    "delivery_policy",
+                    "saleback_policy",
+                    "address",
+                    "support_phone",
+                    "support_email"
+                ]
+            },
+            {
+                "id": "FooterMakita",
+                "name": "FooterMakita",
+                "image": "footer-simple.png",
+                "using": {
+                    "model": "Social",
+                    "limit": 10
+                },
+                "generals": [
+                    "terms_conditions",
+                    "privacy_policy",
+                    "delivery_policy",
+                    "saleback_policy",
+                    "address",
+                    "support_phone",
+                    "support_email"
+                ]
+            },
+            {
+                "id": "FooterPaani",
+                "name": "FooterPaani",
+                "image": "footer-simple.png",
+                "data": [
+                    "methodPayment"
+                ],
+                "using": {
+                    "model": "Social",
+                    "limit": 10
+                },
+                "generals": [
+                    "terms_conditions",
+                    "privacy_policy",
+                    "delivery_policy",
+                    "saleback_policy",
+                    "address",
+                    "support_phone",
+                    "support_email",
+                    "opening_hours"
+                ]
+            },
+            {
+                "id": "FooterTermsCTASocials",
+                "name": "Politicas, CTA y Redes",
+                "image": "footer-terms-cta-socials.png",
+                "data": [
+                    "complaint_url"
+                ],
+                "using": {
+                    "model": "Social",
+                    "limit": 10
+                },
+                "generals": [
+                    "terms_conditions",
+                    "privacy_policy",
+                    "delivery_policy",
+                    "saleback_policy",
+                    "address",
+                    "support_phone",
+                    "support_email"
+                ]
+            },
+            {
+                "id": "FooterSalaFabulosa",
+                "name": "FooterSalaFabulosa",
+                "image": "footer-simple.png",
+                "using": {
+                    "model": "Social"
+                },
+                "generals": [
+                    "terms_conditions",
+                    "privacy_policy",
+                    "delivery_policy",
+                    "saleback_policy",
+                    "address",
+                    "support_phone",
+                    "support_email"
+                ]
+            },
+            {
+                "id": "FooterCallToAction",
+                "name": "Llamada a la acción",
+                "image": "footer-call-to-action.png",
+                "data": [
+                    "summary"
+                ],
+                "using": {
+                    "model": "Social",
+                    "limit": 10
+                },
+                "generals": [
+                    "terms_conditions",
+                    "privacy_policy"
+                ]
+            },
+            {
+                "id": "FooterSimpleCallToAction",
+                "name": "Llamada a la acción simple",
+                "image": "footer-call-to-action-simple.png",
+                "data": [
+                    "summary"
+                ],
+                "using": {
+                    "model": "Social",
+                    "limit": 10
+                },
+                "generals": [
+                    "terms_conditions",
+                    "privacy_policy",
+                    "delivery_policy",
+                    "saleback_policy",
+                    "address",
+                    "support_phone",
+                    "support_email"
+                ]
+            }
+        ]
+    },
+    {
+        "id": "complaints",
+        "name": "Complaints",
+        "options": [
+            {
+                "id": "ComplaintStech",
+                "name": "Stech",
+                "data": [
+                    "steps",
+                    "selected"
+                ],
+                "generals": [
+                    "terms_conditions"
+                ]
+            },
+            {
+                "id": "ComplaintSimple",
+                "name": "Simple",
+                "data": [
+                    "steps",
+                    "selected"
+                ],
+                "generals": [
+                    "terms_conditions"
+                ]
+            }
+        ]
+    },
+    {
+        "id": "testimonials",
+        "name": "Testimonials",
+        "options": [
+            {
+                "id": "TestimonialsPaani",
+                "name": "Paani",
+                "using": {
+                    "model": "Testimony"
+                }
+            }
+        ]
+    },
+    {
+        "id": "bananalab",
+        "name": "BananaLab",
+        "options": [
+             {
+                "id": "Canvas",
+                "name": "Canvas",
+                "data": [
+                    "steps",
+                    "selected"
+                ]
+            },
+            {
+                "id": "Canva1",
+                "name": "Canva1",
+                "data": [
+                    "steps",
+                    "selected"
+                ]
+            },
+            {
+                "id": "Canva2",
+                "name": "Canva2",
+                "data": [
+                    "steps",
+                    "selected"
+                ]
+            },
+            {
+                "id": "Canva3",
+                "name": "Canva3",
+                "data": [
+                    "steps",
+                    "selected"
+                ]
+            },
+            {
+                "id": "Editor",
+                "name": "Editor",
+                "data": [
+                    "steps",
+                    "selected"
+                ]
+            }
+        ]
+    },
+    {
+        "id": "agradecimientos",
+        "name": "Agradecimientos",
+        "options": [
+            {
+                "id": "AgradecimientoSF",
+                "name": "AgradecimientoSF"
+            },
+            {
+                "id": "AgradecimientoAko",
+                "name": "AgradecimientoAko",
+                "using": {
+                    "model": "Social"
+                }
+            }
+        ]
+    },
+    {
+        "id": "brands",
+        "name": "Brands",
+        "options": [
+            {
+                "id": "BrandMakita",
+                "name": "BrandMakita"
+            }
+        ]
+    },
+    {
+        "id": "partner",
+        "name": "Partners",
+        "options": [
+            {
+                "id": "PartnerSimple",
+                "name": "PartnerSimple",
+                "using": {
+                    "model": "Partner"
+                },
+                "data": [
+                    "title",
+                    "background"
+                ]
+            }
+        ]
+    }
+]
