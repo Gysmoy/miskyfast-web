@@ -55,6 +55,7 @@ use App\Http\Controllers\Api\NotificationVariablesController;
 use App\Http\Controllers\Admin\RepositoryController as AdminRepositoryController;
 use App\Http\Controllers\Admin\SettingController as AdminSettingController;
 use App\Http\Controllers\Admin\CanvasPresetController as AdminCanvasPresetController;
+use App\Http\Controllers\Admin\RestaurantController as AdminRestaurantController;
 use App\Http\Controllers\CanvasController;
 use App\Http\Controllers\CanvasProjectController;
 use App\Http\Controllers\Api\Canvas\ProjectSaveController;
@@ -78,6 +79,7 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\MercadoPagoController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\ScrapController;
@@ -390,6 +392,12 @@ Route::middleware('auth')->group(function () {
     Route::patch('/categories/status', [AdminCategoryController::class, 'status']);
     Route::patch('/categories/{field}', [AdminCategoryController::class, 'boolean']);
     Route::delete('/categories/{id}', [AdminCategoryController::class, 'delete']);
+
+    Route::post('/restaurants', [AdminRestaurantController::class, 'save']);
+    Route::post('/restaurants/paginate', [AdminRestaurantController::class, 'paginate']);
+    Route::patch('/restaurants/status', [AdminRestaurantController::class, 'status']);
+    Route::patch('/restaurants/{field}', [AdminRestaurantController::class, 'boolean']);
+    Route::delete('/restaurants/{id}', [AdminRestaurantController::class, 'delete']);
 
     Route::post('/collections', [AdminCollectionController::class, 'save']);
     Route::post('/collections/paginate', [AdminCollectionController::class, 'paginate']);

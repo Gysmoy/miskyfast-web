@@ -41,6 +41,7 @@ use App\Http\Controllers\Admin\CouponController as AdminCouponController;
 use App\Http\Controllers\Admin\DiscountRulesController as AdminDiscountRulesController;
 use App\Http\Controllers\Admin\FaqController as AdminFaqController;
 use App\Http\Controllers\Admin\RepositoryController as AdminRepositoryController;
+use App\Http\Controllers\Admin\RestaurantController as AdminRestaurantController;
 use App\Http\Controllers\Customer\AlbumController as CustomerAlbumController;
 use App\Http\Controllers\Admin\SaleStatusController as AdminSaleStatusController;
 
@@ -53,6 +54,7 @@ use SoDe\Extend\File;
 use App\Http\Controllers\CanvasController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\RestaurantController;
 
 /*
 |--------------------------------------------------------------------------
@@ -75,6 +77,7 @@ Route::middleware('auth')->group(function () {
     Route::middleware('can:Admin')->prefix('admin')->group(function () {
         Route::get('/home', [AdminHomeController::class, 'reactView'])->name('Admin/Home.jsx');
         Route::get('/categories', [AdminCategoryController::class, 'reactView'])->name('Admin/Categories.jsx');
+        Route::get('/restaurants', [AdminRestaurantController::class, 'reactView'])->name('Admin/Restaurants.jsx');
     });
 });
 
