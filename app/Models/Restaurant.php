@@ -30,4 +30,9 @@ class Restaurant extends Model
         'visible' => 'boolean',
         'status' => 'boolean',
     ];
+
+    public function categories()
+    {
+        return $this->hasManyThrough(Category::class, Item::class, 'restaurant_id', 'id', 'id', 'category_id');
+    }
 }
