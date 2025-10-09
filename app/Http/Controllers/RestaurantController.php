@@ -9,6 +9,9 @@ class RestaurantController extends Controller
 {
     public function all()
     {
-        return Restaurant::where('visible', true)->where('status', true)->get();
+        return Restaurant::with(['categories'])
+            ->where('visible', true)
+            ->where('status', true)
+            ->get();
     }
 }
