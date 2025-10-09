@@ -33,6 +33,7 @@ class Restaurant extends Model
 
     public function categories()
     {
-        return $this->hasManyThrough(Category::class, Item::class, 'restaurant_id', 'id', 'id', 'category_id');
+        return $this->belongsToMany(Category::class, 'items', 'restaurant_id', 'category_id')
+                    ->distinct();
     }
 }
