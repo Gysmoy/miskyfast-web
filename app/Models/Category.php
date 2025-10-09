@@ -27,4 +27,9 @@ class Category extends Model
         'visible' => 'boolean',
         'status' => 'boolean',
     ];
+
+    public function items()
+    {
+        return $this->hasMany(Item::class, 'category_id');
+    }
 }

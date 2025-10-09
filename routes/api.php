@@ -56,6 +56,7 @@ use App\Http\Controllers\Admin\RepositoryController as AdminRepositoryController
 use App\Http\Controllers\Admin\SettingController as AdminSettingController;
 use App\Http\Controllers\Admin\CanvasPresetController as AdminCanvasPresetController;
 use App\Http\Controllers\Admin\RestaurantController as AdminRestaurantController;
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\CanvasController;
 use App\Http\Controllers\CanvasProjectController;
 use App\Http\Controllers\Api\Canvas\ProjectSaveController;
@@ -444,6 +445,13 @@ Route::middleware('auth')->group(function () {
     Route::patch('/tags/status', [AdminTagController::class, 'status']);
     Route::patch('/tags/{field}', [AdminTagController::class, 'boolean']);
     Route::delete('/tags/{id}', [AdminTagController::class, 'delete']);
+
+    Route::post('/users', [AdminUserController::class, 'save']);
+    Route::post('/users/{role}/paginate', [AdminUserController::class, 'paginate']);
+    Route::post('/users/update-promotional-status', [AdminUserController::class, 'updatePromotionalStatus']);
+    Route::patch('/users/status', [AdminUserController::class, 'status']);
+    Route::patch('/users/{field}', [AdminUserController::class, 'boolean']);
+    Route::delete('/users/{id}', [AdminTagController::class, 'delete']);
 
     Route::post('/delivery-zones', [AdminDeliveryZoneController::class, 'save']);
     Route::post('/delivery-zones/paginate', [AdminDeliveryZoneController::class, 'paginate']);

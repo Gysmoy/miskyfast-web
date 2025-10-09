@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use SoDe\Extend\File;
 
 class DatabaseSeeder extends Seeder
 {
@@ -15,24 +14,9 @@ class DatabaseSeeder extends Seeder
         $this->call([
             RoleSeeder::class,
             UsersSeeder::class,
-            // SliderSeeder::class,
-            // IndicatorSeeder::class,
-            // AboutusSeeder::class,
-            // TestimonySeeder::class,
-            // CategorySeeder::class,
-            // SubCategorySeeder::class,
-            // BrandSeeder::class,
-            // StrengthSeeder::class,
-            // SocialSeeder::class,
-            // GeneralSeeder::class,
-            // ItemSeeder::class,
-            // SystemSeeder::class,
-            // SystemColorSeeder::class,
-            // NewUserSeeder::class,
-            // StatusSeeder::class,
-            // PrintingCatalogSeeder::class,
+            CategorySeeder::class,
+            RestaurantSeeder::class,
+            ItemSeeder::class,
         ]);
-
-        // File::save(storage_path('app/pages.json'), '[]');
     }
 }

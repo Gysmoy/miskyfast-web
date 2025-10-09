@@ -14,10 +14,15 @@ return new class extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
-            $table->string('image');
+            $table->string('image')->nullable();
             $table->string('name');
             $table->longText('description')->nullable();
             $table->decimal('price', 10, 2);
+            $table->json('presentations')->nullable();
+
+            $table->foreignUuid('category_id')->nullable()->constrained('categories')->nullOnDelete();
+            $table->foreignUuid('restaurant_id')->constrained('restaurants')->onDelete('cascade');
+
             $table->timestamps();
         });
     }

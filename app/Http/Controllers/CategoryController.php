@@ -10,6 +10,9 @@ class CategoryController extends Controller
 {
     public function all()
     {
-        return Category::where('visible', true)->where('status', true)->get();
+        return Category::withCount('items')
+            ->where('visible', true)
+            ->where('status', true)
+            ->get();
     }
 }

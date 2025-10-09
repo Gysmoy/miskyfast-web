@@ -6,6 +6,7 @@ class BasicRest {
     path = null;
     hasFiles = false;
     controller = null;
+    pagination_suffix = null;
     constructor() {
         this.controller = new AbortController();
     }
@@ -34,7 +35,7 @@ class BasicRest {
         this.controller.abort("Nothing");
         this.controller = new AbortController();
         const signal = this.controller.signal;
-        const res = await fetch(`/api/${this.path}/paginate`, {
+        const res = await fetch(`/api/${this.path}${this.pagination_suffix ? `/${this.pagination_suffix}` : ''}/paginate`, {
             method: "POST",
             headers: {
                 Accept: "application/json",

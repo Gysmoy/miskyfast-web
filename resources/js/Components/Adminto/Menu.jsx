@@ -100,14 +100,15 @@ const Menu = ({ session, hasRole }) => {
                   <MenuItem href="/admin/restaurants" icon="mdi mdi-silverware">Restaurantes</MenuItem>
 
                   <MenuItemContainer title="Usuarios" icon="mdi mdi-account-group">
-                    <MenuItem href="/admin/restaurant-users" icon="mdi mdi-account-group">Restaurantes</MenuItem>
-                    <MenuItem href="/admin/deliveries" icon="mdi mdi-moped">Deliveries</MenuItem>
-                    <MenuItem href="/admin/clients" icon="mdi mdi-account-multiple">Clientes</MenuItem>
+                    <MenuItem href="/admin/users/restaurant" icon="mdi mdi-account-group">Restaurantes</MenuItem>
+                    <MenuItem href="/admin/users/delivery" icon="mdi mdi-moped">Deliveries</MenuItem>
+                    <MenuItem href="/admin/users/client" icon="mdi mdi-account-multiple">Clientes</MenuItem>
                   </MenuItemContainer>
 
                   <li className="menu-title">Aplicación</li>
 
                   <MenuItem href="/admin/categories" icon="mdi mdi-shape-outline">Categorías</MenuItem>
+                  <MenuItem href="/admin/items" icon="mdi mdi-package-variant">Items</MenuItem>
                   <MenuItem href="/admin/statuses" icon="mdi mdi-tag-text">Estados</MenuItem>
                   <MenuItem href="/admin/messages" icon="mdi mdi-message-text">Mensajes</MenuItem>
 

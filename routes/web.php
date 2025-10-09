@@ -44,7 +44,7 @@ use App\Http\Controllers\Admin\RepositoryController as AdminRepositoryController
 use App\Http\Controllers\Admin\RestaurantController as AdminRestaurantController;
 use App\Http\Controllers\Customer\AlbumController as CustomerAlbumController;
 use App\Http\Controllers\Admin\SaleStatusController as AdminSaleStatusController;
-
+use App\Http\Controllers\Admin\UserController as AdminUserController;
 // Public 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RepositoryController;
@@ -75,9 +75,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/account', [AdminAccountController::class, 'reactView'])->name('Admin/Account.jsx');
 
     Route::middleware('can:Admin')->prefix('admin')->group(function () {
+        Route::get('/', fn() => redirect()->route('Admin/Home.jsx'));
         Route::get('/home', [AdminHomeController::class, 'reactView'])->name('Admin/Home.jsx');
         Route::get('/categories', [AdminCategoryController::class, 'reactView'])->name('Admin/Categories.jsx');
+        Route::get('/items', [AdminItemController::class, 'reactView'])->name('Admin/Items.jsx');
         Route::get('/restaurants', [AdminRestaurantController::class, 'reactView'])->name('Admin/Restaurants.jsx');
+
+        Route::get('/users/{role}', [AdminUserController::class, 'reactView'])->name('Admin/Users.jsx');
     });
 });
 
