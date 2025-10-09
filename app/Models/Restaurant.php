@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+
 class Restaurant extends Model
 {
     use HasFactory, HasUuids;
@@ -33,7 +34,9 @@ class Restaurant extends Model
 
     public function categories()
     {
-        return $this->belongsToMany(Category::class, 'items', 'restaurant_id', 'category_id')
-                    ->distinct();
+        return $this->belongsToMany(Category::class, Item::class, 'restaurant_id', 'category_id')
+            ->where('items.visible', true)
+            ->where('items.status', true)
+            ->distinct();
     }
 }
