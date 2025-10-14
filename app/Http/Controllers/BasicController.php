@@ -97,7 +97,7 @@ class BasicController extends Controller
 
     $session = null;
     if (Auth::check()) {
-      $session = User::find(Auth::id());
+      $session = User::with(['restaurant'])->find(Auth::id());
       $session->getAllPermissions();
     }
 

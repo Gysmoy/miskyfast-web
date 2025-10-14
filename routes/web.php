@@ -3,58 +3,25 @@
 use Illuminate\Support\Facades\Route;
 
 // Admin
-use App\Http\Controllers\Admin\AboutusController as AdminAboutusController;
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
-use App\Http\Controllers\Admin\IndicatorController as AdminIndicatorController;
-use App\Http\Controllers\Admin\SliderController as AdminSliderController;
-use App\Http\Controllers\Admin\TestimonyController as AdminTestimonyController;
-use App\Http\Controllers\Admin\SubscriptionController as AdminSubscriptionController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
-use App\Http\Controllers\Admin\CollectionController as AdminCollectionController;
-use App\Http\Controllers\Admin\PostController as AdminPostController;
-use App\Http\Controllers\Admin\SocialController as AdminSocialController;
-use App\Http\Controllers\Admin\StrengthController as AdminStrengthController;
-use App\Http\Controllers\Admin\CertificationController as AdminCertificationController;
-use App\Http\Controllers\Admin\PartnerController as AdminPartnerController;
-use App\Http\Controllers\Admin\GeneralController as AdminGeneralController;
 use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
-use App\Http\Controllers\Test\PixelTestController;
-use App\Http\Controllers\Test\NotificationTestController;
-use App\Http\Controllers\Customer\SaleController as CustomerSaleController;
 use App\Http\Controllers\Admin\AccountController as AdminAccountController;
-use App\Http\Controllers\Admin\AdController as AdminAdController;
-use App\Http\Controllers\Admin\BannerController as AdminBannerController;
 use App\Http\Controllers\Admin\ItemController as AdminItemController;
-use App\Http\Controllers\Admin\GalleryController as AdminGalleryController;
-use App\Http\Controllers\Admin\SystemController as AdminSystemController;
-use App\Http\Controllers\Admin\TagController as AdminTagController;
-use App\Http\Controllers\Admin\BrandController as AdminBrandController;
-use App\Http\Controllers\Admin\ComboController as AdminComboController;
-use App\Http\Controllers\Admin\CanvasPresetController as AdminCanvasPresetController;
-use App\Http\Controllers\Admin\DeliveryPriceController as AdminDeliveryPriceController;
-use App\Http\Controllers\Admin\DeliveryZoneController as AdminDeliveryZoneController;
-use App\Http\Controllers\Admin\StoreController as AdminStoreController;
-use App\Http\Controllers\Admin\SaleController as AdminSaleController;
-use App\Http\Controllers\Admin\SaleExportController as AdminSaleExportController;
-use App\Http\Controllers\Admin\SubCategoryController as AdminSubCategoryController;
-use App\Http\Controllers\Admin\CouponController as AdminCouponController;
-use App\Http\Controllers\Admin\DiscountRulesController as AdminDiscountRulesController;
-use App\Http\Controllers\Admin\FaqController as AdminFaqController;
-use App\Http\Controllers\Admin\RepositoryController as AdminRepositoryController;
 use App\Http\Controllers\Admin\RestaurantController as AdminRestaurantController;
-use App\Http\Controllers\Customer\AlbumController as CustomerAlbumController;
-use App\Http\Controllers\Admin\SaleStatusController as AdminSaleStatusController;
+use App\Http\Controllers\Admin\StatusController as AdminStatusController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
+
+// Restaurant
+use App\Http\Controllers\Restaurant\HomeController as RestaurantHomeController;
+
 // Public 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RepositoryController;
-use App\Http\Controllers\SaleController;
-use App\Http\Controllers\SystemController;
-use SoDe\Extend\File;
-use App\Http\Controllers\CanvasController;
-use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\RestaurantController;
+use App\Http\Controllers\ItemController;
+use App\Http\Controllers\Restaurant\ItemController as RestaurantItemController;
+use App\Http\Controllers\StatusController;
 
 /*
 |--------------------------------------------------------------------------
@@ -80,8 +47,16 @@ Route::middleware('auth')->group(function () {
         Route::get('/categories', [AdminCategoryController::class, 'reactView'])->name('Admin/Categories.jsx');
         Route::get('/items', [AdminItemController::class, 'reactView'])->name('Admin/Items.jsx');
         Route::get('/restaurants', [AdminRestaurantController::class, 'reactView'])->name('Admin/Restaurants.jsx');
+        Route::get('/statuses', [AdminStatusController::class, 'reactView'])->name('Admin/Statuses.jsx');
 
         Route::get('/users/{role}', [AdminUserController::class, 'reactView'])->name('Admin/Users.jsx');
+    });
+
+    Route::middleware('can:Restaurant')->prefix('restaurant')->group(function () {
+        Route::get('/', fn() => redirect()->route('Restaurant/Home.jsx'));
+        Route::get('/home', [RestaurantHomeController::class, 'reactView'])->name('Restaurant/Home.jsx');
+
+        Route::get('/items', [RestaurantItemController::class, 'reactView'])->name('Restaurant/Items.jsx');
     });
 });
 

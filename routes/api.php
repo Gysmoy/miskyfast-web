@@ -56,6 +56,7 @@ use App\Http\Controllers\Admin\RepositoryController as AdminRepositoryController
 use App\Http\Controllers\Admin\SettingController as AdminSettingController;
 use App\Http\Controllers\Admin\CanvasPresetController as AdminCanvasPresetController;
 use App\Http\Controllers\Admin\RestaurantController as AdminRestaurantController;
+use App\Http\Controllers\Admin\StatusController as AdminStatusController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\CanvasController;
 use App\Http\Controllers\CanvasProjectController;
@@ -80,12 +81,15 @@ use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\MercadoPagoController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\Restaurant\ItemController as RestaurantItemController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\ScrapController;
+use App\Http\Controllers\StatusController;
 use App\Http\Controllers\TemporalyImageController;
 use App\Http\Controllers\UnifiedImportController;
+use Maatwebsite\Excel\Row;
 
 /*
 |--------------------------------------------------------------------------
@@ -175,12 +179,12 @@ Route::get('/cover/thumbnail/{uuid}', [CoverController::class, 'thumbnail']);
 Route::get('/thumbnail/{uuid}', [CoverController::class, 'thumbnail']);
 // Thumbnails de alta calidad para proyectos
 Route::prefix('thumbnails')->group(function () {
-    Route::post('/{projectId}/generate', [App\Http\Controllers\Api\ThumbnailController::class, 'generateProjectThumbnails']);
-    Route::post('/{projectId}/page/{pageIndex}', [App\Http\Controllers\Api\ThumbnailController::class, 'generatePageThumbnail']);
-    Route::get('/{projectId}', [App\Http\Controllers\Api\ThumbnailController::class, 'getProjectThumbnails']);
-    Route::post('/{projectId}/save-as-files', [App\Http\Controllers\Api\ThumbnailController::class, 'saveThumbnailsAsFiles']);
-    Route::post('/{projectId}/existing', [App\Http\Controllers\Api\ThumbnailController::class, 'loadExistingThumbnails']);
-    Route::delete('/{projectId}', [App\Http\Controllers\Api\ThumbnailController::class, 'deleteProjectThumbnails']);
+  Route::post('/{projectId}/generate', [App\Http\Controllers\Api\ThumbnailController::class, 'generateProjectThumbnails']);
+  Route::post('/{projectId}/page/{pageIndex}', [App\Http\Controllers\Api\ThumbnailController::class, 'generatePageThumbnail']);
+  Route::get('/{projectId}', [App\Http\Controllers\Api\ThumbnailController::class, 'getProjectThumbnails']);
+  Route::post('/{projectId}/save-as-files', [App\Http\Controllers\Api\ThumbnailController::class, 'saveThumbnailsAsFiles']);
+  Route::post('/{projectId}/existing', [App\Http\Controllers\Api\ThumbnailController::class, 'loadExistingThumbnails']);
+  Route::delete('/{projectId}', [App\Http\Controllers\Api\ThumbnailController::class, 'deleteProjectThumbnails']);
 });
 
 Route::get('/mailing/notify', [BlogController::class, 'notifyToday']);
@@ -228,8 +232,8 @@ Route::post('/discount-rules/apply-to-cart', [AdminDiscountRulesController::clas
 
 // 🧪 TEMPORAL: Ruta de prueba para PDF sin autenticación (SOLO DESARROLLO)
 if (app()->environment('local')) {
-    // Route::post('/test/projects/{projectId}/export/pdf', [App\Http\Controllers\Api\ProjectPDFController::class, 'generatePDF']);
-    // Route::post('/test/projects/{projectId}/debug/html', [App\Http\Controllers\Api\ProjectPDFController::class, 'debugPDFHtml']);
+  // Route::post('/test/projects/{projectId}/export/pdf', [App\Http\Controllers\Api\ProjectPDFController::class, 'generatePDF']);
+  // Route::post('/test/projects/{projectId}/debug/html', [App\Http\Controllers\Api\ProjectPDFController::class, 'debugPDFHtml']);
 }
 
 Route::middleware('auth')->group(function () {
@@ -261,10 +265,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/projects/{projectId}/generate-pdf', [App\Http\Controllers\Api\ProjectPDFController::class, 'generatePDF']);
     Route::get('/projects/{projectId}/pdf-info', [App\Http\Controllers\Api\ProjectPDFController::class, 'getPDFInfo']);
     Route::get('/projects/{projectId}/download-pdf', [App\Http\Controllers\Api\ProjectPDFController::class, 'downloadPDF']);
-    
+
     // 🚀 Ruta para recibir PDF generado en frontend
     Route::post('/projects/{projectId}/upload-pdf', [App\Http\Controllers\Api\ProjectPDFController::class, 'uploadPDF']);
-    
+
     // 🛒 Rutas para carrito con PDFs backend
     Route::post('/cart/process-pdfs', [CartPDFController::class, 'processCartPDFs']);
     Route::post('/cart/check-pdf-status', [CartPDFController::class, 'checkCartPDFStatus']);
@@ -483,11 +487,11 @@ Route::middleware('auth')->group(function () {
     Route::patch('/socials/{field}', [AdminSocialController::class, 'boolean']);
     Route::delete('/socials/{id}', [AdminSocialController::class, 'delete']);
 
-    Route::post('/statuses', [AdminSaleStatusController::class, 'save']);
-    Route::post('/statuses/paginate', [AdminSaleStatusController::class, 'paginate']);
-    Route::patch('/statuses/status', [AdminSaleStatusController::class, 'status']);
-    Route::patch('/statuses/{field}', [AdminSaleStatusController::class, 'boolean']);
-    Route::delete('/statuses/{id}', [AdminSaleStatusController::class, 'delete']);
+    Route::post('/statuses', [AdminStatusController::class, 'save']);
+    Route::post('/statuses/paginate', [AdminStatusController::class, 'paginate']);
+    Route::patch('/statuses/status', [AdminStatusController::class, 'status']);
+    Route::patch('/statuses/{field}', [AdminStatusController::class, 'boolean']);
+    Route::delete('/statuses/{id}', [AdminStatusController::class, 'delete']);
 
     Route::middleware(['can:Root'])->group(function () {
       Route::post('/system', [AdminSystemController::class, 'save']);
@@ -505,7 +509,7 @@ Route::middleware('auth')->group(function () {
       Route::get('/system/has-remote-changes', [AdminSystemController::class, 'hasRemoteChanges']);
 
       Route::get('/system/related/{model}/{method}', [AdminSystemController::class, 'getRelatedFilter']);
-      
+
       // 📄 Gestión de PDFs para administradores
       Route::get('/system/projects-with-pdfs', [AdminSystemController::class, 'getProjectsWithPDFs']);
     });
@@ -540,8 +544,16 @@ Route::middleware('auth')->group(function () {
 
   });
 
-// Canvas Project routes - accessible to authenticated users
-Route::middleware('auth:sanctum')->group(function () {
+  Route::middleware('can:Restaurant')->prefix('restaurant')->group(function () {
+    Route::post('/items', [RestaurantItemController::class, 'save']);
+    Route::post('/items/paginate', [RestaurantItemController::class, 'paginate'])->withoutMiddleware('throttle');
+    Route::patch('/items/status', [RestaurantItemController::class, 'status']);
+    Route::patch('/items/{field}', [RestaurantItemController::class, 'boolean']);
+    Route::delete('/items/{id}', [RestaurantItemController::class, 'delete']);
+  });
+
+  // Canvas Project routes - accessible to authenticated users
+  Route::middleware('auth:sanctum')->group(function () {
     Route::post('/canvas/create-project', [CanvasController::class, 'createProject']);
     Route::get('/canvas/projects/{id}', [CanvasController::class, 'getProject']);
     Route::post('/canvas/save', [CanvasController::class, 'save']);
@@ -554,7 +566,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/canvas/upload-image', [ProjectSaveController::class, 'uploadImage']);
     Route::post('/canvas/auto-save', [ProjectSaveController::class, 'autoSave'])->middleware('optimize.mysql');
     Route::post('/canvas/manual-save', [ProjectSaveController::class, 'manualSave']);
-    
+
     // Enhanced auto-save system routes - con optimización para MySQL
     Route::post('/canvas/projects/{id}/save-progress', [ProjectSaveController::class, 'saveProgress'])->middleware('optimize.mysql');
     Route::get('/canvas/projects/{id}/load-progress', [ProjectSaveController::class, 'loadProgress']);
@@ -595,5 +607,3 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::delete('/albums/{id}', [CustomerAlbumController::class, 'delete']);
   });
 });
-
-

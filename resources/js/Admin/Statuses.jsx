@@ -16,17 +16,19 @@ import StatusesRest from '../Actions/Admin/StatusesRest';
 
 const statusesRest = new StatusesRest()
 
-const Statuses = ({ icons }) => {
+const Statuses = ({ }) => {
   const gridRef = useRef()
   const modalRef = useRef()
 
   // Form elements ref
   const idRef = useRef()
-  const iconRef = useRef()
   const nameRef = useRef()
   const descriptionRef = useRef()
+  const imageRef = useRef()
   const colorRef = useRef()
-  const reversibleRef = useRef()
+  const typeRef = useRef()
+  const isOkRef = useRef()
+  const statusRef = useRef()
 
   const [isEditing, setIsEditing] = useState(false)
 
@@ -35,11 +37,13 @@ const Statuses = ({ icons }) => {
     else setIsEditing(false)
 
     idRef.current.value = data?.id ?? ''
-    $(iconRef.current).val(data?.icon ?? null).trigger('change');
     nameRef.current.value = data?.name ?? ''
     descriptionRef.current.value = data?.description ?? ''
-    colorRef.current.value = data?.color ?? ''
-    $(reversibleRef.current).prop('checked', data?.reversible == 0).trigger('click')
+    $(imageRef.current).val(data?.image ?? null).trigger('change');
+    colorRef.current.value = data?.color ?? '#000000'
+    $(typeRef.current).val(data?.type ?? 'order').trigger('change');
+    $(isOkRef.current).prop('checked', data?.is_ok == 1).trigger('click')
+    $(statusRef.current).prop('checked', data?.status == 1).trigger('click')
 
     $(modalRef.current).modal('show')
   }
@@ -49,11 +53,13 @@ const Statuses = ({ icons }) => {
 
     const request = {
       id: idRef.current.value || undefined,
-      icon: iconRef.current.value,
       name: nameRef.current.value,
       description: descriptionRef.current.value,
+      image: imageRef.current.value,
       color: colorRef.current.value,
-      reversible: reversibleRef.current.checked,
+      type: typeRef.current.value,
+      is_ok: isOkRef.current.checked,
+      status: statusRef.current.checked,
     }
 
     const result = await statusesRest.save(request)
@@ -63,8 +69,8 @@ const Statuses = ({ icons }) => {
     $(modalRef.current).modal('hide')
   }
 
-  const onVisibleChange = async ({ id, value }) => {
-    const result = await statusesRest.boolean({ id, field: 'visible', value })
+  const onStatusChange = async ({ id, value }) => {
+    const result = await statusesRest.boolean({ id, field: 'status', value })
     if (!result) return
     $(gridRef.current).dxDataGrid('instance').refresh()
   }
@@ -84,15 +90,14 @@ const Statuses = ({ icons }) => {
     $(gridRef.current).dxDataGrid('instance').refresh()
   }
 
-  const iconTemplate = (e) => {
+  const imageTemplate = (e) => {
     return $(renderToString(<span>
-      <i className={`${e.id} me-1`}></i>
-      {e.text.replace('mdi mdi-', '')}
+      {e.text}
     </span>))
   }
 
   return (<>
-    <Table gridRef={gridRef} title='Estados de ventas' rest={statusesRest}
+    <Table gridRef={gridRef} title='Estados' rest={statusesRest}
       toolBar={(container) => {
         container.unshift({
           widget: 'dxButton', location: 'after',
@@ -119,13 +124,12 @@ const Statuses = ({ icons }) => {
           visible: false
         },
         {
-          dataField: 'icon',
-          caption: 'Ícono',
+          dataField: 'image',
+          caption: 'Imagen',
           width: '100px',
           cellTemplate: (container, { data }) => {
             container.html(renderToString(<>
-              <i className={`${data.icon} me-1`}></i>
-              {String(data.icon || '').replace('mdi mdi-', '')}
+              {data.image && <img src={data.image} alt="status" style={{width:32,height:32,objectFit:'contain'}} />}
             </>))
           }
         },
@@ -137,12 +141,6 @@ const Statuses = ({ icons }) => {
         {
           dataField: 'description',
           caption: 'Descripción',
-          // cellTemplate: (container, { data }) => {
-          //   container.html(renderToString(<>
-          //     <i className={`fab ${data.icon} me-1`}></i>
-          //     {data.description}
-          //   </>))
-          // }
         },
         {
           dataField: 'color',
@@ -156,15 +154,33 @@ const Statuses = ({ icons }) => {
           }
         },
         {
-          dataField: 'visible',
-          caption: 'Visible',
+          dataField: 'type',
+          caption: 'Tipo',
+          width: '120px'
+        },
+        {
+          dataField: 'is_ok',
+          caption: 'Contable',
           dataType: 'boolean',
           width: '100px',
           cellTemplate: (container, { data }) => {
             $(container).empty()
-            ReactAppend(container, <SwitchFormGroup checked={data.visible == 1} onChange={() => onVisibleChange({
+            ReactAppend(container, <SwitchFormGroup checked={data.is_ok == 1} onChange={() => onStatusChange({
               id: data.id,
-              value: !data.visible
+              value: !data.is_ok
+            })} />)
+          }
+        },
+        {
+          dataField: 'status',
+          caption: 'Activo',
+          dataType: 'boolean',
+          width: '100px',
+          cellTemplate: (container, { data }) => {
+            $(container).empty()
+            ReactAppend(container, <SwitchFormGroup checked={data.status == 1} onChange={() => onStatusChange({
+              id: data.id,
+              value: !data.status
             })} />)
           }
         },
@@ -190,18 +206,26 @@ const Statuses = ({ icons }) => {
           allowExporting: false
         }
       ]} />
-    <Modal modalRef={modalRef} title={isEditing ? 'Editar estado' : 'Agregar estado'} onSubmit={onModalSubmit} size='md'>
+    <Modal modalRef={modalRef} title={isEditing ? 'Editar estado' : 'Agregar estado'} onSubmit={onModalSubmit} size='lg'>
       <div className='row' id='statuses-container'>
         <input ref={idRef} type='hidden' />
-        <SelectFormGroup eRef={iconRef} label='Ícono' dropdownParent='#statuses-container' col='col-md-4' templateResult={iconTemplate} templateSelection={iconTemplate} >
-          {icons.map((icon, index) => {
-            return <option key={index} value={icon.id}>{icon.value}</option>
-          })}
-        </SelectFormGroup>
-        <InputFormGroup eRef={nameRef} label='Estado' col='col-md-8' required />
+        <InputFormGroup eRef={nameRef} label='Estado' col='col-md-6' required />
+        <SelectFormGroup
+          eRef={typeRef}
+          label='Tipo'
+          col='col-md-6'
+          options={[
+            {value:'order',label:'Pedido'},
+            {value:'payment',label:'Pago'},
+            {value:'shipment',label:'Envío'}
+          ]}
+          required
+        />
         <TextareaFormGroup eRef={descriptionRef} label='Descripción' col='col-12' />
-        <InputFormGroup eRef={colorRef} label='Color (#000000)' type="color" col='col-md-6' rows={2} required />
-        <SwitchFormGroup eRef={reversibleRef} label='Reversible' info="Sirve para controlar si el estado se puede revertir o no" col='col-md-6' />
+        <InputFormGroup eRef={imageRef} label='Imagen' type='file' col='col-md-6' />
+        <InputFormGroup eRef={colorRef} label='Color' type="color" col='col-md-6' required />
+        <SwitchFormGroup eRef={isOkRef} label='¿Es contable?' info="Indica si este estado se considera 'hecho' para efectos de dashboard y reportes" col='col-md-6' />
+        <SwitchFormGroup eRef={statusRef} label='Activo' col='col-md-6' />
       </div>
     </Modal>
   </>
@@ -210,7 +234,7 @@ const Statuses = ({ icons }) => {
 
 CreateReactScript((el, properties) => {
 
-  createRoot(el).render(<BaseAdminto {...properties} title='Estados de ventas'>
+  createRoot(el).render(<BaseAdminto {...properties} title='Estados'>
     <Statuses {...properties} />
   </BaseAdminto>);
 })

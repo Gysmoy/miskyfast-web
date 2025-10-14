@@ -13,14 +13,19 @@ class UsersSeeder extends Seeder
      */
     public function run(): void
     {
-        $roles = ['Admin', 'Restaurant', 'Client', 'Delivery'];
+        $roles = [
+            'Admin',
+            // 'Restaurant', 
+            'Client',
+            'Delivery'
+        ];
         foreach ($roles as $role) {
             User::updateOrCreate([
                 'email' => strtolower($role) . '@mundoweb.pe'
             ], [
                 'name' => $role,
                 'lastname' => 'MundoWeb',
-                'password' => '12345678'
+                'password' => 'r00tme'
             ])->assignRole($role);
         }
     }

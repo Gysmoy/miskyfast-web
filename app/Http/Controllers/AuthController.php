@@ -43,8 +43,8 @@ class AuthController extends Controller
         case 'Admin':
           return redirect('/admin/home');
           break;
-        case 'Root':
-          return redirect('/admin/home');
+        case 'Restaurant':
+          return redirect('/restaurant/home');
           break;
         default:
           Auth::guard('web')->logout();

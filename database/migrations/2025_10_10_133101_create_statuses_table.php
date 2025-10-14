@@ -12,19 +12,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('items', function (Blueprint $table) {
+        Schema::create('statuses', function (Blueprint $table) {
             $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
-            $table->string('image')->nullable();
+
             $table->string('name');
             $table->longText('description')->nullable();
-            $table->decimal('price', 10, 2);
-            $table->json('presentations')->nullable();
-
-            $table->boolean('visible')->default(true);
+            $table->string('image')->nullable();
+            $table->string('color')->default('#000000');
+            $table->string('type')->default('order');
+            $table->boolean('is_ok')->nullable();
             $table->boolean('status')->default(true);
-
-            $table->foreignUuid('category_id')->nullable()->constrained('categories')->nullOnDelete();
-            $table->foreignUuid('restaurant_id')->constrained('restaurants')->onDelete('cascade');
 
             $table->timestamps();
         });
@@ -35,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('items');
+        Schema::dropIfExists('statuses');
     }
 };

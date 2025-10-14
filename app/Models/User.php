@@ -25,34 +25,13 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'uuid',
-        // 'relative_id',
+        'restaurant_id',
         'name',
         'lastname',
         'email',
         'email_verified_at',
         'password',
-        'dni',
-        'phone',
-        'phone_prefix',
-        'video',
-        'title',
-        'country',
-        'city',
-        'address',
-        'summary',
-        'description',
         'status',
-        'department',
-        'province',
-        'district',
-        'ubigeo',
-        'number',
-        'reference',
-        'alternate_phone',
-        'document_type',
-        'document_number',
-
-
     ];
 
     /**
@@ -89,5 +68,10 @@ class User extends Authenticatable
     public function getRole()
     {
         return $this->getRoleNames()[0];
+    }
+
+    public function restaurant()
+    {
+        return $this->hasOne(Restaurant::class, 'id', 'restaurant_id');
     }
 }

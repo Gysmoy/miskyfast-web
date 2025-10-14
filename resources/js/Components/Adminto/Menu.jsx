@@ -64,7 +64,7 @@ const Menu = ({ session, hasRole }) => {
           </div>
 
           {/* <Tippy content={mainRole.description} arrow={true}> */}
-          <p className="text-muted left-user-info">{mainRole.name}</p>
+          <p className="text-muted left-user-info">{session?.restaurant?.name || mainRole.name}</p>
           {/* </Tippy> */}
 
           <ul className="list-inline">
@@ -88,38 +88,39 @@ const Menu = ({ session, hasRole }) => {
             </li>
           </ul>
         </div>
-        {hasRole("Admin") && (
-          <div id="sidebar-menu" className="show">
-            <ul id="side-menu">
-              <li className="menu-title">Navigation Panel</li>
-              {hasRole("Admin") && (
-                <>
-                  {/* Administración */}
-                  <MenuItem href="/admin/home" icon="mdi mdi-home">Dashboard</MenuItem>
+        <div id="sidebar-menu" className="show">
+          <ul id="side-menu">
+            <li className="menu-title">Panel de Navegación</li>
+            {hasRole("Admin") && <>
+              {/* Administración */}
+              <MenuItem href="/admin/home" icon="mdi mdi-home">Dashboard</MenuItem>
 
-                  <MenuItem href="/admin/restaurants" icon="mdi mdi-silverware">Restaurantes</MenuItem>
+              <MenuItem href="/admin/restaurants" icon="mdi mdi-silverware">Restaurantes</MenuItem>
 
-                  <MenuItemContainer title="Usuarios" icon="mdi mdi-account-group">
-                    <MenuItem href="/admin/users/restaurant" icon="mdi mdi-account-group">Restaurantes</MenuItem>
-                    <MenuItem href="/admin/users/delivery" icon="mdi mdi-moped">Deliveries</MenuItem>
-                    <MenuItem href="/admin/users/client" icon="mdi mdi-account-multiple">Clientes</MenuItem>
-                  </MenuItemContainer>
+              <MenuItemContainer title="Usuarios" icon="mdi mdi-account-group">
+                <MenuItem href="/admin/users/restaurant" icon="mdi mdi-account-group">Restaurantes</MenuItem>
+                <MenuItem href="/admin/users/delivery" icon="mdi mdi-moped">Deliveries</MenuItem>
+                <MenuItem href="/admin/users/client" icon="mdi mdi-account-multiple">Clientes</MenuItem>
+              </MenuItemContainer>
 
-                  <li className="menu-title">Aplicación</li>
+              <li className="menu-title">Aplicación</li>
 
-                  <MenuItem href="/admin/categories" icon="mdi mdi-shape-outline">Categorías</MenuItem>
-                  <MenuItem href="/admin/items" icon="mdi mdi-package-variant">Items</MenuItem>
-                  <MenuItem href="/admin/statuses" icon="mdi mdi-tag-text">Estados</MenuItem>
-                  <MenuItem href="/admin/messages" icon="mdi mdi-message-text">Mensajes</MenuItem>
+              <MenuItem href="/admin/categories" icon="mdi mdi-shape-outline">Categorías</MenuItem>
+              <MenuItem href="/admin/items" icon="mdi mdi-shape-outline">Items</MenuItem>
+              <MenuItem href="/admin/statuses" icon="mdi mdi-tag-text">Estados</MenuItem>
+              <MenuItem href="/admin/messages" icon="mdi mdi-message-text">Mensajes</MenuItem>
 
-                  <li className="menu-title">Configuraciones</li>
-                  <MenuItem href="/admin/profile" icon="mdi mdi-account-box">Mi perfil</MenuItem>
-                  <MenuItem href="/admin/account" icon="mdi mdi-account-key">Mi cuenta</MenuItem>
-                </>
-              )}
-            </ul>
-          </div>
-        )}
+              <li className="menu-title">Configuraciones</li>
+              <MenuItem href="/admin/profile" icon="mdi mdi-account-box">Mi perfil</MenuItem>
+              <MenuItem href="/admin/account" icon="mdi mdi-account-key">Mi cuenta</MenuItem>
+            </>}
+            {hasRole('Restaurant') && <>
+              <MenuItem href="/restaurant/home" icon="mdi mdi-home">Dashboard</MenuItem>
+              <MenuItem href="/restaurant/orders" icon="mdi mdi-cart-outline">Pedidos</MenuItem>
+              <MenuItem href="/restaurant/items" icon="mdi mdi-shape-outline">Items</MenuItem>
+            </>}
+          </ul>
+        </div>
         {hasRole("Customer") && (
           <div id="sidebar-menu" className="show">
             <ul id="side-menu">

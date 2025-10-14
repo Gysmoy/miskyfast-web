@@ -32,6 +32,13 @@ class Restaurant extends Model
         'status' => 'boolean',
     ];
 
+    public function items()
+    {
+        return $this->hasMany(Item::class, 'restaurant_id')
+            ->where('items.visible', true)
+            ->where('items.status', true);
+    }
+
     public function categories()
     {
         return $this->belongsToMany(Category::class, Item::class, 'restaurant_id', 'category_id')
