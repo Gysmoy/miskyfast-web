@@ -151,7 +151,11 @@ class AuthController extends Controller
         'email' => Controller::decode($email),
         'password' => Controller::decode($password)
       ])) {
-        throw new Exception(Auth::getLastAttempted() ? 'Error: ' . Auth::getLastAttempted()->getAuthIdentifierName() : 'Error de autenticación');
+        $user = Auth::getLastAttempted();
+        $message = $user && $user->exists
+          ? 'Contraseña incorrecta'
+          : 'No existe un usuario registrado con ese correo';
+        throw new Exception($message);
       }
 
       $request->session()->regenerate();
