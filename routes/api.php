@@ -82,6 +82,7 @@ use App\Http\Controllers\MercadoPagoController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\Restaurant\ItemController as RestaurantItemController;
+use App\Http\Controllers\Restaurant\OrderController as RestaurantOrderController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\SubscriptionController;
@@ -550,6 +551,8 @@ Route::middleware('auth')->group(function () {
     Route::patch('/items/status', [RestaurantItemController::class, 'status']);
     Route::patch('/items/{field}', [RestaurantItemController::class, 'boolean']);
     Route::delete('/items/{id}', [RestaurantItemController::class, 'delete']);
+
+    Route::post('/orders', [RestaurantOrderController::class, 'save']);
   });
 
   // Canvas Project routes - accessible to authenticated users

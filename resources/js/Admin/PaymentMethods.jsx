@@ -16,7 +16,7 @@ import SelectFormGroup from '../Components/Adminto/form/SelectFormGroup';
 
 const statusesRest = new StatusesRest()
 
-const Statuses = ({ }) => {
+const PaymentMethods = ({ }) => {
   const gridRef = useRef()
   const modalRef = useRef()
 
@@ -90,14 +90,8 @@ const Statuses = ({ }) => {
     $(gridRef.current).dxDataGrid('instance').refresh()
   }
 
-  const imageTemplate = (e) => {
-    return $(renderToString(<span>
-      {e.text}
-    </span>))
-  }
-
   return (<>
-    <Table gridRef={gridRef} title='Estados' rest={statusesRest}
+    <Table gridRef={gridRef} title='Métodos de pago' rest={statusesRest}
       toolBar={(container) => {
         container.unshift({
           widget: 'dxButton', location: 'after',
@@ -243,7 +237,7 @@ const Statuses = ({ }) => {
 
 CreateReactScript((el, properties) => {
 
-  createRoot(el).render(<BaseAdminto {...properties} title='Estados'>
-    <Statuses {...properties} />
+  createRoot(el).render(<BaseAdminto {...properties} title='Métodos de Pago'>
+    <PaymentMethods {...properties} />
   </BaseAdminto>);
 })

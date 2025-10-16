@@ -14,13 +14,14 @@ use App\Http\Controllers\Admin\UserController as AdminUserController;
 
 // Restaurant
 use App\Http\Controllers\Restaurant\HomeController as RestaurantHomeController;
+use App\Http\Controllers\Restaurant\OrderController as RestaurantOrderController;
+use App\Http\Controllers\Restaurant\ItemController as RestaurantItemController;
 
 // Public 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RepositoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ItemController;
-use App\Http\Controllers\Restaurant\ItemController as RestaurantItemController;
 use App\Http\Controllers\StatusController;
 
 /*
@@ -56,6 +57,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/', fn() => redirect()->route('Restaurant/Home.jsx'));
         Route::get('/home', [RestaurantHomeController::class, 'reactView'])->name('Restaurant/Home.jsx');
 
+        Route::get('/orders', [RestaurantOrderController::class, 'reactView'])->name('Restaurant/Orders.jsx');
         Route::get('/items', [RestaurantItemController::class, 'reactView'])->name('Restaurant/Items.jsx');
     });
 });

@@ -3,8 +3,10 @@
 namespace App\Providers;
 
 use App\Models\Item;
+use App\Models\Order;
 use App\Models\Sale;
 use App\Observers\ItemPriceObserver;
+use App\Observers\OrderObserver;
 use App\Observers\SaleCreationObserver;
 use App\Observers\SaleStatusObserver;
 use Illuminate\Support\ServiceProvider;
@@ -24,10 +26,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // Item::observe(ItemPriceObserver::class);
-        // Sale::observe([
-        //     SaleCreationObserver::class,
-        //     SaleStatusObserver::class,
-        // ]);
+        Order::observe([
+            OrderObserver::class
+        ]);
     }
 }

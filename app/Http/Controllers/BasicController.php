@@ -232,12 +232,7 @@ class BasicController extends Controller
   }
 
   public function beforeSave(Request $request)
-  {
-    // Debug: Log para campos específicos
-    Log::info('BasicController beforeSave - has_cover_image:', [$request->input('has_cover_image')]);
-    Log::info('BasicController beforeSave - has_back_cover_image:', [$request->input('has_back_cover_image')]);
-    Log::info('BasicController beforeSave - Todos los datos:', $request->all());
-    
+  {    
     return $request->all();
   }
 
@@ -247,10 +242,6 @@ class BasicController extends Controller
     try {
 
       $body = $this->beforeSave($request);
-      
-      // Debug logging
-      Log::info('BasicController save - Body after beforeSave:', $body);
-      Log::info('BasicController save - ID check: ' . (isset($body['id']) ? 'ID existe: ' . $body['id'] : 'ID no existe'));
       
       $snake_case = Text::camelToSnakeCase(str_replace('App\\Models\\', '', $this->model));
       if ($snake_case === "item_image") {

@@ -6,7 +6,8 @@ class Global {
     static APP_DOMAIN = null;
     static APP_ENV = "production";
     static APP_NAME = "Stech Perú";
-    static APP_CORRELATIVE = "bananalab_app";
+    static APP_CORRELATIVE = "miskifast";
+    static EVENTS_URL = 'https://events.atalaya.pe';
     static GMAPS_API_KEY = null;
     static APP_COLOR_PRIMARY = null;
     static CULQI_PUBLIC_KEY = null;

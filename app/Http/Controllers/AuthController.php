@@ -151,7 +151,7 @@ class AuthController extends Controller
         'email' => Controller::decode($email),
         'password' => Controller::decode($password)
       ])) {
-        throw new Exception('Credenciales invalidas');
+        throw new Exception(Auth::getLastAttempted() ? 'Error: ' . Auth::getLastAttempted()->getAuthIdentifierName() : 'Error de autenticación');
       }
 
       $request->session()->regenerate();
