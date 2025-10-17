@@ -250,4 +250,14 @@ class AuthController extends Controller
       );
     }
   }
+
+  public function verify(Request $request) {
+    $response = Response::simpleTryCatch(function () use ($request) {
+      $user = $request->user();
+      $user->getRoleNames();
+      return $user;
+    });
+
+    return response($response->toArray(), $response->status);
+  }
 }

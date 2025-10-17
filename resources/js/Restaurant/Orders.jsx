@@ -12,6 +12,7 @@ const audio = new Audio('/assets/sounds/notification.mp3');
 
 const Orders = ({ orders: ordersDB, statuses }) => {
   const [orders, setOrders] = useState(ordersDB);
+  const [activeTab, setActiveTab] = useState('realtime'); // realtime | history
 
   const { socket } = useWebSocket()
 
@@ -49,121 +50,112 @@ const Orders = ({ orders: ordersDB, statuses }) => {
     }
   }, [socket])
 
-  return <div className="row">
-    <div className="col-12">
-      <div className="card h-100">
-        <div className="d-flex card-header justify-content-between align-items-center border-bottom">
-          <h4 className="header-title my-0">Lista de pedidos</h4>
-          <div className="btn-group btn-group-xs" role="group">
-            <button type="button" className="btn btn-xs btn-outline-primary active">Pendientes</button>
-            <button type="button" className="btn btn-xs btn-outline-primary">Completados</button>
-          </div>
-        </div>
-        <div className="card-body p-0 d-flex flex-column" style={{ minHeight: 'calc(100vh - 300px)' }}>
-          <div className="table-responsive flex-grow-1">
-            <table className="table table-hover mb-0">
-              <thead>
-                <tr>
-                  <th>#</th>
-                  <th>First Name</th>
-                  <th>Last Name</th>
-                  <th>Username</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                {orders.map(order => (
-                  <tr key={order.id}>
-                    <th scope="row">{order.id}</th>
-                    <td>Client #{order.client_id}</td>
-                    <td>Order #{order.id}</td>
-                    <td>@{order.client_id}</td>
-                    <td>
-                      <div className="dropdown">
-                        <button
-                          className="btn btn-sm btn-white dropdown-toggle"
-                          type="button"
-                          data-bs-toggle="dropdown"
-                          aria-expanded="false"
-                        >
-                          {statuses.find(s => s.id === order.status_id)?.name}
-                        </button>
-                        <ul className="dropdown-menu">
-                          {/* Non-OK statuses first */}
-                          {statuses
-                            .filter(s => s.type === 'order' && !s.is_ok)
-                            .map(status => (
-                              <li key={status.id}>
-                                <button
-                                  className="dropdown-item"
-                                  type="button"
-                                  onClick={() => onStatusChanged(order.id, status.id)}
-                                >
-                                  {status.name}
-                                </button>
-                              </li>
-                            ))}
-                          {/* Divider between blocks */}
-                          {statuses.some(s => s.type === 'order' && !s.is_ok) &&
-                            statuses.some(s => s.type === 'order' && s.is_ok) && (
-                              <li><hr className="dropdown-divider" /></li>
-                            )}
-                          {/* OK statuses below */}
-                          {statuses
-                            .filter(s => s.type === 'order' && s.is_ok)
-                            .map(status => (
-                              <li key={status.id}>
-                                <button
-                                  className="dropdown-item"
-                                  type="button"
-                                  onClick={() => onStatusChanged(order.id, status.id)}
-                                >
-                                  {status.name}
-                                </button>
-                              </li>
-                            ))}
-                        </ul>
-                      </div>
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-        </div>
+  // Filter orders for realtime panel (only pending status)
+  const realtimeOrders = orders.filter(o => o.status_id === '56844089-7edf-4c9e-9d09-6874624c37b2');
 
-        <div className="card-footer">
-          <div className="align-items-center justify-content-between row text-center text-sm-start">
-            <div className="col-sm">
-              <div className="text-muted">
-                Showing <span className="fw-semibold">5</span> of <span className="fw-semibold">20</span> Results
+  const handleConfirm = (orderId) => {
+    onStatusChanged(orderId, 'be7e24c9-a3e4-444e-adab-bb301b4ccce3');
+  };
+
+  const handleCancel = (orderId) => {
+    onStatusChanged(orderId, 'ea4578c1-f0c7-4495-ade5-a82b5ca7cc4b');
+  };
+
+  const handleMozoView = () => {
+    console.log('Vista de mozo clicked');
+  };
+
+  return (
+    <div className="row">
+      <div className="col-12">
+        <div className="card h-100">
+          <div className="d-flex card-header justify-content-between align-items-center border-bottom">
+            <h4 className="header-title my-0">Lista de pedidos</h4>
+            <div className="btn-group btn-group-xs" role="group">
+              <button
+                type="button"
+                className={`btn btn-xs btn-outline-primary ${activeTab === 'realtime' ? 'active' : ''}`}
+                onClick={() => setActiveTab('realtime')}
+              >
+                En tiempo real
+              </button>
+              <button
+                type="button"
+                className={`btn btn-xs btn-outline-primary ${activeTab === 'history' ? 'active' : ''}`}
+                onClick={() => setActiveTab('history')}
+              >
+                Historial
+              </button>
+            </div>
+          </div>
+
+          <div className="card-body p-0 d-flex flex-column" style={{ minHeight: 'calc(100vh - 300px)' }}>
+            {activeTab === 'realtime' && (
+              <div className="table-responsive flex-grow-1">
+                <table className="table table-hover mb-0">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Cliente</th>
+                      <th>Pedido</th>
+                      <th>Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {realtimeOrders.map(order => (
+                      <tr key={order.id}>
+                        <th scope="row">{order.id}</th>
+                        <td>Client #{order.client_id}</td>
+                        <td>Order #{order.id}</td>
+                        <td>
+                          <div className="btn-group btn-group-sm" role="group">
+                            <button
+                              className="btn btn-success btn-sm"
+                              onClick={() => handleConfirm(order.id)}
+                            >
+                              CONFIRMAR
+                            </button>
+                            <button
+                              className="btn btn-danger btn-sm"
+                              onClick={() => handleCancel(order.id)}
+                            >
+                              CANCELAR
+                            </button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+            )}
+
+            {activeTab === 'history' && (
+              <div className="p-3 text-center text-muted">
+                {/* Placeholder for history content */}
+                Historial de pedidos (contenido pendiente)
+              </div>
+            )}
+          </div>
+
+          <div className="card-footer">
+            <div className="align-items-center justify-content-between row text-center text-sm-start">
+              <div className="col-sm">
+                <div className="text-muted">
+                  Mostrando <span className="fw-semibold">{activeTab === 'realtime' ? realtimeOrders.length : 0}</span> resultados
+                </div>
+              </div>
+              <div className="col-sm-auto mt-3 mt-sm-0">
+                <button className="btn btn-outline-secondary btn-sm" onClick={handleMozoView}>
+                  Vista de mozo
+                </button>
               </div>
             </div>
-            <div className="col-sm-auto mt-3 mt-sm-0">
-              <ul className="pagination pagination-boxed pagination-sm mb-0 justify-content-center">
-                <li className="page-item disabled">
-                  <a href="#" className="page-link"><i className="ti ti-chevron-left"></i></a>
-                </li>
-                <li className="page-item active">
-                  <a href="#" className="page-link">1</a>
-                </li>
-                <li className="page-item">
-                  <a href="#" className="page-link">2</a>
-                </li>
-                <li className="page-item">
-                  <a href="#" className="page-link">3</a>
-                </li>
-                <li className="page-item">
-                  <a href="#" className="page-link"><i className="ti ti-chevron-right"></i></a>
-                </li>
-              </ul>
-            </div>
           </div>
         </div>
-
       </div>
     </div>
-  </div>
+  );
 }
 
 CreateReactScript((el, properties) => {

@@ -557,6 +557,9 @@ Route::middleware('auth')->group(function () {
 
   // Canvas Project routes - accessible to authenticated users
   Route::middleware('auth:sanctum')->group(function () {
+
+    Route::get('/auth/verify', [AuthController::class, 'verify']);
+
     Route::post('/canvas/create-project', [CanvasController::class, 'createProject']);
     Route::get('/canvas/projects/{id}', [CanvasController::class, 'getProject']);
     Route::post('/canvas/save', [CanvasController::class, 'save']);
