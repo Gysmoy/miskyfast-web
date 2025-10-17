@@ -12,6 +12,7 @@ class RestaurantController extends Controller
         return Restaurant::with(['categories'])
             ->where('visible', true)
             ->where('status', true)
+            ->has('categories')
             ->get();
     }
 }
