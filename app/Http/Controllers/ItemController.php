@@ -15,14 +15,14 @@ class ItemController extends BasicController
     public $reactRootView = 'public';
     public $prefix4filter = 'items';
 
-    public function byCategory(Request $request, Restaurant $restaurant, Category $category)
+    public function byCategory(Request $request, string $restaurant_id, string $category_id = null)
     {
-        $response = Response::simpleTryCatch(function () use ($restaurant, $category) {
+        $response = Response::simpleTryCatch(function () use ($restaurant_id, $category_id) {
             $query = Item::select()
                 ->where('visible', true)
                 ->where('status', true)
-                ->where('restaurant_id', $restaurant->id);
-            if ($category) $query->where('category_id', $category->id);
+                ->where('restaurant_id', $restaurant_id);
+            if ($category_id) $query->where('category_id', $category_id);
             return $query->get();
         });
         return response($response->toArray(), $response->status);
