@@ -17,6 +17,7 @@ const Orders = ({ orders: ordersDB, statuses }) => {
   const { socket } = useWebSocket()
 
   const onOrderChanged = (order) => {
+    console.log(order);
     setOrders(prev => {
       const exists = prev.some(o => o.id === order.id);
       if (order.status.is_ok) {
