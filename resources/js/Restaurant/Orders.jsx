@@ -106,8 +106,13 @@ const Orders = ({ orders: ordersDB, statuses }) => {
                     {realtimeOrders.map((order, idx) => (
                       <tr key={order.id}>
                         <th scope="row">{idx + 1}</th>
-                        <td>Client #{order.client_id}</td>
-                        <td>Order #{order.id}</td>
+                        <td>
+                          <div className="d-flex flex-column">
+                            <span>{order.client.name} {order.client.lastname}</span>
+                            <small className="text-muted">{order.client.email}</small>
+                          </div>
+                        </td>
+                        <td>{order.id}</td>
                         <td>
                           <div className="btn-group btn-group-sm" role="group">
                             <button
