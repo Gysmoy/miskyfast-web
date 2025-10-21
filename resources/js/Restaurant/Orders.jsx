@@ -46,7 +46,6 @@ const Orders = ({ orders: ordersDB, statuses }) => {
     socket.on('order.updated', (order) => onOrderChanged(order))
 
     return () => {
-      console.loh('Quitando eventos del websocket')
       socket.off('order.created')
       socket.off('order.updated')
     }
