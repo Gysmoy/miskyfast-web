@@ -41,12 +41,13 @@ const Orders = ({ orders: ordersDB, statuses }) => {
   }
 
   useEffect(() => {
-    socket.on('orders.created', (order) => onOrderChanged(order))
-    socket.on('orders.updated', (order) => onOrderChanged(order))
+    socket.on('order.created', (order) => onOrderChanged(order))
+    socket.on('order.updated', (order) => onOrderChanged(order))
 
     return () => {
-      socket.off('orders.created')
-      socket.off('orders.updated')
+      console.loh('Quitando eventos del websocket')
+      socket.off('order.created')
+      socket.off('order.updated')
     }
   }, [socket])
 

@@ -8,9 +8,8 @@ class OrderObserver
 {
     public function created($order)
     {
-        dump($order);
         EventController::notify(
-            'orders.created',
+            'order.created',
             $order->load(['client', 'delivery', 'status']),
             ['restaurant_id' => $order->restaurant_id]
         );
@@ -19,7 +18,7 @@ class OrderObserver
     public function updated($order)
     {
         EventController::notify(
-            'orders.updated',
+            'order.updated',
             $order->load(['client', 'delivery', 'status']),
             ['restaurant_id' => $order->restaurant_id]
         );
