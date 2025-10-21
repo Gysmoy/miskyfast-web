@@ -24,41 +24,61 @@ class OrderController extends BasicController
             $paymentMethodJpa = PaymentMethod::find($request->payment_method_id);
             if (!$paymentMethodJpa) throw new Exception('Elige un método de pago válido');
 
-            $itemsId = collect($request->items)->pluck('id');
-            $itemsJpa = Item::whereIn('id', $itemsId)->get();
-            $itemsGrouped = $itemsJpa->groupBy('restaurant_id');
+            $requestItems = collect($request->items);
+            $itemsId = $requestItems->pluck('id');
+            $itemsJpa = Item::whereIn('id', $itemsId)->get()->keyBy('id');
 
+            $matchedItems = [];
+
+            foreach ($requestItems as $reqItem) {
+                $itemJpa = $itemsJpa->get($reqItem['id']);
+                if (!$itemJpa) {
+                    throw new Exception("El item {$reqItem['id']} no existe en la base de datos o ya no se encuentra disponible");
+                }
+
+                $presentation = collect($itemJpa->presentations)
+                    ->firstWhere('id', $reqItem['presentation_id'] ?? null);
+
+                $matchedItems[] = [
+                    'id' => $itemJpa->id,
+                    'name' => $itemJpa->name,
+                    'restaurant_id' => $itemJpa->restaurant_id,
+                    'presentation' => $presentation['presentation'] ?? 'Standard',
+                    'quantity' => $reqItem['quantity'],
+                    'unit_price' => $presentation['price'] ?? $itemJpa->price,
+                    'observation' => $reqItem['observation'] ?? null,
+                ];
+            }
+
+            $itemsGrouped = collect($matchedItems)->groupBy('restaurant_id');
             $ordersCreated = [];
 
             foreach ($itemsGrouped as $restaurantId => $itemsGroup) {
-                // Calculate total amount for this order
                 $totalAmount = collect($itemsGroup)->sum(function ($item) {
                     return $item['quantity'] * $item['unit_price'];
                 });
 
-                // Create order
                 $order = Order::create([
                     'client_id' => $clientJpa->id,
                     'restaurant_id' => $restaurantId,
-                    'status_id' => $request->status_id,
-                    'delivery_status_id' => $request->delivery_status_id,
-                    'payment_method_id' => $request->payment_method_id,
+                    'status_id' => '56844089-7edf-4c9e-9d09-6874624c37b2',
+                    'delivery_status_id' => '8617ebd8-575a-494e-bb35-3ed380f42dd5',
+                    'payment_method_id' => $paymentMethodJpa->id,
                     'payment_method_note' => $request->payment_method_note,
                     'location' => $request->location,
                     'total_amount' => $totalAmount,
                 ]);
 
-                // Create order details
                 foreach ($itemsGroup as $item) {
                     $order->details()->create([
                         'order_id' => $order->id,
-                        'item_id' => $item['id'] ?? null,
-                        'item' => $item['name'] ?? 'Item',
-                        'presentation' => $item['presentation'] ?? 'Standard',
+                        'item_id' => $item['id'],
+                        'item' => $item['name'],
+                        'presentation' => $item['presentation'],
                         'quantity' => $item['quantity'],
                         'unit_price' => $item['unit_price'],
                         'total_price' => $item['quantity'] * $item['unit_price'],
-                        'observation' => $item['observation'] ?? null,
+                        'observation' => $item['observation'],
                     ]);
                 }
 
