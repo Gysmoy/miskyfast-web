@@ -1462,7 +1462,7 @@
     ]
   },
   "resources/js/Admin/Statuses.jsx": {
-    "file": "assets/Statuses-Dp8m1fYL.js",
+    "file": "assets/Statuses-CGSRa6SZ.js",
     "name": "Statuses",
     "src": "resources/js/Admin/Statuses.jsx",
     "isEntry": true,
@@ -1483,6 +1483,7 @@
       "_ReactAppend-Vm5G2nof.js",
       "_BasicRest-toNqoSaQ.js",
       "_SelectFormGroup-CVmlaBEm.js",
+      "_ImageFormGroup-DS34wn7h.js",
       "_index-yBjzXJbu.js",
       "_MenuItemContainer-D-Aykn96.js",
       "_index-fRpqIG3j.js",

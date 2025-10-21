@@ -13,6 +13,7 @@ import CreateReactScript from '../Utils/CreateReactScript';
 import ReactAppend from '../Utils/ReactAppend';
 import StatusesRest from '../Actions/Admin/StatusesRest';
 import SelectFormGroup from '../Components/Adminto/form/SelectFormGroup';
+import ImageFormGroup from '../Components/Adminto/form/ImageFormGroup';
 
 const statusesRest = new StatusesRest()
 
@@ -39,11 +40,10 @@ const Statuses = ({ }) => {
     idRef.current.value = data?.id ?? ''
     nameRef.current.value = data?.name ?? ''
     descriptionRef.current.value = data?.description ?? ''
-    // $(imageRef.current).val(data?.image ?? null).trigger('change');
+    imageRef.current.value = null
+    imageRef.image.src = `/storage/images/status/${data?.image}`
     colorRef.current.value = data?.color ?? '#000000'
     $(typeRef.current).val(data?.type ?? 'order').trigger('change');
-    $(isOkRef.current).prop('checked', data?.is_ok == 1).trigger('click')
-    $(statusRef.current).prop('checked', data?.status == 1).trigger('click')
 
     $(modalRef.current).modal('show')
   }
@@ -90,12 +90,6 @@ const Statuses = ({ }) => {
     $(gridRef.current).dxDataGrid('instance').refresh()
   }
 
-  const imageTemplate = (e) => {
-    return $(renderToString(<span>
-      {e.text}
-    </span>))
-  }
-
   return (<>
     <Table gridRef={gridRef} title='Estados' rest={statusesRest}
       toolBar={(container) => {
@@ -131,13 +125,13 @@ const Statuses = ({ }) => {
           cellTemplate: (container, { data }) => {
             container.html(renderToString(<>
               {data.image && <img src={`/storage/images/status/${data.image}`} className='mx-auto d-block' alt="status" style={{
-                width:32,
-                height:32,
-                objectFit:'contain',
+                width: 32,
+                height: 32,
+                objectFit: 'contain',
                 backgroundColor: data.color,
                 borderRadius: 8,
                 padding: 4,
-                }} />}
+              }} />}
             </>))
           },
           allowFiltering: false,
@@ -216,25 +210,23 @@ const Statuses = ({ }) => {
           allowExporting: false
         }
       ]} />
-    <Modal modalRef={modalRef} title={isEditing ? 'Editar estado' : 'Agregar estado'} onSubmit={onModalSubmit} size='lg'>
+    <Modal modalRef={modalRef} title={isEditing ? 'Editar estado' : 'Agregar estado'} onSubmit={onModalSubmit}>
+      <input ref={idRef} type='hidden' />
       <div className='row' id='statuses-container'>
-        <input ref={idRef} type='hidden' />
-        <InputFormGroup eRef={nameRef} label='Estado' col='col-md-6' required />
-        <SelectFormGroup
-          eRef={typeRef}
-          label='Tipo'
-          col='col-md-6'
-          dropdownParent='#statuses-container'
-          required
-        >
-          <option value="order">Orden</option>
-          <option value="delivery">Delivery</option>
-        </SelectFormGroup>
+        <div className="col-md-4">
+          <ImageFormGroup eRef={imageRef} label='Imagen' aspect={1} />
+        </div>
+        <div className="col-md-8">
+          <InputFormGroup eRef={nameRef} label='Estado' required />
+          <div className='row'>
+          <SelectFormGroup eRef={typeRef} label='Tipo' dropdownParent='#statuses-container' col='col-md-7' required>
+            <option value="order">Orden</option>
+            <option value="delivery">Delivery</option>
+          </SelectFormGroup>
+          <InputFormGroup eRef={colorRef} label='Color' type='color' col='col-md-5' required />
+          </div>
+        </div>
         <TextareaFormGroup eRef={descriptionRef} label='Descripción' col='col-12' />
-        <InputFormGroup eRef={imageRef} label='Imagen' type='file' col='col-md-6' />
-        <InputFormGroup eRef={colorRef} label='Color' type="color" col='col-md-6' required />
-        <SwitchFormGroup eRef={isOkRef} label='¿Es contable?' info="Indica si este estado se considera 'hecho' para efectos de dashboard y reportes" col='col-md-6' />
-        <SwitchFormGroup eRef={statusRef} label='Activo' col='col-md-6' />
       </div>
     </Modal>
   </>
