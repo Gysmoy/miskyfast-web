@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response as HttpResponse;
 use Illuminate\Routing\ResponseFactory;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use SoDe\Extend\Response;
 
 class OrderController extends BasicController
@@ -20,6 +21,8 @@ class OrderController extends BasicController
     public function save(Request $request): HttpResponse|ResponseFactory
     {
         $response = Response::simpleTryCatch(function () use ($request) {
+            DB::beginTransaction();
+
             $clientJpa = User::find(Auth::id());
             $paymentMethodJpa = PaymentMethod::find($request->payment_method_id);
             if (!$paymentMethodJpa) throw new Exception('Elige un método de pago válido');
@@ -84,10 +87,13 @@ class OrderController extends BasicController
 
                 $ordersCreated[] = $order;
             }
+            DB::commit();
 
             return [
                 'orders' => $ordersCreated
             ];
+        }, function ($response, $th) {
+            DB::rollBack();
         });
         return response($response->toArray(), $response->status);
     }

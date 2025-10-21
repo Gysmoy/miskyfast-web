@@ -103,9 +103,9 @@ const Orders = ({ orders: ordersDB, statuses }) => {
                     </tr>
                   </thead>
                   <tbody>
-                    {realtimeOrders.map(order => (
+                    {realtimeOrders.map((order, idx) => (
                       <tr key={order.id}>
-                        <th scope="row">{order.id}</th>
+                        <th scope="row">{idx + 1}</th>
                         <td>Client #{order.client_id}</td>
                         <td>Order #{order.id}</td>
                         <td>
