@@ -160,7 +160,15 @@ const Statuses = ({ }) => {
         {
           dataField: 'type',
           caption: 'Tipo',
-          width: '120px'
+          width: '120px',
+          lookup: {
+            dataSource: [
+              { value: 'order', text: 'Pedido' },
+              { value: 'delivery', text: 'Delivery' }
+            ],
+            valueExpr: 'value',
+            displayExpr: 'text'
+          }
         },
         {
           dataField: 'is_ok',
