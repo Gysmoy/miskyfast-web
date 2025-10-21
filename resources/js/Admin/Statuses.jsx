@@ -70,7 +70,7 @@ const Statuses = ({ }) => {
   }
 
   const onStatusChange = async ({ id, value }) => {
-    const result = await statusesRest.boolean({ id, field: 'status', value })
+    const result = await statusesRest.boolean({ id, field: 'is_ok', value })
     if (!result) return
     $(gridRef.current).dxDataGrid('instance').refresh()
   }
@@ -176,19 +176,6 @@ const Statuses = ({ }) => {
           }
         },
         {
-          dataField: 'status',
-          caption: 'Activo',
-          dataType: 'boolean',
-          width: '100px',
-          cellTemplate: (container, { data }) => {
-            $(container).empty()
-            ReactAppend(container, <SwitchFormGroup checked={data.status == 1} onChange={() => onStatusChange({
-              id: data.id,
-              value: !data.status
-            })} />)
-          }
-        },
-        {
           caption: 'Acciones',
           width: '150px',
           cellTemplate: (container, { data }) => {
@@ -199,12 +186,12 @@ const Statuses = ({ }) => {
               icon: 'fa fa-pen',
               onClick: () => onModalOpen(data)
             }))
-            data.editable == 1 && container.append(DxButton({
-              className: 'btn btn-xs btn-soft-danger',
-              title: 'Eliminar',
-              icon: 'fa fa-trash',
-              onClick: () => onDeleteClicked(data.id)
-            }))
+            // data.editable == 1 && container.append(DxButton({
+            //   className: 'btn btn-xs btn-soft-danger',
+            //   title: 'Eliminar',
+            //   icon: 'fa fa-trash',
+            //   onClick: () => onDeleteClicked(data.id)
+            // }))
           },
           allowFiltering: false,
           allowExporting: false
