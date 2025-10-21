@@ -2,10 +2,14 @@
 
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\RestaurantController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/categories', [CategoryController::class, 'all']);
 Route::get('/restaurants', [RestaurantController::class, 'all']);
+Route::get('/payment-methods', [PaymentMethodController::class, 'all']);
 Route::get('/items/{restaurant}/{category?}', [ItemController::class, 'byCategory']);
-// Route::post('/clients', [ClientController::class, 'save']);
+
+Route::post('/orders', [OrderController::class, 'save']);
