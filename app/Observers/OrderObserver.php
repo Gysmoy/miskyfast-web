@@ -8,6 +8,7 @@ class OrderObserver
 {
     public function created($order)
     {
+        dump($order);
         EventController::notify(
             'orders.created',
             $order->load(['client', 'delivery', 'status']),
