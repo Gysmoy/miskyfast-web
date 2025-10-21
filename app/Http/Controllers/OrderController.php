@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Item;
 use App\Models\Order;
+use App\Models\PaymentMethod;
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response as HttpResponse;
 use Illuminate\Routing\ResponseFactory;
@@ -18,7 +21,13 @@ class OrderController extends BasicController
     {
         $response = Response::simpleTryCatch(function () use ($request) {
             $clientJpa = User::find(Auth::id());
-            return $clientJpa;
+            $paymentMethodJpa = PaymentMethod::find($request->payment_method_id);
+            if (!$paymentMethodJpa) throw new Exception('Elige un método de pago válido');
+            $itemIds = collect($request->items)->pluck('id')->toArray();
+            $itemsJpa = Item::whereIn('id', $itemIds)->get();
+            return [
+                'items' => $itemsJpa
+            ];
         });
         return response($response->toArray(), $response->status);
     }
