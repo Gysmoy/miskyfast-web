@@ -11,10 +11,11 @@ import Table from '../Components/Adminto/Table';
 import DxButton from '../Components/dx/DxButton';
 import CreateReactScript from '../Utils/CreateReactScript';
 import ReactAppend from '../Utils/ReactAppend';
-import StatusesRest from '../Actions/Admin/StatusesRest';
+import PaymentMethodsRest from '../Actions/Admin/PaymentMethodsRest';
 import SelectFormGroup from '../Components/Adminto/form/SelectFormGroup';
+import ImageFormGroup from '../Components/Adminto/form/ImageFormGroup';
 
-const statusesRest = new StatusesRest()
+const paymentMethodsRest = new PaymentMethodsRest()
 
 const PaymentMethods = ({ }) => {
   const gridRef = useRef()
@@ -25,9 +26,6 @@ const PaymentMethods = ({ }) => {
   const nameRef = useRef()
   const descriptionRef = useRef()
   const imageRef = useRef()
-  const colorRef = useRef()
-  const typeRef = useRef()
-  const isOkRef = useRef()
   const statusRef = useRef()
 
   const [isEditing, setIsEditing] = useState(false)
@@ -39,10 +37,8 @@ const PaymentMethods = ({ }) => {
     idRef.current.value = data?.id ?? ''
     nameRef.current.value = data?.name ?? ''
     descriptionRef.current.value = data?.description ?? ''
-    // $(imageRef.current).val(data?.image ?? null).trigger('change');
-    colorRef.current.value = data?.color ?? '#000000'
-    $(typeRef.current).val(data?.type ?? 'order').trigger('change');
-    $(isOkRef.current).prop('checked', data?.is_ok == 1).trigger('click')
+    imageRef.current.value = null
+    imageRef.image.src = `/storage/images/payment_method/${data?.image}`
     $(statusRef.current).prop('checked', data?.status == 1).trigger('click')
 
     $(modalRef.current).modal('show')
@@ -55,22 +51,20 @@ const PaymentMethods = ({ }) => {
     formData.append('id', idRef.current.value || '')
     formData.append('name', nameRef.current.value)
     formData.append('description', descriptionRef.current.value)
-    formData.append('color', colorRef.current.value)
-    formData.append('type', typeRef.current.value)
 
     // Append image file if selected
     const file = imageRef.current.files[0]
     if (file) formData.append('image', file)
 
-    const result = await statusesRest.save(formData)
+    const result = await paymentMethodsRest.save(formData)
     if (!result) return
 
     $(gridRef.current).dxDataGrid('instance').refresh()
     $(modalRef.current).modal('hide')
   }
 
-  const onStatusChange = async ({ id, value }) => {
-    const result = await statusesRest.boolean({ id, field: 'status', value })
+  const onVisibleChange = async ({ id, value }) => {
+    const result = await paymentMethodsRest.boolean({ id, field: 'visible', value })
     if (!result) return
     $(gridRef.current).dxDataGrid('instance').refresh()
   }
@@ -85,13 +79,13 @@ const PaymentMethods = ({ }) => {
       cancelButtonText: 'Cancelar'
     })
     if (!isConfirmed) return
-    const result = await statusesRest.delete(id)
+    const result = await paymentMethodsRest.delete(id)
     if (!result) return
     $(gridRef.current).dxDataGrid('instance').refresh()
   }
 
   return (<>
-    <Table gridRef={gridRef} title='Métodos de pago' rest={statusesRest}
+    <Table gridRef={gridRef} title='Métodos de pago' rest={paymentMethodsRest}
       toolBar={(container) => {
         container.unshift({
           widget: 'dxButton', location: 'after',
@@ -124,14 +118,13 @@ const PaymentMethods = ({ }) => {
           ccsClass: 'text-center',
           cellTemplate: (container, { data }) => {
             container.html(renderToString(<>
-              {data.image && <img src={`/storage/images/status/${data.image}`} className='mx-auto d-block' alt="status" style={{
-                width:32,
-                height:32,
-                objectFit:'contain',
-                backgroundColor: data.color,
+              {data.image && <img src={`/storage/images/payment_method/${data.image}`} className='mx-auto d-block' alt={data.name} style={{
+                width: 32,
+                height: 32,
+                objectFit: 'contain',
                 borderRadius: 8,
                 padding: 4,
-                }} />}
+              }} />}
             </>))
           },
           allowFiltering: false,
@@ -147,44 +140,15 @@ const PaymentMethods = ({ }) => {
           caption: 'Descripción',
         },
         {
-          dataField: 'color',
-          caption: 'Color',
-          width: '100px',
-          cellTemplate: (container, { data }) => {
-            container.html(renderToString(<>
-              <i className={`mdi mdi-checkbox-blank-circle me-1`} style={{ color: data.color }} />
-              {data.color}
-            </>))
-          }
-        },
-        {
-          dataField: 'type',
-          caption: 'Tipo',
-          width: '120px'
-        },
-        {
-          dataField: 'is_ok',
-          caption: 'Contable',
+          dataField: 'visible',
+          caption: 'Visible',
           dataType: 'boolean',
           width: '100px',
           cellTemplate: (container, { data }) => {
             $(container).empty()
-            ReactAppend(container, <SwitchFormGroup checked={data.is_ok == 1} onChange={() => onStatusChange({
+            ReactAppend(container, <SwitchFormGroup checked={data.visible == 1} onChange={() => onVisibleChange({
               id: data.id,
-              value: !data.is_ok
-            })} />)
-          }
-        },
-        {
-          dataField: 'status',
-          caption: 'Activo',
-          dataType: 'boolean',
-          width: '100px',
-          cellTemplate: (container, { data }) => {
-            $(container).empty()
-            ReactAppend(container, <SwitchFormGroup checked={data.status == 1} onChange={() => onStatusChange({
-              id: data.id,
-              value: !data.status
+              value: !data.visible
             })} />)
           }
         },
@@ -210,25 +174,14 @@ const PaymentMethods = ({ }) => {
           allowExporting: false
         }
       ]} />
-    <Modal modalRef={modalRef} title={isEditing ? 'Editar estado' : 'Agregar estado'} onSubmit={onModalSubmit} size='lg'>
-      <div className='row' id='statuses-container'>
-        <input ref={idRef} type='hidden' />
-        <InputFormGroup eRef={nameRef} label='Estado' col='col-md-6' required />
-        <SelectFormGroup
-          eRef={typeRef}
-          label='Tipo'
-          col='col-md-6'
-          dropdownParent='#statuses-container'
-          required
-        >
-          <option value="order">Orden</option>
-          <option value="delivery">Delivery</option>
-        </SelectFormGroup>
-        <TextareaFormGroup eRef={descriptionRef} label='Descripción' col='col-12' />
-        <InputFormGroup eRef={imageRef} label='Imagen' type='file' col='col-md-6' />
-        <InputFormGroup eRef={colorRef} label='Color' type="color" col='col-md-6' required />
-        <SwitchFormGroup eRef={isOkRef} label='¿Es contable?' info="Indica si este estado se considera 'hecho' para efectos de dashboard y reportes" col='col-md-6' />
-        <SwitchFormGroup eRef={statusRef} label='Activo' col='col-md-6' />
+    <Modal modalRef={modalRef} title={isEditing ? 'Editar estado' : 'Agregar estado'} onSubmit={onModalSubmit}>
+      <input ref={idRef} type='hidden' />
+      <div className='row'>
+        <ImageFormGroup eRef={imageRef} label='Imagen' col='col-md-4' aspect={1} />
+        <div className="col-md-8">
+          <InputFormGroup eRef={nameRef} label='Método de pago' required />
+          <TextareaFormGroup eRef={descriptionRef} label='Descripción' />
+        </div>
       </div>
     </Modal>
   </>

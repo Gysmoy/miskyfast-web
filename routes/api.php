@@ -55,6 +55,7 @@ use App\Http\Controllers\Api\NotificationVariablesController;
 use App\Http\Controllers\Admin\RepositoryController as AdminRepositoryController;
 use App\Http\Controllers\Admin\SettingController as AdminSettingController;
 use App\Http\Controllers\Admin\CanvasPresetController as AdminCanvasPresetController;
+use App\Http\Controllers\Admin\PaymentMethodController as AdminPaymentMethodController;
 use App\Http\Controllers\Admin\RestaurantController as AdminRestaurantController;
 use App\Http\Controllers\Admin\StatusController as AdminStatusController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
@@ -79,6 +80,7 @@ use App\Http\Controllers\ItemImportController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\MercadoPagoController;
+use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\Restaurant\ItemController as RestaurantItemController;
@@ -493,6 +495,12 @@ Route::middleware('auth')->group(function () {
     Route::patch('/statuses/status', [AdminStatusController::class, 'status']);
     Route::patch('/statuses/{field}', [AdminStatusController::class, 'boolean']);
     Route::delete('/statuses/{id}', [AdminStatusController::class, 'delete']);
+
+    Route::post('/payment-methods', [AdminPaymentMethodController::class, 'save']);
+    Route::post('/payment-methods/paginate', [AdminPaymentMethodController::class, 'paginate']);
+    Route::patch('/payment-methods/status', [AdminPaymentMethodController::class, 'status']);
+    Route::patch('/payment-methods/{field}', [AdminPaymentMethodController::class, 'boolean']);
+    Route::delete('/payment-methods/{id}', [AdminPaymentMethodController::class, 'delete']);
 
     Route::middleware(['can:Root'])->group(function () {
       Route::post('/system', [AdminSystemController::class, 'save']);

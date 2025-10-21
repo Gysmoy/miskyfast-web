@@ -1,1 +1,0 @@
-var i=Object.defineProperty;var r=(t,s,a)=>s in t?i(t,s,{enumerable:!0,configurable:!0,writable:!0,value:a}):t[s]=a;var e=(t,s,a)=>r(t,typeof s!="symbol"?s+"":s,a);import{B as m}from"./BasicRest-toNqoSaQ.js";class u extends m{constructor(){super(...arguments);e(this,"path","admin/statuses");e(this,"hasFiles",!0)}}export{u as S};

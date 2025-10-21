@@ -107,6 +107,7 @@ const Menu = ({ session, hasRole }) => {
 
               <MenuItem href="/admin/categories" icon="mdi mdi-shape-outline">Categorías</MenuItem>
               <MenuItem href="/admin/items" icon="mdi mdi-shape-outline">Items</MenuItem>
+              <MenuItem href="/admin/payment-methods" icon="mdi mdi-credit-card">Métodos de pago</MenuItem>
               <MenuItem href="/admin/statuses" icon="mdi mdi-tag-text">Estados</MenuItem>
               <MenuItem href="/admin/messages" icon="mdi mdi-message-text">Mensajes</MenuItem>
 
