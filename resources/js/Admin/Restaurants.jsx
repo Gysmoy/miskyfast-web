@@ -185,7 +185,7 @@ const Restaurants = () => {
                                 <img
                                     src={`/storage/images/restaurant/${data.logo}`}
                                     style={{
-                                        width: "80px",
+                                        width: "48px",
                                         height: "48px",
                                         objectFit: "cover",
                                         objectPosition: "center",
