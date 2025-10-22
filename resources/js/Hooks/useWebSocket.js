@@ -1,11 +1,13 @@
 import { useEffect, useState } from "react";
 import socket from "./Needed/socketService";
 import LaravelSession from "../Utils/LaravelSession";
+import Global from "../Utils/Global";
 
 const useWebSocket = (filters = {}) => {
   const [wsActive, setWsActive] = useState(false);
 
   const defaultFilters = {
+    environment: Global.APP_ENV,
     restaurant_id: LaravelSession.restaurant_id
   };
 

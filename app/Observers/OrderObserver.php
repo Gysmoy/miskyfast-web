@@ -10,7 +10,7 @@ class OrderObserver
     {
         EventController::notify(
             'order.created',
-            $order->load(['client', 'delivery', 'status']),
+            $order->load(['client', 'delivery', 'status', 'details']),
             ['restaurant_id' => $order->restaurant_id]
         );
     }
@@ -19,7 +19,7 @@ class OrderObserver
     {
         EventController::notify(
             'order.updated',
-            $order->load(['client', 'delivery', 'status']),
+            $order->load(['client', 'delivery', 'status', 'details']),
             ['restaurant_id' => $order->restaurant_id]
         );
     }

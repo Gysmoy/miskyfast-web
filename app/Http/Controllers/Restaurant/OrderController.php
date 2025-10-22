@@ -13,7 +13,7 @@ class OrderController extends BasicController
 {
     public $model = Order::class;
     public $reactView = 'Restaurant/Orders';
-    public $with4get = ['client', 'delivery', 'status'];
+    public $with4get = ['client', 'delivery', 'status', 'details'];
 
     public function setReactViewProperties(Request $request)
     {

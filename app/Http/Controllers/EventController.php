@@ -13,6 +13,7 @@ class EventController extends Controller
     static function notify($event, $data, $filters = []): bool
     {
         try {
+            $filters['environment'] = env('APP_ENV');
             $res = new Fetch(env('EVENTS_URL') . '/emit', [
                 'method' => 'POST',
                 'headers' => [

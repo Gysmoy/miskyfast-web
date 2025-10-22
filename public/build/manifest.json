@@ -2909,7 +2909,7 @@
     ]
   },
   "resources/js/Restaurant/Orders.jsx": {
-    "file": "assets/Orders-oYT4j-n5.js",
+    "file": "assets/Orders-BrWNemqC.js",
     "name": "Orders",
     "src": "resources/js/Restaurant/Orders.jsx",
     "isEntry": true,
@@ -2920,6 +2920,7 @@
       "_CreateReactScript-snwvHhUQ.js",
       "_index-BH53Isel.js",
       "_BasicRest-toNqoSaQ.js",
+      "_Number2Currency-e57Tgsuk.js",
       "_index-yBjzXJbu.js",
       "_MenuItemContainer-D-Aykn96.js",
       "_index-fRpqIG3j.js",
