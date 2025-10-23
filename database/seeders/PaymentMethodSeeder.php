@@ -15,6 +15,7 @@ class PaymentMethodSeeder extends Seeder
     {
         $paymentMethods = [
             [
+                "id" => "8c7fd44b-b64f-47b8-a9e7-50d4922c50d8",
                 "name" =>  "Efectivo",
                 "description" =>  "Pago en moneda física. El repartidor puede necesitar llevar vuelto.",
                 "visible" =>  true

@@ -21,7 +21,7 @@ class OrderController extends BasicController
             ->with($this->with4get)
             ->join('statuses as status', 'status.id', 'orders.status_id')
             ->where('restaurant_id', Auth::user()->restaurant_id)
-            ->where('status.is_ok', false)
+            // ->where('status.is_ok', false)
             ->get();
         $statuses = Status::where('status', true)->get();
         return [

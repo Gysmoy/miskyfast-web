@@ -177,7 +177,7 @@ const Restaurants = () => {
                     {
                         dataField: "logo",
                         caption: "Logo",
-                        width: "90px",
+                        width: "58px",
                         allowFiltering: false,
                         cellTemplate: (container, { data }) => {
                             ReactAppend(

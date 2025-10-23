@@ -171,8 +171,6 @@ Route::get('/socials/active', [SocialController::class, 'getActiveSocials'])->wi
 Route::get('/stores/media/{uuid}', [AdminStoreController::class, 'media']);
 
 Route::post('/posts/paginate', [PostController::class, 'paginate']);
-Route::post('/items/paginate', [ItemController::class, 'paginate']);
-Route::post('/items/convert-slugs', [ItemController::class, 'convertSlugsToIds']);
 
 Route::post('/messages', [MessageController::class, 'save']);
 Route::post('/subscriptions', [SubscriptionController::class, 'save']);
@@ -192,16 +190,6 @@ Route::prefix('thumbnails')->group(function () {
 
 Route::get('/mailing/notify', [BlogController::class, 'notifyToday']);
 Route::delete('/mailing/down/{id}', [SubscriptionController::class, 'delete'])->name('mailing.down');
-
-Route::post('/items/verify-stock', [ItemController::class, 'verifyStock']);
-Route::post('/items/combo-items', [ItemController::class, 'verifyCombo']);
-Route::post('/items/update-items', [ItemController::class, 'updateViews']);
-Route::post('/items/relations-items', [ItemController::class, 'relationsItems']);
-Route::post('/items/variations-items', [ItemController::class, 'variationsItems'])->withoutMiddleware('throttle');
-Route::post('/items/sizes-items', [ItemController::class, 'getSizesItems'])->withoutMiddleware('throttle');
-Route::post('/items/colors-items', [ItemController::class, 'getColorsItems'])->withoutMiddleware('throttle');
-Route::post('/items/searchProducts', [ItemController::class, 'searchProduct']);
-Route::get('/items/tags', [ItemController::class, 'getTags']);
 
 Route::post('/pago', [PaymentController::class, 'charge']);
 Route::get('/pago/{sale_id}', [PaymentController::class, 'getPaymentStatus']);
@@ -561,12 +549,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/items/{id}', [RestaurantItemController::class, 'delete']);
 
     Route::post('/orders', [RestaurantOrderController::class, 'save']);
+    Route::post('/orders/paginate', [RestaurantOrderController::class, 'paginate']);
   });
 
   // Canvas Project routes - accessible to authenticated users
   Route::middleware('auth:sanctum')->group(function () {
-
-    Route::get('/auth/verify', [AuthController::class, 'verify']);
 
     Route::post('/canvas/create-project', [CanvasController::class, 'createProject']);
     Route::get('/canvas/projects/{id}', [CanvasController::class, 'getProject']);

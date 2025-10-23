@@ -66,6 +66,11 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
             // \Illuminate\Routing\Middleware\ThrottleRequests::class . ':200,1',
         ],
+
+        'app' => [
+            \Illuminate\Routing\Middleware\ThrottleRequests::class . ':200,1',
+            \Illuminate\Routing\Middleware\SubstituteBindings::class,
+        ],
     ];
 
     /**
