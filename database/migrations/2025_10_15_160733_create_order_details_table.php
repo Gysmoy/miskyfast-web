@@ -13,7 +13,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('order_details', function (Blueprint $table) {
-             $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
+            $table->uuid('id')->default(DB::raw('(UUID())'))->primary();
 
             $table->foreignUuid('order_id')->constrained('orders')->cascadeOnDelete();
             $table->foreignUuid('item_id')->nullable()->constrained('items')->nullOnDelete();

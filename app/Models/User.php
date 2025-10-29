@@ -32,6 +32,9 @@ class User extends Authenticatable
         'email_verified_at',
         'password',
         'status',
+        'phone',
+        'biography',
+        'profile'
     ];
 
     /**
@@ -73,5 +76,10 @@ class User extends Authenticatable
     public function restaurant()
     {
         return $this->hasOne(Restaurant::class, 'id', 'restaurant_id');
+    }
+
+    public function addresses()
+    {
+        return $this->hasMany(Address::class, 'user_id');
     }
 }

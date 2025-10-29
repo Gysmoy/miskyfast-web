@@ -13,7 +13,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>{{ $data['name'] ?? 'Página' }} | {{ env('APP_NAME', '') }}</title>
 
-  
+
     <link rel="shortcut icon" href="/assets/resources/icon.png?v={{ uniqid() }}" type="image/png">
     <meta name="description" content="xcleretor">
     @isset($data['description'])
@@ -26,28 +26,42 @@
     <meta name="author" content="Powered by Mundo Web">
 
     <!-- Carga diferida de select2 CSS -->
-    <link rel="preload" href="/lte/assets/libs/select2/css/select2.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/lte/assets/libs/select2/css/select2.min.css"></noscript>
-    
+    <link rel="preload" href="/lte/assets/libs/select2/css/select2.min.css" as="style"
+        onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="/lte/assets/libs/select2/css/select2.min.css">
+    </noscript>
+
     <!-- Carga diferida de icons CSS -->
-    <link rel="preload" href="/lte/assets/css/icons.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="/lte/assets/css/icons.min.css"></noscript>
-    
+    <link rel="preload" href="/lte/assets/css/icons.min.css" as="style"
+        onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="/lte/assets/css/icons.min.css">
+    </noscript>
+
 
     <!-- Fuentes con configuración CORS para dom-to-image -->
-    <link rel="preload" href='https://fonts.googleapis.com/css?family=Poppins' as="style" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Poppins' crossorigin="anonymous"></noscript>
-    
-    
+    <link rel="preload" href='https://fonts.googleapis.com/css?family=Poppins' as="style" crossorigin="anonymous"
+        onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href='https://fonts.googleapis.com/css?family=Poppins' crossorigin="anonymous">
+    </noscript>
+
+
     <!-- Carga diferida de Tailwind CSS con CORS -->
-    <link rel="preload" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" as="style" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" crossorigin="anonymous"></noscript>
-    
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" as="style"
+        crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css"
+            crossorigin="anonymous">
+    </noscript>
+
     <script src="https://cdn.tailwindcss.com" defer crossorigin="anonymous"></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&display=swap" rel="stylesheet" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&display=swap" rel="stylesheet"
+        crossorigin="anonymous">
 
     @vite(['resources/css/app.css', 'resources/js/' . Route::currentRouteName()])
     @inertiaHead
@@ -69,6 +83,8 @@
                 border-radius: 8px;
             }
         </style>
+    @elseif ($component == 'Mobile/AddAddress.jsx')
+        <script type="application/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDikLz7ELBdUFW0TnvkWkcXPK48Wc003U" async></script>
     @endif
     <style>
         body {
@@ -93,7 +109,7 @@
             transform: translateY(-50%);
         }
     </style>
-    
+
 </head>
 
 <body class="font-general">
@@ -106,13 +122,13 @@
     <!-- Culqi Checkout v4 -->
     <script src="https://checkout.culqi.com/js/v4"></script>
 
-    <script src="/lte/assets/libs/select2/js/select2.full.min.js" defer></script>    <!-- App js -->
+    <script src="/lte/assets/libs/select2/js/select2.full.min.js" defer></script> <!-- App js -->
     <script src="https://cdn.jsdelivr.net/npm/flowbite@2.4.1/dist/flowbite.min.js" defer></script>
     <script src="/lte/assets/libs/moment/min/moment.min.js" defer></script>
     <script src="/lte/assets/libs/moment/moment-timezone.js" defer></script>
     <script src="/lte/assets/libs/moment/locale/es.js" defer></script>
     <script src="/lte/assets/libs/quill/quill.min.js" defer></script>
-    
+
     <!-- Ecommerce Tracking System -->
     <script src="/assets/js/ecommerce-tracker.js" defer></script>
     <script>
@@ -133,7 +149,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             var lazyImages = [].slice.call(document.querySelectorAll('img.lazy'));
-            
+
             if ('IntersectionObserver' in window) {
                 let lazyImageObserver = new IntersectionObserver(function(entries, observer) {
                     entries.forEach(function(entry) {
@@ -145,7 +161,7 @@
                         }
                     });
                 });
-                
+
                 lazyImages.forEach(function(lazyImage) {
                     lazyImageObserver.observe(lazyImage);
                 });
@@ -154,27 +170,27 @@
             // document.body.removeChild(document.getElementById('page-loader'))
         });
     </script>
-<script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js" type="text/javascript"></script>
+    <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js" type="text/javascript"></script>
     <!-- Configuración para dom-to-image: suprimir errores de CORS en CSS -->
     <script>
         // Suprimir errores específicos de dom-to-image relacionados con CORS CSS
         const originalConsoleError = console.error;
         console.error = function(...args) {
             const errorMessage = args.join(' ');
-            
+
             // Filtrar errores conocidos de CORS en CSS que no afectan la funcionalidad
-            if (errorMessage.includes('domtoimage: Error while reading CSS rules') && 
-                (errorMessage.includes('fonts.googleapis.com') || 
-                 errorMessage.includes('tailwindcss') || 
-                 errorMessage.includes('SecurityError: Failed to read'))) {
+            if (errorMessage.includes('domtoimage: Error while reading CSS rules') &&
+                (errorMessage.includes('fonts.googleapis.com') ||
+                    errorMessage.includes('tailwindcss') ||
+                    errorMessage.includes('SecurityError: Failed to read'))) {
                 // Silenciar estos errores específicos
                 return;
             }
-            
+
             // Permitir otros errores
             originalConsoleError.apply(console, args);
         };
-        
+
         // Configuración adicional para dom-to-image
         window.domToImageConfig = {
             skipFonts: true,

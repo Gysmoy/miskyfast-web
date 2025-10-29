@@ -23,6 +23,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RepositoryController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ItemController;
+use App\Http\Controllers\Mobile\AddressController as MobileAddressController;
 use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\StatusController;
 
@@ -136,3 +137,5 @@ if (env('APP_ENV') === 'local') {
 
     Route::get('/cloud/{uuid}', [RepositoryController::class, 'media']);
 }
+
+Route::get('/app/add-address', [MobileAddressController::class, 'reactView'])->name('Mobile/AddAddress.jsx');
