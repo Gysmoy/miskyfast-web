@@ -22,7 +22,6 @@ class AddressController extends BasicController
                 ->where('user_id', Auth::id())
                 ->get();
         });
-        dump($response->toArray());
         return response($response->toArray(), $response->status);
     }
 

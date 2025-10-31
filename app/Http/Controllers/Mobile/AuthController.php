@@ -90,7 +90,6 @@ class AuthController extends Controller
                 'bearerToken' => $bearerToken
             ];
         });
-        dump($response->toArray());
         return response($response->toArray(), $response->status);
     }
 
