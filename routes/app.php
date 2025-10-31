@@ -36,6 +36,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/addresses', [AddressController::class, 'all']);
     Route::post('/addresses', [AddressController::class, 'save']);
+    Route::delete('/addresses/{id}', [AddressController::class, 'delete']);
 
+    Route::get('/orders', [OrderController::class, 'paginate']);
     Route::post('/orders', [OrderController::class, 'save']);
 });

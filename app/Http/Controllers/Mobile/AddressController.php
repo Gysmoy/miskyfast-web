@@ -31,6 +31,11 @@ class AddressController extends BasicController
         $body = $request->all();
         $body['user_id'] = Auth::id();
 
+        $hasAddresses = Address::where('user_id', Auth::id())->exists();
+        if (!$hasAddresses) {
+            $body['is_default'] = true;
+        }
+
         return $body;
     }
 }

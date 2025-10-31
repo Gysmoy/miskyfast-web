@@ -19,6 +19,7 @@ class Order extends Model
      * @var array<string>
      */
     protected $fillable = [
+        'code',
         'client_id',
         'restaurant_id',
         'delivery_id',
@@ -58,6 +59,11 @@ class Order extends Model
     public function status()
     {
         return $this->belongsTo(Status::class);
+    }
+
+    public function deliveryStatus()
+    {
+        return $this->belongsTo(Status::class, 'delivery_status_id');
     }
 
     public function paymentMethod()

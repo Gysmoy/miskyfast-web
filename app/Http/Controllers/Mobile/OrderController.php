@@ -17,10 +17,27 @@ use SoDe\Extend\Response;
 
 class OrderController extends Controller
 {
+    private function generateCode()
+    {
+        do {
+            // Generar un código de 6 caracteres (letras + números)
+            $timestamp = now()->format('ymdHis');
+            $random = substr(str_shuffle('ABCDEFGHJKLMNPQRSTUVWXYZ23456789'), 0, 2);
+
+            // Hash temporal + random para reducir colisión
+            $code = strtoupper(substr(base_convert(crc32($timestamp . $random . uniqid()), 10, 36), 0, 6));
+
+            // Verificar existencia en la tabla de pedidos
+            $exists = DB::table('orders')->where('code', $code)->exists();
+        } while ($exists);
+
+        return $code;
+    }
+
     public function save(Request $request): HttpResponse|ResponseFactory
     {
+        DB::beginTransaction();
         $response = Response::simpleTryCatch(function () use ($request) {
-            DB::beginTransaction();
 
             $clientJpa = User::find(Auth::id());
             $paymentMethodJpa = PaymentMethod::find($request->payment_method_id);
@@ -31,11 +48,19 @@ class OrderController extends Controller
             $itemsJpa = Item::whereIn('id', $itemsId)->get()->keyBy('id');
 
             $matchedItems = [];
+            $restaurantId = null;
 
             foreach ($requestItems as $reqItem) {
                 $itemJpa = $itemsJpa->get($reqItem['id']);
                 if (!$itemJpa) {
                     throw new Exception("El item {$reqItem['id']} no existe en la base de datos o ya no se encuentra disponible");
+                }
+
+                // Verificar que todos los items pertenezcan al mismo restaurante
+                if ($restaurantId === null) {
+                    $restaurantId = $itemJpa->restaurant_id;
+                } elseif ($restaurantId !== $itemJpa->restaurant_id) {
+                    throw new Exception('Parece que quieres mezclar sabores de dos restaurantes distintos. Por ahora solo puedes ordenar de uno a la vez.');
                 }
 
                 $presentation = collect($itemJpa->presentations)
@@ -52,48 +77,51 @@ class OrderController extends Controller
                 ];
             }
 
-            $itemsGrouped = collect($matchedItems)->groupBy('restaurant_id');
-            $ordersCreated = [];
+            $totalAmount = collect($matchedItems)->sum(function ($item) {
+                return $item['quantity'] * $item['unit_price'];
+            });
 
-            foreach ($itemsGrouped as $restaurantId => $itemsGroup) {
-                $totalAmount = collect($itemsGroup)->sum(function ($item) {
-                    return $item['quantity'] * $item['unit_price'];
-                });
+            $order = Order::create([
+                'code' => $this->generateCode(),
+                'client_id' => $clientJpa->id,
+                'restaurant_id' => $restaurantId,
+                'status_id' => '56844089-7edf-4c9e-9d09-6874624c37b2',
+                'delivery_status_id' => '8617ebd8-575a-494e-bb35-3ed380f42dd5',
+                'payment_method_id' => $paymentMethodJpa->id,
+                'payment_method_note' => $request->payment_method_note,
+                'location' => $request->location,
+                'total_amount' => $totalAmount,
+            ]);
 
-                $order = Order::create([
-                    'client_id' => $clientJpa->id,
-                    'restaurant_id' => $restaurantId,
-                    'status_id' => '56844089-7edf-4c9e-9d09-6874624c37b2',
-                    'delivery_status_id' => '8617ebd8-575a-494e-bb35-3ed380f42dd5',
-                    'payment_method_id' => $paymentMethodJpa->id,
-                    'payment_method_note' => $request->payment_method_note,
-                    'location' => $request->location,
-                    'total_amount' => $totalAmount,
+            foreach ($matchedItems as $item) {
+                $order->details()->create([
+                    'order_id' => $order->id,
+                    'item_id' => $item['id'],
+                    'item' => $item['name'],
+                    'presentation' => $item['presentation'],
+                    'quantity' => $item['quantity'],
+                    'unit_price' => $item['unit_price'],
+                    'total_price' => $item['quantity'] * $item['unit_price'],
+                    'observation' => $item['observation'],
                 ]);
-
-                foreach ($itemsGroup as $item) {
-                    $order->details()->create([
-                        'order_id' => $order->id,
-                        'item_id' => $item['id'],
-                        'item' => $item['name'],
-                        'presentation' => $item['presentation'],
-                        'quantity' => $item['quantity'],
-                        'unit_price' => $item['unit_price'],
-                        'total_price' => $item['quantity'] * $item['unit_price'],
-                        'observation' => $item['observation'],
-                    ]);
-                }
-
-                $ordersCreated[] = $order;
             }
+
             DB::commit();
 
-            return [
-                'orders' => $ordersCreated
-            ];
+            return $order;
         }, function ($response, $th) {
             DB::rollBack();
         });
         return response($response->toArray(), $response->status);
+    }
+
+    public function paginate(Request $request)
+    {
+        $orders = Order::with(['status', 'deliveryStatus', 'restaurant'])
+            ->withCount(['details'])
+            ->where('client_id', Auth::id())
+            ->orderBy('created_at', 'desc')
+            ->cursorPaginate(10);
+        return $orders;
     }
 }
