@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Mobile;
 
+use App\Http\Controllers\BasicController;
 use App\Http\Controllers\Controller;
 use App\Models\Item;
 use App\Models\Order;
@@ -15,8 +16,10 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use SoDe\Extend\Response;
 
-class OrderController extends Controller
+class OrderController extends BasicController
 {
+    public $model = Order::class;
+
     private function generateCode()
     {
         do {
@@ -115,13 +118,11 @@ class OrderController extends Controller
         return response($response->toArray(), $response->status);
     }
 
-    public function paginate(Request $request)
+    public function setPaginationInstance(Request $request, string $model)
     {
-        $orders = Order::with(['status', 'deliveryStatus', 'restaurant'])
+        return $model::with(['status', 'deliveryStatus', 'restaurant', 'details'])
             ->withCount(['details'])
             ->where('client_id', Auth::id())
-            ->orderBy('created_at', 'desc')
-            ->cursorPaginate(10);
-        return $orders;
+            ->orderBy('created_at', 'desc');
     }
 }

@@ -119,6 +119,7 @@ const Menu = ({ session, hasRole }) => {
               <MenuItem href="/restaurant/home" icon="mdi mdi-home">Dashboard</MenuItem>
               <MenuItem href="/restaurant/orders" icon="mdi mdi-cart-outline">Pedidos</MenuItem>
               <MenuItem href="/restaurant/items" icon="mdi mdi-shape-outline">Items</MenuItem>
+              <MenuItem href="/restaurant/users" icon="mdi mdi-account-group">Usuarios</MenuItem>
             </>}
           </ul>
         </div>

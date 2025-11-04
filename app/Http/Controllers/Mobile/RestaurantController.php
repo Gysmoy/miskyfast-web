@@ -13,6 +13,7 @@ class RestaurantController extends Controller
     {
         $response = Response::simpleTryCatch(function () {
             return Restaurant::with(['categories'])
+                ->withCount(['items'])
                 ->where('visible', true)
                 ->where('status', true)
                 ->has('categories')

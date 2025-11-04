@@ -30,7 +30,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
     Route::get('/payment-methods', [PaymentMethodController::class, 'all']);
 
+    Route::get('/items', [ItemController::class, 'all']);
     Route::get('/items/restaurant/{restaurant}', [ItemController::class, 'byField']);
+    Route::get('/items/best-sale', [ItemController::class, 'bestSale']);
     Route::get('/items/category/{category}', [ItemController::class, 'byField']);
     Route::get('/items/restaurant/{restaurant}/category/{category}', [ItemController::class, 'byField']);
 
@@ -38,6 +40,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/addresses', [AddressController::class, 'save']);
     Route::delete('/addresses/{id}', [AddressController::class, 'delete']);
 
-    Route::get('/orders', [OrderController::class, 'paginate']);
     Route::post('/orders', [OrderController::class, 'save']);
+    Route::post('/orders/paginate', [OrderController::class, 'paginate']);
 });
