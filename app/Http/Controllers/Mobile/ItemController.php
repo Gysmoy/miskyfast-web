@@ -22,8 +22,15 @@ class ItemController extends Controller
                 throw new Exception('El parámetro de búsqueda es requerido');
             }
 
-            // 🧩 Separar palabras individuales
-            $terms = preg_split('/\s+/', trim($search));
+            // 🧩 Separar palabras individuales y filtrar las que tienen menos de 3 caracteres
+            $terms = array_filter(
+                preg_split('/\s+/', trim($search)),
+                fn($word) => mb_strlen($word) >= 3
+            );
+
+            if (empty($terms)) {
+                throw new Exception('Ingresa al menos una palabra de 3 o más caracteres');
+            }
 
             // 🔍 Construir el SQL del "score" de relevancia
             $scoreSql = collect($terms)->map(function ($term) {
