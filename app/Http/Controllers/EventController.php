@@ -14,6 +14,7 @@ class EventController extends Controller
     {
         try {
             $filters['environment'] = env('APP_ENV');
+            dump($filters);
             $res = new Fetch(env('EVENTS_URL') . '/emit', [
                 'method' => 'POST',
                 'headers' => [

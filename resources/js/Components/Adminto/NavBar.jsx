@@ -52,11 +52,11 @@ const NavBar = ({ session = {}, title = 'Pagina' }) => {
           </div>
         </li>
 
-        <li className="dropdown notification-list">
+        {/* <li className="dropdown notification-list">
           <a href="#" className="nav-link right-bar-toggle waves-effect waves-light">
             <i className="fe-settings noti-icon"></i>
           </a>
-        </li>
+        </li> */}
 
       </ul>
 

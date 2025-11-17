@@ -15,7 +15,7 @@ class RoleSeeder extends Seeder
      */
     public function run(): void
     {
-        $roles = ['Admin', 'Restaurant', 'Client', 'Delivery'];
+        $roles = ['Admin', 'Restaurant', 'Client', 'Delivery', 'Kitchen'];
         foreach ($roles as $role) {
             Role::updateOrCreate(['name' => $role], [
                 'relative_id' => Crypto::randomUUID()

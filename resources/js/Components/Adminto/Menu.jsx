@@ -2,14 +2,14 @@ import Tippy from "@tippyjs/react";
 import React from "react";
 import "tippy.js/dist/tippy.css";
 import Logout from "../../Actions/Logout";
-import MenuItem from "../MenuItem";
-import MenuItemContainer from "../MenuItemContainer";
+import MenuItem from "./Menu/MenuItem";
+import MenuItemContainer from "./Menu/MenuItemContainer";
 
 const Menu = ({ session, hasRole }) => {
   const mainRole = session.roles[0];
 
   return (
-    <div className="left-side-menu">
+    <div className= "left-side-menu">
       <div className="h-100" data-simplebar>
         <div className="user-box text-center">
           <img
@@ -117,7 +117,11 @@ const Menu = ({ session, hasRole }) => {
             </>}
             {hasRole('Restaurant') && <>
               <MenuItem href="/restaurant/home" icon="mdi mdi-home">Dashboard</MenuItem>
-              <MenuItem href="/restaurant/orders" icon="mdi mdi-cart-outline">Pedidos</MenuItem>
+              <MenuItemContainer title="Pedidos" icon="mdi mdi-cart-outline">
+                <MenuItem href="/restaurant/orders" icon="mdi mdi-bell-ring-outline">Recepción</MenuItem>
+                <MenuItem href="/restaurant/kitchen" icon="mdi mdi-chef-hat">Cocina</MenuItem>
+              </MenuItemContainer>
+              <li className="menu-title">Configuraciones</li>
               <MenuItem href="/restaurant/items" icon="mdi mdi-shape-outline">Items</MenuItem>
               <MenuItem href="/restaurant/users" icon="mdi mdi-account-group">Usuarios</MenuItem>
             </>}

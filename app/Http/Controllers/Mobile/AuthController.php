@@ -53,27 +53,79 @@ class AuthController extends Controller
         return response($response->toArray(), $response->status);
     }
 
+    public function validateDuplicate(Request $request)
+    {
+        $response = Response::simpleTryCatch(function () use ($request) {
+            $request->validate([
+                'email' => 'required|email',
+            ]);
+
+            $user = User::where('email', $request->email)->first();
+
+            if (!$user) return;
+
+            return [
+                'name' => $user->name,
+                'lastname' => $user->lastname,
+                'phone' => $user->phone,
+            ];
+        });
+
+        return response($response->toArray(), $response->status);
+    }
+
     public function register(Request $request)
     {
         $response = Response::simpleTryCatch(function () use ($request) {
             $request->validate([
                 'name' => 'required|string|max:255',
                 'lastname' => 'required|string|max:255',
-                'email' => 'required|email|unique:users,email',
+                'email' => 'required|email',
                 'password' => 'required|string|min:8',
                 'phone' => 'required|string|max:20',
                 'device_id' => 'nullable|string',
                 'device_name' => 'nullable|string',
+            ], [
+                'name.required' => 'El nombre es obligatorio.',
+                'name.string' => 'El nombre debe ser texto.',
+                'name.max' => 'El nombre no puede exceder 255 caracteres.',
+                'lastname.required' => 'El apellido es obligatorio.',
+                'lastname.string' => 'El apellido debe ser texto.',
+                'lastname.max' => 'El apellido no puede exceder 255 caracteres.',
+                'email.required' => 'El correo electrónico es obligatorio.',
+                'email.email' => 'El correo electrónico debe ser válido.',
+                'password.required' => 'La contraseña es obligatoria.',
+                'password.string' => 'La contraseña debe ser texto.',
+                'password.min' => 'La contraseña debe tener al menos 8 caracteres.',
+                'phone.required' => 'El teléfono es obligatorio.',
+                'phone.string' => 'El teléfono debe ser texto.',
+                'phone.max' => 'El teléfono no puede exceder 20 caracteres.',
+                'device_id.string' => 'El ID del dispositivo debe ser texto.',
+                'device_name.string' => 'El nombre del dispositivo debe ser texto.',
             ]);
 
-            $user = User::create([
-                'name' => $request->name,
-                'lastname' => $request->lastname,
-                'email' => $request->email,
-                'password' => bcrypt(Controller::decode($request->password)),
-                'phone' => $request->phone,
-            ]);
+            $user = User::where('email', $request->email)->first();
 
+            if (!$user) {
+                $user = User::create([
+                    'name' => $request->name,
+                    'lastname' => $request->lastname,
+                    'email' => $request->email,
+                    'password' => bcrypt(Controller::decode($request->password)),
+                    'phone' => $request->phone,
+                ]);
+            } else {
+                if ($request->boolean('update')) {
+                    $user->update([
+                        'name' => $request->name,
+                        'lastname' => $request->lastname,
+                        'phone' => $request->phone,
+                    ]);
+                }
+            }
+            if ($user->hasRole('Client')) {
+                throw new Exception('El correo electrónico ya está registrado.');
+            }
             $user->assignRole('Client');
 
             $bearerToken = $user->createToken('app-token')->plainTextToken;

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Mobile;
 
 use App\Http\Controllers\BasicController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\EventController;
 use App\Models\Item;
 use App\Models\Order;
 use App\Models\PaymentMethod;
@@ -45,6 +46,20 @@ class OrderController extends BasicController
             $clientJpa = User::find(Auth::id());
             $paymentMethodJpa = PaymentMethod::find($request->payment_method_id);
             if (!$paymentMethodJpa) throw new Exception('Elige un método de pago válido');
+
+            // Verificar si el cliente tiene un pedido pendiente
+            $hasPendingOrder = Order::where('client_id', $clientJpa->id)
+                ->where(function ($q) {
+                    $q->whereHas('status', function ($q) {
+                        $q->where('can_order', false);
+                    })->orWhereHas('deliveryStatus', function ($q) {
+                        $q->where('can_order', false);
+                    });
+                })->exists();
+
+            if ($hasPendingOrder) {
+                throw new Exception('Ya tienes un pedido pendiente. No puedes crear uno nuevo hasta que se complete.');
+            }
 
             $requestItems = collect($request->items);
             $itemsId = $requestItems->pluck('id');
@@ -111,6 +126,11 @@ class OrderController extends BasicController
 
             DB::commit();
 
+            // Ahora SÍ el pedido está "completo"
+            $order->load(['client', 'delivery', 'status', 'details']);
+            EventController::notify('order.created', $order->toArray(), ['restaurant_id' => $order->restaurant_id,]);
+            EventController::notify('order.created', $order->toArray(), ['client_id' => $order->client_id,]);
+
             return $order;
         }, function ($response, $th) {
             DB::rollBack();
@@ -124,5 +144,26 @@ class OrderController extends BasicController
             ->withCount(['details'])
             ->where('client_id', Auth::id())
             ->orderBy('created_at', 'desc');
+    }
+
+    public function lastPendingOrder()
+    {
+        $response = Response::simpleTryCatch(function () {
+            $lastPendingOrder = Order::select('orders.*')
+                ->with(['status', 'deliveryStatus', 'restaurant', 'details'])
+                ->withCount(['details'])
+                ->join('statuses as status', 'orders.status_id', '=', 'status.id')
+                ->join('statuses as delivery_status', 'orders.delivery_status_id', '=', 'delivery_status.id')
+                ->where('orders.client_id', Auth::id())
+                ->where(function ($q) {
+                    $q->where('status.can_order', false)
+                        ->orWhere('delivery_status.can_order', false);
+                })
+                ->orderBy('orders.created_at', 'desc')
+                ->first();
+
+            return $lastPendingOrder ?: null;
+        });
+        return response($response->toArray(), $response->status);
     }
 }

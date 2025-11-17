@@ -17,15 +17,19 @@ use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\Restaurant\HomeController as RestaurantHomeController;
 use App\Http\Controllers\Restaurant\OrderController as RestaurantOrderController;
 use App\Http\Controllers\Restaurant\ItemController as RestaurantItemController;
+use App\Http\Controllers\Restaurant\UserController as RestaurantUserController;
+use App\Http\Controllers\Restaurant\KitchenController as RestaurantKitchenController;
+
+// Mobile
+use App\Http\Controllers\Mobile\AddressController as MobileAddressController;
 
 // Public 
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\RepositoryController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\ItemController;
-use App\Http\Controllers\Mobile\AddressController as MobileAddressController;
-use App\Http\Controllers\PaymentMethodController;
-use App\Http\Controllers\StatusController;
+use App\Http\Controllers\Kitchen\HomeController as KitchenHomeController;
+use App\Models\User;
+use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -41,6 +45,7 @@ use App\Http\Controllers\StatusController;
 Route::get('/', [HomeController::class, 'reactView'])->name('Home.jsx');
 
 Route::get('/login', [AuthController::class, 'loginView'])->name('Login.jsx');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [AdminProfileController::class, 'reactView'])->name('Admin/Profile.jsx');
     Route::get('/account', [AdminAccountController::class, 'reactView'])->name('Admin/Account.jsx');
@@ -63,79 +68,14 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/orders', [RestaurantOrderController::class, 'reactView'])->name('Restaurant/Orders.jsx');
         Route::get('/items', [RestaurantItemController::class, 'reactView'])->name('Restaurant/Items.jsx');
+        Route::get('/users', [RestaurantUserController::class, 'reactView'])->name('Restaurant/Users.jsx');
+        Route::get('/kitchen', [RestaurantKitchenController::class, 'reactView'])->name('Restaurant/Kitchen.jsx');
+    });
+
+    Route::middleware('can:Kitchen')->prefix('kitchen')->group(function () {
+        Route::get('/', fn() => redirect()->route('Kitchen/Home.jsx'));
+        Route::get('/home', [KitchenHomeController::class, 'reactView'])->name('Kitchen/Home.jsx');
     });
 });
-
-
-
-// // Admin routes
-// Route::middleware(['can:Admin', 'auth'])->prefix('admin')->group(function () {
-//     Route::get('/', fn() => redirect()->route('Admin/Home.jsx'));
-//     Route::get('/home', [AdminHomeController::class, 'reactView'])->name('Admin/Home.jsx');
-//     Route::get('/sales', [AdminSaleController::class, 'reactView'])->name('Admin/Sales.jsx');
-//     Route::get('/sales/export-data', [AdminSaleExportController::class, 'exportData'])->name('admin.sales.export');
-//     Route::get('/items', [AdminItemController::class, 'reactView'])->name('Admin/Items.jsx');
-//     Route::get('/coupons', [AdminCouponController::class, 'reactView'])->name('Admin/Coupons.jsx');
-//     Route::get('/discount-rules', [AdminDiscountRulesController::class, 'reactView'])->name('Admin/DiscountRules.jsx');
-//     Route::get('/ads', [AdminAdController::class, 'reactView'])->name('Admin/Ads.jsx');
-
-//     Route::get('/combos', [AdminComboController::class, 'reactView'])->name('Admin/Combos.jsx');
-//     Route::get('/canvas-presets', [AdminCanvasPresetController::class, 'reactView'])->name('Admin/Presets.jsx');
-
-//     Route::get('/categories', [AdminCategoryController::class, 'reactView'])->name('Admin/Categories.jsx');
-//     Route::get('/collections', [AdminCollectionController::class, 'reactView'])->name('Admin/Collections.jsx');
-//     Route::get('/subcategories', [AdminSubCategoryController::class, 'reactView'])->name('Admin/SubCategories.jsx');
-//     Route::get('/brands', [AdminBrandController::class, 'reactView'])->name('Admin/Brands.jsx');
-//     Route::get('/tags', [AdminTagController::class, 'reactView'])->name('Admin/Tags.jsx');
-//     Route::get('/prices', [AdminDeliveryPriceController::class, 'reactView'])->name('Admin/DeliveryPricesType.jsx');
-//     Route::get('/stores', [AdminStoreController::class, 'reactView'])->name('Admin/Stores.jsx');
-//     Route::get('/messages', [AdminSubscriptionController::class, 'reactView'])->name('Admin/Messages.jsx');
-//     Route::get('/subscriptions', [AdminSubscriptionController::class, 'reactView'])->name('Admin/Subscriptions.jsx');
-
-//     Route::get('/posts', [AdminPostController::class, 'reactView'])->name('Admin/Posts.jsx');
-//     Route::get('/about', [AdminAboutusController::class, 'reactView'])->name('Admin/About.jsx');
-//     Route::get('/delivery-zones', [AdminDeliveryZoneController::class, 'reactView'])->name('Admin/DeliveryZones.jsx');
-//     Route::get('/indicators', [AdminIndicatorController::class, 'reactView'])->name('Admin/Indicators.jsx');
-//     Route::get('/sliders', [AdminSliderController::class, 'reactView'])->name('Admin/Sliders.jsx');
-//     Route::get('/banners', [AdminBannerController::class, 'reactView'])->name('Admin/Banners.jsx');
-//     Route::get('/testimonies', [AdminTestimonyController::class, 'reactView'])->name('Admin/Testimonies.jsx');
-//     Route::get('/socials', [AdminSocialController::class, 'reactView'])->name('Admin/Socials.jsx');
-//     Route::get('/statuses', [AdminSaleStatusController::class, 'reactView'])->name('Admin/Statuses.jsx');
-//     Route::get('/strengths', [AdminStrengthController::class, 'reactView'])->name('Admin/Strengths.jsx');
-//     Route::get('/certifications', [AdminCertificationController::class, 'reactView'])->name('Admin/Certifications.jsx');
-//     Route::get('/partners', [AdminPartnerController::class, 'reactView'])->name('Admin/Partners.jsx');
-//     Route::get('/generals', [AdminGeneralController::class, 'reactView'])->name('Admin/Generals.jsx');
-//     Route::get('/coupons', [AdminCouponController::class, 'reactView'])->name('Admin/Coupons.jsx');
-//     Route::get('/faqs', [AdminFaqController::class, 'reactView'])->name('Admin/Faqs.jsx');
-
-
-//     Route::get('/gallery', [AdminGalleryController::class, 'reactView'])->name('Admin/Gallery.jsx');
-//     Route::get('/repository', [AdminRepositoryController::class, 'reactView'])->name('Admin/Repository.jsx');
-
-//     Route::middleware(['can:Root'])->get('/system', [AdminSystemController::class, 'reactView'])->name('Admin/System.jsx');
-// });
-
-// Route::middleware(['can:Customer', 'auth'])->prefix('customer')->group(function () {
-//     Route::get('/dashboard', [CustomerSaleController::class, 'reactView'])->name('Customer/Sales.jsx');
-//     Route::get('/orders', [CustomerSaleController::class, 'reactView'])->name('Customer/Sales.jsx');
-//     Route::get('/albums', [CustomerAlbumController::class, 'reactView'])->name('Customer/Albums.jsx');
-// });
-
-
-
-// // Canvas Routes - Authentication required
-// Route::middleware(['auth'])->prefix('canvas')->group(function () {
-//     Route::get('/editor/{project}', [CanvasController::class, 'editor'])->name('canvas.editor');
-//     Route::post('/save', [CanvasController::class, 'save'])->name('canvas.save');
-//     Route::get('/projects', [CanvasController::class, 'getUserProjects'])->name('canvas.projects');
-//     Route::post('/export/{project}', [CanvasController::class, 'export'])->name('canvas.export');
-//     Route::delete('/project/{project}', [CanvasController::class, 'deleteProject'])->name('canvas.delete');
-// });
-
-// // Test route for development
-if (env('APP_ENV') === 'local') {
-
-    Route::get('/cloud/{uuid}', [RepositoryController::class, 'media']);
-}
 
 Route::get('/app/add-address', [MobileAddressController::class, 'reactView'])->name('Mobile/AddAddress.jsx');

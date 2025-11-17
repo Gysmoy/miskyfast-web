@@ -6,6 +6,13 @@ import { useEffect, useRef, useState } from 'react';
 import OrdersRest from '../Actions/Restaurant/OrdersRest';
 import Number2Currency from '../Utils/Number2Currency';
 import DataGrid from '../Components/Adminto/DataGrid';
+import KanbanCard from '../Reutilizables/Orders/KanbanCard';
+import OrderCard from '../Reutilizables/Orders/OrderCard';
+import Table from '../Components/Adminto/Table';
+import { renderToString } from 'react-dom/server';
+import ReactAppend from '../Utils/ReactAppend';
+import SwitchFormGroup from '../Components/Adminto/form/SwitchFormGroup';
+import DxButton from '../Components/dx/DxButton';
 
 // Rests
 const ordersRest = new OrdersRest()
@@ -62,7 +69,7 @@ const Orders = ({ orders: ordersDB, statuses }) => {
   }, []);
 
   // Pipeline stages
-  const receptionOrders = orders.filter(o => o.status_id === '56844089-7edf-4c9e-9d09-6874624c37b2'); // PENDIENTE
+  const pendingOrders = orders.filter(o => o.status_id === '56844089-7edf-4c9e-9d09-6874624c37b2'); // PENDIENTE
   const kitchenOrders = orders.filter(o => o.status_id === 'be7e24c9-a3e4-444e-adab-bb301b4ccce3' || o.status_id === '1eb603e6-e078-4f9f-8c86-25a363742518'); // CONFIRMADO + PREPARANDO
   const readyOrders = orders.filter(o => o.status_id === 'f0a538f0-8aef-4ca7-80d1-297ab6c58279'); // LISTO PARA RECOJO
   const deliveredOrders = orders.filter(o => o.status_id === 'f7b3f073-c8bf-49c9-ba6d-fcdfe82395dc' || o.status_id === 'ea4578c1-f0c7-4495-ade5-a82b5ca7cc4b'); // ENTREGADO + CANCELADO
@@ -86,84 +93,7 @@ const Orders = ({ orders: ordersDB, statuses }) => {
     return 'Pedidos';
   };
 
-  const OrderCard = ({ order, stage }) => (
-    <div className="card mb-2" style={{ borderLeft: `3px solid ${order.status.color}` }}>
-      <div className="card-body p-2">
-        <div className="d-flex justify-content-between align-items-start">
-          <small className="fw-bold text-muted">#{order.id.slice(-6)}</small>
-          <span className="badge" style={{ backgroundColor: order.status.color, color: '#fff' }}>
-            {order.status.name}
-          </span>
-        </div>
-
-        {stage === 'reception' && (
-          <>
-            <div className="mt-2">
-              <strong>{order.client.name} {order.client.lastname}</strong>
-              <div className="text-muted small">{order.client.email}</div>
-              <div className="text-muted small">{order.address?.street || 'Sin dirección'}</div>
-              <div className="text-muted small">{order.payment_method}</div>
-            </div>
-            <div className="mt-2 fw-semibold">Total: S/ {Number2Currency(order.total_amount)}</div>
-            <details className="mt-2 small">
-              <summary>Detalles</summary>
-              <ul className="mt-1 mb-0 ps-3">
-                {order.details.map(d => (
-                  <li key={d.id}>{d.quantity} × {d.product_name}</li>
-                ))}
-              </ul>
-            </details>
-            <div className="d-flex gap-1 mt-2">
-              <button className="btn btn-success btn-sm flex-fill" onClick={() => handleConfirm(order.id)}>Aceptar</button>
-              <button className="btn btn-danger btn-sm flex-fill" onClick={() => handleCancel(order.id)}>Rechazar</button>
-            </div>
-          </>
-        )}
-
-        {stage === 'kitchen' && (
-          <>
-            <details className="mt-2 small">
-              <summary>Pedido</summary>
-              <ul className="mt-1 mb-0 ps-3">
-                {order.details.map(d => (
-                  <li key={d.id}>{d.quantity} × {d.product_name}</li>
-                ))}
-              </ul>
-              {order.notes && <div className="mt-1 text-muted"><strong>Notas:</strong> {order.notes}</div>}
-            </details>
-            <div className="d-flex gap-1 mt-2">
-              <button className="btn btn-info btn-sm flex-fill" onClick={() => handleReady(order.id)}>Listo</button>
-            </div>
-          </>
-        )}
-
-        {stage === 'ready' && (
-          <>
-            <div className="mt-2">
-              <strong>{order.client.name} {order.client.lastname}</strong>
-              <div className="text-muted small">{order.payment_method}</div>
-              <div className="text-muted small">{order.address?.street || 'Recojo en tienda'}</div>
-            </div>
-            <div className="d-flex gap-1 mt-2">
-              <button className="btn btn-success btn-sm flex-fill" onClick={() => handleDeliver(order.id)}>Entregado</button>
-            </div>
-          </>
-        )}
-
-        {stage === 'history' && (
-          <>
-            <div className="mt-2">
-              <strong>{order.client.name} {order.client.lastname}</strong>
-              <div className="text-muted small">Delivery: {order.delivery?.name || 'N/A'}</div>
-              <div className="text-muted small">Entrega: {new Date(order.updated_at).toLocaleTimeString()}</div>
-            </div>
-          </>
-        )}
-      </div>
-    </div>
-  );
-
-  return (
+  return <>
     <div className="row">
       <div className="col-12">
         {/* Título dinámico */}
@@ -191,175 +121,174 @@ const Orders = ({ orders: ordersDB, statuses }) => {
             </button>
           </div>
         </div>
-
-        {/* Tabs content */}
-        {activeTab === 'realtime' && (
-          <>
-            {/* 3 cards independientes sin contenedor principal */}
-            <div className="row g-2">
-              <div className="col-md-4">
-                <div className="card h-100">
-                  <div className="card-header text-center">
-                    <h6 className="mb-0">Recepción</h6>
-                  </div>
-                  <div className="card-body p-2" style={{ minHeight: 'calc(100vh - 300px)' }}>
-                    {receptionOrders.map(o => <OrderCard key={o.id} order={o} stage="reception" />)}
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-md-4">
-                <div className="card h-100">
-                  <div className="card-header text-center">
-                    <h6 className="mb-0">Cocina</h6>
-                  </div>
-                  <div className="card-body p-2" style={{ minHeight: 'calc(100vh - 300px)' }}>
-                    {kitchenOrders.map(o => <OrderCard key={o.id} order={o} stage="kitchen" />)}
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-md-4">
-                <div className="card h-100">
-                  <div className="card-header text-center">
-                    <h6 className="mb-0">Listos</h6>
-                  </div>
-                  <div className="card-body p-2" style={{ minHeight: 'calc(100vh - 300px)' }}>
-                    {readyOrders.map(o => <OrderCard key={o.id} order={o} stage="ready" />)}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </>
-        )}
-
-        {activeTab === 'history' && (
-          <div className="card">
-            <div className="card-body p-2" style={{ minHeight: 'calc(100vh - 300px)' }}>
-              <DataGrid
-                gridRef={gridRef}
-                rest={ordersRest}
-                toolBar={(container) => {
-                  container.unshift({
-                    widget: "dxButton",
-                    location: "after",
-                    options: {
-                      icon: "refresh",
-                      hint: "Refrescar tabla",
-                      onClick: () =>
-                        $(gridRef.current).dxDataGrid("instance").refresh(),
-                    },
-                  });
-                }} 
-                columns={[
-                    {
-                        dataField: "id",
-                        caption: "ID",
-                        visible: false,
-                    },
-                    {
-                        dataField: "category.name",
-                        caption: "Categoría",
-                        width: "200px",
-                    },
-                    {
-                        dataField: "name",
-                        caption: "Nombre",
-                        minWidth: "300px",
-                        cellTemplate: (container, { data }) => {
-                            container.html(renderToString(<>
-                                <b className="d-block mb-1">{data.name}</b>
-                                <div className="d-flex flex-wrap gap-1">{data.presentations.map(p => <span className="badge badge-outline-dark">{p.presentation}</span>)}</div>
-                            </>));
-                        },
-                    },
-                    {
-                        dataField: "price",
-                        caption: "Precio",
-                        dataType: "number",
-                        width: "90px",
-                        cellTemplate: (container, { data }) => {
-                            container.html(renderToString(<>S/.{Number2Currency(data.price)}</>));
-                        },
-                    },
-                    {
-                        dataField: "image",
-                        caption: "Imagen",
-                        width: "90px",
-                        allowFiltering: false,
-                        cellTemplate: (container, { data }) => {
-                            ReactAppend(
-                                container,
-                                <img
-                                    src={data.image ? `/storage/images/item/${data.image}` : "/api/cover/thumbnail/null"}
-                                    style={{
-                                        width: "80px",
-                                        height: "48px",
-                                        objectFit: "cover",
-                                        objectPosition: "center",
-                                        borderRadius: "4px",
-                                    }}
-                                    onError={(e) => (e.target.src = "/api/cover/thumbnail/null")}
-                                />
-                            );
-                        },
-                    },
-                    {
-                        dataField: "visible",
-                        caption: "Visible",
-                        dataType: "boolean",
-                        width: "80px",
-                        cellTemplate: (container, { data }) => {
-                            ReactAppend(
-                                container,
-                                <SwitchFormGroup
-                                    checked={data.visible}
-                                    onChange={(e) =>
-                                        onVisibleChange({
-                                            id: data.id,
-                                            value: e.target.checked,
-                                        })
-                                    }
-                                />
-                            );
-                        },
-                    },
-                    {
-                        caption: "Acciones",
-                        width: "100px",
-                        cellTemplate: (container, { data }) => {
-                            container.css("text-overflow", "unset");
-                            container.append(
-                                DxButton({
-                                    className: "btn btn-xs btn-soft-primary",
-                                    title: "Editar",
-                                    icon: "fa fa-pen",
-                                    onClick: () => onModalOpen(data),
-                                })
-                            );
-                            container.append(
-                                DxButton({
-                                    className: "btn btn-xs btn-soft-danger",
-                                    title: "Eliminar",
-                                    icon: "fa fa-trash",
-                                    onClick: () => onDeleteClicked(data.id),
-                                })
-                            );
-                        },
-                        allowFiltering: false,
-                        allowExporting: false,
-                    },
-                ]}/>
-            </div>
-          </div>
-        )}
       </div>
     </div>
-  );
+
+    {/* Tabs content */}
+    {activeTab === 'realtime' && (
+      <div className="row">
+        <div className="col-12">
+          <div className="row">
+            <div className="col-md-4">
+              <KanbanCard title="PENDIENTE" length={pendingOrders.length}>
+                {pendingOrders.map(order => <OrderCard
+                  key={order.id} {...order}
+                  showContact
+                  showTotal
+                  confirmText={<>Aceptar <i className="mdi mdi-arrow-right"></i></>}
+                  onConfirm={() => onStatusChanged(order.id, 'be7e24c9-a3e4-444e-adab-bb301b4ccce3')}
+                  cancelText={<i className="mdi mdi-close" />}
+                  onCancel={() => onStatusChanged(order.id, 'ea4578c1-f0c7-4495-ade5-a82b5ca7cc4b')}
+                />)}
+              </KanbanCard>
+            </div>
+
+            <div className="col-md-4">
+              <KanbanCard title="COCINA" length={kitchenOrders.length}>
+                {kitchenOrders.map(order => <OrderCard
+                  key={order.id} {...order}
+                  showContact
+                  confirmText={<>Listo <i className="mdi mdi-arrow-right"></i></>}
+                  onConfirm={() => onStatusChanged(order.id, 'f0a538f0-8aef-4ca7-80d1-297ab6c58279')}
+                />)}
+              </KanbanCard>
+            </div>
+
+            <div className="col-md-4">
+              <KanbanCard title="LISTO PARA RECOJO" length={readyOrders.length}>
+                {readyOrders.map(order => <OrderCard
+                  key={order.id} {...order}
+                  showContact
+                  showTotal
+                  confirmText={<>Entregar <i className="mdi mdi-arrow-right"></i></>}
+                  onConfirm={() => onStatusChanged(order.id, 'f7b3f073-c8bf-49c9-ba6d-fcdfe82395dc')}
+                />)}
+              </KanbanCard>
+            </div>
+          </div>
+        </div>
+      </div>
+    )}
+
+    {activeTab === 'history' && (
+      <Table
+        gridRef={gridRef}
+        title="Items"
+        rest={ordersRest}
+        toolBar={(container) => {
+          container.unshift({
+            widget: "dxButton",
+            location: "after",
+            options: {
+              icon: "refresh",
+              hint: "Refrescar tabla",
+              onClick: () =>
+                $(gridRef.current).dxDataGrid("instance").refresh(),
+            },
+          });
+          container.unshift({
+            widget: "dxButton",
+            location: "after",
+            options: {
+              icon: "plus",
+              text: "Agregar",
+              hint: "Agregar",
+              onClick: () => onModalOpen(),
+            },
+          });
+        }}
+        exportable={true}
+        exportableName="Items"
+        columns={[
+          {
+            dataField: "id",
+            caption: "ID",
+            visible: false,
+          },
+          {
+            dataField: "code",
+            caption: "Código",
+            cssClass: 'font-monospace fw-bold text-center',
+            width: '80px',
+            cellTemplate: (container, { data }) => {
+              container.css({ borderLeft: `4px solid ${data.status?.color ?? '#ddd'}` });
+              container.text(data.code);
+            },
+          },
+          {
+            dataField: "status.name",
+            caption: "Estado",
+          },
+          {
+            dataField: "client.name",
+            caption: "Cliente",
+            cellTemplate: (container, { data }) => {
+              container.text(`${data.client.name} ${data.client.lastname}`);
+            },
+          },
+          {
+            dataField: "client.lastname",
+            caption: "Apellido",
+            visible: false,
+          },
+          {
+            dataField: "client.email",
+            caption: "Correo"
+          },
+          {
+            dataField: "client.phone",
+            caption: "Teléfono"
+          },
+          {
+            dataField: "details_count",
+            caption: "Items",
+            cellTemplate: (container, { data }) => {
+              container.text(`${data.details_count} items`);
+            },
+            width: '80px',
+          },
+          {
+            dataField: "total_amount",
+            caption: "Precio",
+            dataType: "number",
+            width: "100px",
+            cellTemplate: (container, { data }) => {
+              container.text(`S/ ${Number2Currency(data.total_amount)}`);
+            },
+          },
+          {
+            caption: "Acciones",
+            width: "100px",
+            cellTemplate: (container, { data }) => {
+              container.css("text-overflow", "unset");
+              container.append(
+                DxButton({
+                  className: "btn btn-xs btn-soft-primary",
+                  title: "Editar",
+                  icon: "fa fa-pen",
+                  onClick: () => onModalOpen(data),
+                })
+              );
+              container.append(
+                DxButton({
+                  className: "btn btn-xs btn-soft-danger",
+                  title: "Eliminar",
+                  icon: "fa fa-trash",
+                  onClick: () => onDeleteClicked(data.id),
+                })
+              );
+            },
+            allowFiltering: false,
+            allowExporting: false,
+          },
+        ]}
+      />
+    )}
+  </>
 }
 
 CreateReactScript((el, properties) => {
-  createRoot(el).render(<BaseAdminto {...properties} title='Pedidos'>
+  createRoot(el).render(<BaseAdminto {...properties} title='Recepción'>
     <Orders {...properties} />
   </BaseAdminto>);
 })

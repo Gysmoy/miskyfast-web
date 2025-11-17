@@ -15,7 +15,6 @@
     <link rel="shortcut icon" href="/assets/resources/icon.png?v={{ uniqid() }}" type="image/png">
 
     <meta name="csrf_token" content="{{ csrf_token() }}">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <link href="/lte/assets/libs/mohithg-switchery/switchery.min.css" rel="stylesheet" type="text/css" />
     <link href="/lte/assets/libs/select2/css/select2.min.css" rel="stylesheet" type="text/css" />
@@ -73,7 +72,7 @@
     </style>
 </head>
 
-<body class="loading"
+<body class="loading" @isset($data['layout-mode']) data-layout-mode="{{ $data['layout-mode'] }}" @endisset
     data-layout='{"mode": "horizontal", "width": "fluid", "menuPosition": "fixed", "sidebar": { "color": "light", "size": "default", "showuser": true}, "topbar": {"color": "light"}, "showRightSidebarOnPageLoad": false}'>
     @inertia
 

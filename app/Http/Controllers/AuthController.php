@@ -35,67 +35,23 @@ use Spatie\Permission\Models\Role;
 class AuthController extends Controller
 {
 
-  public function loginView(Request $request, string $confirmation = null)
+  public function loginView(Request $request)
   {
     if (Auth::check()) {
       $sessionJpa = User::find(Auth::id());
-      switch ($sessionJpa->getRole()) {
-        case 'Admin':
-          return redirect('/admin/home');
-          break;
-        case 'Restaurant':
-          return redirect('/restaurant/home');
-          break;
-        default:
-          Auth::guard('web')->logout();
-          $request->session()->invalidate();
-          $request->session()->regenerateToken();
-          return redirect('/login');
-          break;
+      if ($sessionJpa->hasRole('Admin')) {
+        return redirect('/admin/home');
+      } else if ($sessionJpa->hasRole('Restaurant')) {
+        return redirect('/restaurant/home');
+      } else if ($sessionJpa->hasRole('Kitchen')) {
+        return redirect('/kitchen/home');
+      } else {
+        Auth::guard('web')->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect('/login');
       }
     };
-
-
-    if ($confirmation) {
-      $userJpa = new User();
-      try {
-        //code...
-        $preUserJpa = PreUser::select()
-          ->where('confirmation_token', $confirmation)
-          ->first();
-        if (!$preUserJpa) return redirect('/login');
-
-        $roleJpa = Role::where('relative_id', $preUserJpa->role)->first();
-
-        $userJpa = User::create([
-          'uuid' => Crypto::randomUUID(),
-          'name' => $preUserJpa->name,
-          'lastname' => $preUserJpa->lastname,
-          'email' => $preUserJpa->email,
-          'email_verified_at' => Trace::getDate('mysql'),
-          'password' => $preUserJpa->password,
-          'birthdate' => $preUserJpa->birthdate,
-          'status' => false
-        ])->assignRole($roleJpa->name);
-
-        $specialties = JSON::parse($preUserJpa->specialties);
-        foreach ($specialties as $specialty) {
-          SpecialtiesByUser::create([
-            'user_id' => $userJpa->id,
-            'specialty_id' => $specialty
-          ]);
-        }
-
-        $message = 'La confirmacion se ha realizado con exito';
-
-        $preUserJpa->delete();
-        return redirect('/login?message=' . $message);
-      } catch (\Throwable $th) {
-        $userJpa->delete();
-        // dump($th);
-        // return redirect('/login');
-      }
-    }
 
     return Inertia::render('Login', [
       'message' => $message ?? null,

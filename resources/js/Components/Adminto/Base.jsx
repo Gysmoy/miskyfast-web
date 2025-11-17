@@ -3,6 +3,7 @@ import Footer from './Footer'
 import Menu from './Menu'
 import NavBar from './NavBar'
 import RigthBar from './RightBar'
+import { Toaster } from 'sonner'
 
 moment.tz.setDefault('UTC');
 
@@ -20,8 +21,9 @@ const Base = ({ children, title, ...props }) => {
         <Footer />
       </div>
     </div>
-    <RigthBar {...props} />
+    {/* <RigthBar {...props} /> */}
     <div className="rightbar-overlay"></div>
+    <Toaster/>
   </>)
 }
 

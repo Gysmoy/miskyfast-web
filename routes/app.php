@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
+Route::post('/validate-duplicate', [AuthController::class, 'validateDuplicate']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::prefix('/auth')->group(function () {
@@ -40,6 +41,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/addresses', [AddressController::class, 'save']);
     Route::delete('/addresses/{id}', [AddressController::class, 'delete']);
 
+    Route::get('/orders/last', [OrderController::class, 'lastPendingOrder']);
     Route::post('/orders', [OrderController::class, 'save']);
     Route::post('/orders/paginate', [OrderController::class, 'paginate']);
 });

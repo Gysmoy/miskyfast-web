@@ -20,6 +20,7 @@ class Status extends Model
         'color',
         'type',
         'is_ok',
+        'can_order',
         'status',
     ];
 }

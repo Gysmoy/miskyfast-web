@@ -33,7 +33,6 @@ use App\Http\Controllers\Admin\StoreController as AdminStoreController;
 use App\Http\Controllers\Admin\GalleryController as AdminGalleryController;
 use App\Http\Controllers\Admin\ItemController as AdminItemController;
 use App\Http\Controllers\Admin\SaleController as AdminSaleController;
-use App\Http\Controllers\Admin\SaleExportController as AdminSaleExportController;
 use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Customer\SaleController as CustomerSaleController;
 use App\Http\Controllers\Customer\AlbumController as CustomerAlbumController;
@@ -62,9 +61,6 @@ use App\Http\Controllers\Admin\UserController as AdminUserController;
 use App\Http\Controllers\CanvasController;
 use App\Http\Controllers\CanvasProjectController;
 use App\Http\Controllers\Api\Canvas\ProjectSaveController;
-// use App\Http\Controllers\ProjectPDFController;
-use App\Http\Controllers\Api\SimplePDFController;
-use App\Http\Controllers\PDFGeneratorController;
 use App\Http\Controllers\CartPDFController;
 use App\Http\Controllers\AuthClientController;
 // Public
@@ -75,24 +71,20 @@ use App\Http\Controllers\CoverController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\DeliveryPriceController;
 use App\Http\Controllers\TypeDeliveryController;
-use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ItemImportController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\MercadoPagoController;
-use App\Http\Controllers\PaymentMethodController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\Restaurant\ItemController as RestaurantItemController;
 use App\Http\Controllers\Restaurant\OrderController as RestaurantOrderController;
-use App\Http\Controllers\RestaurantController;
+use App\Http\Controllers\Restaurant\UserController as RestaurantUserController;
 use App\Http\Controllers\SaleController;
 use App\Http\Controllers\SubscriptionController;
 use App\Http\Controllers\ScrapController;
-use App\Http\Controllers\StatusController;
 use App\Http\Controllers\TemporalyImageController;
 use App\Http\Controllers\UnifiedImportController;
-use Maatwebsite\Excel\Row;
 
 /*
 |--------------------------------------------------------------------------
@@ -550,6 +542,10 @@ Route::middleware('auth')->group(function () {
 
     Route::post('/orders', [RestaurantOrderController::class, 'save']);
     Route::post('/orders/paginate', [RestaurantOrderController::class, 'paginate']);
+
+    Route::post('/users', [RestaurantUserController::class, 'save']);
+    Route::post('/users/paginate', [RestaurantUserController::class, 'paginate']);
+    Route::delete('/users/{id}', [RestaurantUserController::class, 'delete']);
   });
 
   // Canvas Project routes - accessible to authenticated users

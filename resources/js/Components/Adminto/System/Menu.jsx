@@ -1,6 +1,6 @@
 import React from "react"
-import MenuItemContainer from "../../MenuItemContainer";
-import MenuItem from "../../MenuItem";
+import MenuItemContainer from "../Menu/MenuItemContainer";
+import MenuItem from "../Menu/MenuItem";
 import SystemRest from "../../../Actions/Admin/SystemRest";
 
 const systemRest = new SystemRest();
