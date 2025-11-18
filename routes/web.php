@@ -20,16 +20,15 @@ use App\Http\Controllers\Restaurant\ItemController as RestaurantItemController;
 use App\Http\Controllers\Restaurant\UserController as RestaurantUserController;
 use App\Http\Controllers\Restaurant\KitchenController as RestaurantKitchenController;
 
+// kitchen
+use App\Http\Controllers\Kitchen\OrderController as KitchenOrderController;
+
 // Mobile
 use App\Http\Controllers\Mobile\AddressController as MobileAddressController;
 
 // Public 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\RepositoryController;
 use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Kitchen\HomeController as KitchenHomeController;
-use App\Models\User;
-use Illuminate\Http\Request;
 
 /*
 |--------------------------------------------------------------------------
@@ -67,14 +66,15 @@ Route::middleware('auth')->group(function () {
         Route::get('/home', [RestaurantHomeController::class, 'reactView'])->name('Restaurant/Home.jsx');
 
         Route::get('/orders', [RestaurantOrderController::class, 'reactView'])->name('Restaurant/Orders.jsx');
+        Route::get('/kitchen', [RestaurantKitchenController::class, 'reactView'])->name('Restaurant/Kitchen.jsx');
+        
         Route::get('/items', [RestaurantItemController::class, 'reactView'])->name('Restaurant/Items.jsx');
         Route::get('/users', [RestaurantUserController::class, 'reactView'])->name('Restaurant/Users.jsx');
-        Route::get('/kitchen', [RestaurantKitchenController::class, 'reactView'])->name('Restaurant/Kitchen.jsx');
     });
 
     Route::middleware('can:Kitchen')->prefix('kitchen')->group(function () {
-        Route::get('/', fn() => redirect()->route('Kitchen/Home.jsx'));
-        Route::get('/home', [KitchenHomeController::class, 'reactView'])->name('Kitchen/Home.jsx');
+        Route::get('/', fn() => redirect()->route('Kitchen/Kitchen.jsx'));
+        Route::get('/kitchen', [KitchenOrderController::class, 'reactView'])->name('Kitchen/Kitchen.jsx');
     });
 });
 

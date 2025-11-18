@@ -432,7 +432,7 @@ const Sales = ({ statuses = [] }) => {
                                     return (
                                         <article
                                             key={index}
-                                            class="border py-1 px-2 ms-3"
+                                            className="border py-1 px-2 ms-3"
                                             style={{
                                                 position: "relative",
                                                 borderRadius:

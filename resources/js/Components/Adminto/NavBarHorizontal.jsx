@@ -8,9 +8,9 @@ const NavBar = ({ session = {}, title = 'Pagina' }) => {
     document.title = `${title} | ${Global.APP_NAME}`
   }, [null])
 
-  return <div class="navbar-custom">
-    <div class="container-fluid">
-      <ul class="list-unstyled topnav-menu float-end mb-0">
+  return <div className="navbar-custom">
+    <div className="container-fluid">
+      <ul className="list-unstyled topnav-menu float-end mb-0">
 
         <li className="dropdown notification-list topbar-dropdown">
           <a className="nav-link dropdown-toggle nav-user me-0 waves-effect waves-light" data-bs-toggle="dropdown"
@@ -53,14 +53,14 @@ const NavBar = ({ session = {}, title = 'Pagina' }) => {
           </div>
         </li>
 
-        {/* <li class="dropdown notification-list">
-          <a href="javascript:void(0);" class="nav-link right-bar-toggle waves-effect waves-light">
-            <i class="fe-settings noti-icon"></i>
+        {/* <li className="dropdown notification-list">
+          <a href="javascript:void(0);" className="nav-link right-bar-toggle waves-effect waves-light">
+            <i className="fe-settings noti-icon"></i>
           </a>
         </li> */}
 
       </ul>
-      <div class="logo-box">
+      <div className="logo-box">
          <a href="/" className="logo logo-light text-center">
           <span className="logo-sm">
             <img src="/assets/resources/icon.png" alt="" height="22" onError={(e) => {
@@ -91,12 +91,12 @@ const NavBar = ({ session = {}, title = 'Pagina' }) => {
         </a>
       </div>
 
-      <ul class="list-unstyled topnav-menu topnav-menu-left mb-0">
+      <ul className="list-unstyled topnav-menu topnav-menu-left mb-0">
 
         <li>
-          <a class="navbar-toggle nav-link" data-bs-toggle="collapse"
+          <a className="navbar-toggle nav-link" data-bs-toggle="collapse"
             data-bs-target="#topnav-menu-content">
-            <div class="lines">
+            <div className="lines">
               <span></span>
               <span></span>
               <span></span>
@@ -106,7 +106,7 @@ const NavBar = ({ session = {}, title = 'Pagina' }) => {
 
       </ul>
 
-      <div class="clearfix"></div>
+      <div className="clearfix"></div>
 
     </div>
 

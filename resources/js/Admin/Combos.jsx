@@ -319,16 +319,16 @@ const Combos = ({ items }) => {
                 />
                 <div>
 
-                  <div class="card mb-3">
-                    <div class="row g-0">
-                      <div class="col-md-4">
-                        <img src={`/storage/images/item/${product?.image ?? 'undefined'}`} class="img-thumbnail rounded-start" alt={product.name} />
+                  <div className="card mb-3">
+                    <div className="row g-0">
+                      <div className="col-md-4">
+                        <img src={`/storage/images/item/${product?.image ?? 'undefined'}`} className="img-thumbnail rounded-start" alt={product.name} />
                       </div>
-                      <div class="col-md-8">
-                        <div class="card-body">
-                          <h5 class="card-title">{product?.name} </h5>
-                          <p class="card-text small line-clamp-2">{product?.summary} </p>
-                          <p class="card-text"><strong>Precio: S/.{product?.final_price}</strong></p>
+                      <div className="col-md-8">
+                        <div className="card-body">
+                          <h5 className="card-title">{product?.name} </h5>
+                          <p className="card-text small line-clamp-2">{product?.summary} </p>
+                          <p className="card-text"><strong>Precio: S/.{product?.final_price}</strong></p>
 
                           <button className='btn btn-sm btn-danger pull-left' type='button' onClick={() => removeProduct(product.id)}>Eliminar</button>
                         </div>

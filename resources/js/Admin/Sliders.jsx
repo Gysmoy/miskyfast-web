@@ -216,23 +216,23 @@ const Sliders = () => {
       <div className='row' id='sliders-container'>
         <input ref={idRef} type='hidden' />
         <div>
-          <ul class="nav nav-pills navtab-bg nav-justified">
-            <li class="nav-item">
-              <a href="#tab-image" data-bs-toggle="tab" aria-expanded="false" class={`nav-link ${activeTab == 'image' && 'active'}`} onClick={() => setActiveTab('image')}>
+          <ul className="nav nav-pills navtab-bg nav-justified">
+            <li className="nav-item">
+              <a href="#tab-image" data-bs-toggle="tab" aria-expanded="false" className={`nav-link ${activeTab == 'image' && 'active'}`} onClick={() => setActiveTab('image')}>
                 Imagen
               </a>
             </li>
-            <li class="nav-item">
-              <a href="#tab-video" data-bs-toggle="tab" aria-expanded="true" class={`nav-link ${activeTab == 'video' && 'active'}`} onClick={() => setActiveTab('video')}>
+            <li className="nav-item">
+              <a href="#tab-video" data-bs-toggle="tab" aria-expanded="true" className={`nav-link ${activeTab == 'video' && 'active'}`} onClick={() => setActiveTab('video')}>
                 Video
               </a>
             </li>
           </ul>
-          <div class="tab-content">
-            <div class={`tab-pane ${activeTab == 'image' && 'show active'}`} id="tab-image">
+          <div className="tab-content">
+            <div className={`tab-pane ${activeTab == 'image' && 'show active'}`} id="tab-image">
               <ImageFormGroup eRef={bgImageRef} label='Imagen' />
             </div>
-            <div class={`tab-pane ${activeTab == 'video' && 'show active'}`} id="tab-video">
+            <div className={`tab-pane ${activeTab == 'video' && 'show active'}`} id="tab-video">
               <InputFormGroup eRef={bgVideoRef} label='URL (Youtube)' type='link' onChange={e => setIframeSrc(getYTVideoId(e.target.value))} />
               <iframe src={`https://www.youtube.com/embed/${iframeSrc}`} className='w-100 rounded border mb-2' style={{
                 aspectRatio: 21 / 9

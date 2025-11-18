@@ -40,11 +40,11 @@ class AuthController extends Controller
     if (Auth::check()) {
       $sessionJpa = User::find(Auth::id());
       if ($sessionJpa->hasRole('Admin')) {
-        return redirect('/admin/home');
+        return redirect('/admin/');
       } else if ($sessionJpa->hasRole('Restaurant')) {
-        return redirect('/restaurant/home');
+        return redirect('/restaurant/');
       } else if ($sessionJpa->hasRole('Kitchen')) {
-        return redirect('/kitchen/home');
+        return redirect('/kitchen/');
       } else {
         Auth::guard('web')->logout();
         $request->session()->invalidate();

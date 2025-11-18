@@ -17,9 +17,10 @@ import DxButton from '../Components/dx/DxButton';
 // Rests
 const ordersRest = new OrdersRest()
 
-const audio = new Audio('/assets/sounds/notification.mp3');
+const orderCreatedSound = new Audio('/assets/sounds/order-created.mp3');
+const orderReadySound = new Audio('/assets/sounds/order-ready.mp3')
 
-const Orders = ({ orders: ordersDB, statuses }) => {
+const Orders = ({ orders: ordersDB }) => {
   const gridRef = useRef()
 
   const [orders, setOrders] = useState(ordersDB);
@@ -29,18 +30,42 @@ const Orders = ({ orders: ordersDB, statuses }) => {
   const { socket } = useWebSocket()
 
   const onOrderChanged = (order) => {
-    console.log(order);
+    const validStatusIds = [
+      '56844089-7edf-4c9e-9d09-6874624c37b2',
+      'be7e24c9-a3e4-444e-adab-bb301b4ccce3',
+      '1eb603e6-e078-4f9f-8c86-25a363742518',
+      'f0a538f0-8aef-4ca7-80d1-297ab6c58279'
+    ];
+
     setOrders(prev => {
-      const exists = prev.some(o => o.id === order.id);
-      if (exists) {
-        return prev.map(o => o.id === order.id ? order : o);
+      const exists = prev.some(o => o?.id === order?.id);
+      if (validStatusIds.includes(order?.status_id)) {
+        if (exists) {
+          // Play ready sound when status changes to LISTO PARA RECOJO
+          const oldOrder = prev.find(o => o.id === order.id);
+          if (oldOrder?.status_id !== 'f0a538f0-8aef-4ca7-80d1-297ab6c58279' && order?.status_id === 'f0a538f0-8aef-4ca7-80d1-297ab6c58279') {
+            orderReadySound.play();
+          }
+          return prev.map(o => o.id === order.id ? order : o);
+        } else {
+          if (order?.status_id === 'be7e24c9-a3e4-444e-adab-bb301b4ccce3') {
+            orderCreatedSound.play();
+          }
+          // Play ready sound if new order is already LISTO PARA RECOJO
+          if (order?.status_id === 'f0a538f0-8aef-4ca7-80d1-297ab6c58279') {
+            orderReadySound.play();
+          }
+          return [...prev, order];
+        }
       } else {
-        audio.play();
-        return [...prev, order];
+        if (exists) {
+          return prev.filter(o => o.id !== order.id);
+        } else {
+          return prev;
+        }
       }
     });
   }
-
   const onStatusChanged = async (orderId, statusId) => {
     const result = await ordersRest.save({
       id: orderId,
@@ -72,12 +97,6 @@ const Orders = ({ orders: ordersDB, statuses }) => {
   const pendingOrders = orders.filter(o => o.status_id === '56844089-7edf-4c9e-9d09-6874624c37b2'); // PENDIENTE
   const kitchenOrders = orders.filter(o => o.status_id === 'be7e24c9-a3e4-444e-adab-bb301b4ccce3' || o.status_id === '1eb603e6-e078-4f9f-8c86-25a363742518'); // CONFIRMADO + PREPARANDO
   const readyOrders = orders.filter(o => o.status_id === 'f0a538f0-8aef-4ca7-80d1-297ab6c58279'); // LISTO PARA RECOJO
-  const deliveredOrders = orders.filter(o => o.status_id === 'f7b3f073-c8bf-49c9-ba6d-fcdfe82395dc' || o.status_id === 'ea4578c1-f0c7-4495-ade5-a82b5ca7cc4b'); // ENTREGADO + CANCELADO
-
-  const handleConfirm = (orderId) => onStatusChanged(orderId, 'be7e24c9-a3e4-444e-adab-bb301b4ccce3');
-  const handleCancel = (orderId) => onStatusChanged(orderId, 'ea4578c1-f0c7-4495-ade5-a82b5ca7cc4b');
-  const handleReady = (orderId) => onStatusChanged(orderId, 'f0a538f0-8aef-4ca7-80d1-297ab6c58279');
-  const handleDeliver = (orderId) => onStatusChanged(orderId, 'f7b3f073-c8bf-49c9-ba6d-fcdfe82395dc');
 
   const toggleFullscreen = () => {
     if (!isFullscreen) {
@@ -130,7 +149,7 @@ const Orders = ({ orders: ordersDB, statuses }) => {
         <div className="col-12">
           <div className="row">
             <div className="col-md-4">
-              <KanbanCard title="PENDIENTE" length={pendingOrders.length}>
+              <KanbanCard title="PENDIENTE" length={pendingOrders.length} height='calc(100vh - 280px)'>
                 {pendingOrders.map(order => <OrderCard
                   key={order.id} {...order}
                   showContact
@@ -144,7 +163,7 @@ const Orders = ({ orders: ordersDB, statuses }) => {
             </div>
 
             <div className="col-md-4">
-              <KanbanCard title="COCINA" length={kitchenOrders.length}>
+              <KanbanCard title="COCINA" length={kitchenOrders.length} height='calc(100vh - 280px)'>
                 {kitchenOrders.map(order => <OrderCard
                   key={order.id} {...order}
                   showContact
@@ -155,7 +174,7 @@ const Orders = ({ orders: ordersDB, statuses }) => {
             </div>
 
             <div className="col-md-4">
-              <KanbanCard title="LISTO PARA RECOJO" length={readyOrders.length}>
+              <KanbanCard title="LISTO PARA RECOJO" length={readyOrders.length} height='calc(100vh - 280px)'>
                 {readyOrders.map(order => <OrderCard
                   key={order.id} {...order}
                   showContact

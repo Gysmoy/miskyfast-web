@@ -78,6 +78,7 @@ use App\Http\Controllers\MercadoPagoController;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\Restaurant\ItemController as RestaurantItemController;
+use App\Http\Controllers\Restaurant\KitchenController as KitchenKitchenController;
 use App\Http\Controllers\Restaurant\OrderController as RestaurantOrderController;
 use App\Http\Controllers\Restaurant\UserController as RestaurantUserController;
 use App\Http\Controllers\SaleController;
@@ -546,6 +547,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/users', [RestaurantUserController::class, 'save']);
     Route::post('/users/paginate', [RestaurantUserController::class, 'paginate']);
     Route::delete('/users/{id}', [RestaurantUserController::class, 'delete']);
+  });
+  Route::middleware('can:Kitchen')->prefix('kitchen')->group(function () {
+    Route::post('/orders', [KitchenKitchenController::class, 'save']);
   });
 
   // Canvas Project routes - accessible to authenticated users
