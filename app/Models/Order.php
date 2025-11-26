@@ -27,7 +27,10 @@ class Order extends Model
         'delivery_status_id',
         'payment_method_id',
         'payment_method_note',
-        'location',
+        'delivery_address_text',
+        'delivery_address_reference',
+        'delivery_latitude',
+        'delivery_longitude',
         'total_amount',
     ];
 
@@ -53,7 +56,7 @@ class Order extends Model
 
     public function delivery()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'delivery_id');
     }
 
     public function status()

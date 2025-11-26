@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('invitations', function (Blueprint $table) {
             $table->id();
+            $table->foreignUuid('restaurant_id')->constrained('restaurants');
+            $table->foreignId('user_id')->constrained('users');
+            $table->char('token', 36);
+            $table->timestamp('expires_at');
             $table->timestamps();
         });
     }

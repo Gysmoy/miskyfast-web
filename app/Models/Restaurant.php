@@ -21,6 +21,8 @@ class Restaurant extends Model
         'logo',
         'phone_prefix',
         'phone',
+        'latitude',
+        'longitude',
         'featured',
         'visible',
         'status',

@@ -18,14 +18,18 @@ return new class extends Migration
             $table->foreignId('client_id')->constrained('users');
             $table->foreignUuid('restaurant_id')->constrained('restaurants');
             $table->foreignId('delivery_id')->nullable()->constrained('users');
-            
+
             $table->foreignUuid('status_id')->constrained('statuses');
             $table->foreignUuid('delivery_status_id')->constrained('statuses');
 
             $table->foreignUuid('payment_method_id')->constrained('payment_methods');
             $table->longText('payment_method_note')->nullable();
 
-            $table->point('location')->nullable();
+            // Delivery
+            $table->string('delivery_address_text');
+            $table->string('delivery_address_reference')->nullable();
+            $table->decimal('delivery_latitude', 10, 7);
+            $table->decimal('delivery_longitude', 10, 7);
 
             $table->decimal('total_amount', 10, 2);
 

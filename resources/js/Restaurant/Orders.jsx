@@ -66,11 +66,15 @@ const Orders = ({ orders: ordersDB }) => {
       }
     });
   }
-  const onStatusChanged = async (orderId, statusId) => {
-    const result = await ordersRest.save({
+  const onStatusChanged = async (orderId, statusId, deliveryStatusId = null) => {
+    const request = {
       id: orderId,
-      status_id: statusId
-    })
+      status_id: statusId,
+    }
+    if (deliveryStatusId) {
+      request.delivery_status_id = deliveryStatusId
+    }
+    const result = await ordersRest.save(request)
     onOrderChanged(result)
   }
 
@@ -180,7 +184,7 @@ const Orders = ({ orders: ordersDB }) => {
                   showContact
                   showTotal
                   confirmText={<>Entregar <i className="mdi mdi-arrow-right"></i></>}
-                  onConfirm={() => onStatusChanged(order.id, 'f7b3f073-c8bf-49c9-ba6d-fcdfe82395dc')}
+                  onConfirm={() => onStatusChanged(order.id, 'f7b3f073-c8bf-49c9-ba6d-fcdfe82395dc', 'a0618dce-5fe8-4aa8-92c4-1797f9bc5618')}
                 />)}
               </KanbanCard>
             </div>

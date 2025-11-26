@@ -7,7 +7,7 @@ use App\Http\Controllers\Mobile\RestaurantController;
 use App\Http\Controllers\Mobile\PaymentMethodController;
 use App\Http\Controllers\Mobile\ItemController;
 use App\Http\Controllers\Mobile\OrderController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Mobile\StatusController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -41,7 +41,15 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::post('/addresses', [AddressController::class, 'save']);
     Route::delete('/addresses/{id}', [AddressController::class, 'delete']);
 
-    Route::get('/orders/last', [OrderController::class, 'lastPendingOrder']);
+    Route::get('/statuses', [StatusController::class, 'all']);
+
+    Route::get('/orders/last/{mode?}', [OrderController::class, 'lastPendingOrder']);
+    Route::get('/orders/available', [OrderController::class, 'available']);
+    Route::get('/orders/deliver/{orderId}', [OrderController::class, 'deliver']);
     Route::post('/orders', [OrderController::class, 'save']);
     Route::post('/orders/paginate', [OrderController::class, 'paginate']);
+
+    Route::middleware('can:Delivery')->group(function () {
+        Route::patch('/orders/delivery-status', [OrderController::class, 'deliveryStatus']);
+    });
 });

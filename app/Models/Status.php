@@ -20,6 +20,8 @@ class Status extends Model
         'color',
         'type',
         'is_ok',
+        'trackeable',
+        'order',
         'can_order',
         'status',
     ];

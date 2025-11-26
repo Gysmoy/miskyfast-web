@@ -33,7 +33,6 @@ class UserController extends BasicController
             ->where('email', $request->email)
             ->where('restaurant_id', '<>', Auth::user()->restaurant_id)
             ->exists();
-        dump($existingUser);
         if ($existingUser) throw new Exception('El usuario ya existe. Por favor, envía una invitación.');
 
         return $body;
