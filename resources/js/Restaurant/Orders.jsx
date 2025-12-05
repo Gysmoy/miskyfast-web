@@ -5,14 +5,11 @@ import useWebSocket from '../Hooks/useWebSocket';
 import { useEffect, useRef, useState } from 'react';
 import OrdersRest from '../Actions/Restaurant/OrdersRest';
 import Number2Currency from '../Utils/Number2Currency';
-import DataGrid from '../Components/Adminto/DataGrid';
 import KanbanCard from '../Reutilizables/Orders/KanbanCard';
 import OrderCard from '../Reutilizables/Orders/OrderCard';
 import Table from '../Components/Adminto/Table';
-import { renderToString } from 'react-dom/server';
-import ReactAppend from '../Utils/ReactAppend';
-import SwitchFormGroup from '../Components/Adminto/form/SwitchFormGroup';
 import DxButton from '../Components/dx/DxButton';
+import Swal from 'sweetalert2';
 
 // Rests
 const ordersRest = new OrdersRest()
@@ -66,13 +63,16 @@ const Orders = ({ orders: ordersDB }) => {
       }
     });
   }
-  const onStatusChanged = async (orderId, statusId, deliveryStatusId = null) => {
+  const onStatusChanged = async (orderId, statusId, deliveryStatusId = null, reason = null) => {
     const request = {
       id: orderId,
       status_id: statusId,
     }
     if (deliveryStatusId) {
       request.delivery_status_id = deliveryStatusId
+    }
+    if (reason) {
+      request.rejected_reason = reason
     }
     const result = await ordersRest.save(request)
     onOrderChanged(result)
@@ -161,7 +161,25 @@ const Orders = ({ orders: ordersDB }) => {
                   confirmText={<>Aceptar <i className="mdi mdi-arrow-right"></i></>}
                   onConfirm={() => onStatusChanged(order.id, 'be7e24c9-a3e4-444e-adab-bb301b4ccce3')}
                   cancelText={<i className="mdi mdi-close" />}
-                  onCancel={() => onStatusChanged(order.id, 'ea4578c1-f0c7-4495-ade5-a82b5ca7cc4b')}
+                  onCancel={() => {
+                    Swal.fire({
+                      title: 'Motivo de rechazo',
+                      input: 'text',
+                      inputLabel: 'Indique la razón por la cual se rechaza el pedido:',
+                      showCancelButton: true,
+                      confirmButtonText: 'Rechazar',
+                      cancelButtonText: 'Cancelar',
+                      inputValidator: (value) => {
+                        if (!value) {
+                          return 'Debe ingresar un motivo';
+                        }
+                      }
+                    }).then((result) => {
+                      if (result.isConfirmed) {
+                        onStatusChanged(order.id, 'ea4578c1-f0c7-4495-ade5-a82b5ca7cc4b', 'a0618dce-63fc-4e31-8a53-c6dd39ed54d3', result.value);
+                      }
+                    });
+                  }}
                 />)}
               </KanbanCard>
             </div>
@@ -185,6 +203,7 @@ const Orders = ({ orders: ordersDB }) => {
                   showTotal
                   confirmText={<>Entregar <i className="mdi mdi-arrow-right"></i></>}
                   onConfirm={() => onStatusChanged(order.id, 'f7b3f073-c8bf-49c9-ba6d-fcdfe82395dc', 'a0618dce-5fe8-4aa8-92c4-1797f9bc5618')}
+                  showDelivery
                 />)}
               </KanbanCard>
             </div>

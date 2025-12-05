@@ -140,8 +140,8 @@
     "file": "assets/Number2Currency-e57Tgsuk.js",
     "name": "Number2Currency"
   },
-  "_OrderCard-P_j4G9Qr.js": {
-    "file": "assets/OrderCard-P_j4G9Qr.js",
+  "_OrderCard-G59iuVlJ.js": {
+    "file": "assets/OrderCard-G59iuVlJ.js",
     "name": "OrderCard",
     "imports": [
       "_index-BOnQTV8N.js",
@@ -2838,7 +2838,7 @@
     ]
   },
   "resources/js/Kitchen/Kitchen.jsx": {
-    "file": "assets/Kitchen-BiP4ZfIF.js",
+    "file": "assets/Kitchen-CabW3jXe.js",
     "name": "Kitchen",
     "src": "resources/js/Kitchen/Kitchen.jsx",
     "isEntry": true,
@@ -2849,7 +2849,7 @@
       "_CreateReactScript-DFqTQv-e.js",
       "_main-BH5j8D81.js",
       "resources/js/Utils/ReactAppend.jsx",
-      "_OrderCard-P_j4G9Qr.js",
+      "_OrderCard-G59iuVlJ.js",
       "_BasicRest-DAfE3q42.js",
       "_index-yBjzXJbu.js",
       "__commonjsHelpers-D6-XlEtG.js",
@@ -3007,7 +3007,7 @@
     ]
   },
   "resources/js/Restaurant/Kitchen.jsx": {
-    "file": "assets/Kitchen-BwHNbL5V.js",
+    "file": "assets/Kitchen-DkuoXOJm.js",
     "name": "Kitchen",
     "src": "resources/js/Restaurant/Kitchen.jsx",
     "isEntry": true,
@@ -3016,7 +3016,7 @@
       "_Base-Bq29MM6U.js",
       "resources/js/Utils/ReactAppend.jsx",
       "_CreateReactScript-DFqTQv-e.js",
-      "_OrderCard-P_j4G9Qr.js",
+      "_OrderCard-G59iuVlJ.js",
       "_index-BOnQTV8N.js",
       "_OrdersRest-BBNyo9w8.js",
       "_index-yBjzXJbu.js",
@@ -3036,7 +3036,7 @@
     ]
   },
   "resources/js/Restaurant/Orders.jsx": {
-    "file": "assets/Orders-C3WEgrdd.js",
+    "file": "assets/Orders-COHYoowQ.js",
     "name": "Orders",
     "src": "resources/js/Restaurant/Orders.jsx",
     "isEntry": true,
@@ -3045,13 +3045,13 @@
       "_Base-Bq29MM6U.js",
       "resources/js/Utils/ReactAppend.jsx",
       "_CreateReactScript-DFqTQv-e.js",
-      "_OrderCard-P_j4G9Qr.js",
+      "_OrderCard-G59iuVlJ.js",
       "_index-BOnQTV8N.js",
       "_OrdersRest-BBNyo9w8.js",
       "_Number2Currency-e57Tgsuk.js",
       "_Table-BNq1-l85.js",
-      "resources/js/Components/Adminto/Dx/DxBox.jsx",
       "_DxButton-DV0H-ZcL.js",
+      "_sweetalert2.esm.all-CH_YVA8w.js",
       "_index-yBjzXJbu.js",
       "_Logout-BhGEl0E_.js",
       "_main-BH5j8D81.js",

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Mobile\AddressController;
 use App\Http\Controllers\Mobile\AuthController;
 use App\Http\Controllers\Mobile\CategoryController;
+use App\Http\Controllers\Mobile\FavoriteController;
 use App\Http\Controllers\Mobile\RestaurantController;
 use App\Http\Controllers\Mobile\PaymentMethodController;
 use App\Http\Controllers\Mobile\ItemController;
@@ -48,6 +49,10 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/orders/deliver/{orderId}', [OrderController::class, 'deliver']);
     Route::post('/orders', [OrderController::class, 'save']);
     Route::post('/orders/paginate', [OrderController::class, 'paginate']);
+
+    Route::get('/favorites/{itemId}', [FavoriteController::class, 'isFavorite']);
+    Route::post('/favorites', [FavoriteController::class, 'toggle']);
+    Route::post('/favorites/paginate', [FavoriteController::class, 'paginate']);
 
     Route::middleware('can:Delivery')->group(function () {
         Route::patch('/orders/delivery-status', [OrderController::class, 'deliveryStatus']);

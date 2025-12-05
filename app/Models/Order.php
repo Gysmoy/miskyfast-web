@@ -32,6 +32,9 @@ class Order extends Model
         'delivery_latitude',
         'delivery_longitude',
         'total_amount',
+        'delivery_restaurant_route',
+        'delivery_client_route',
+        'rejected_reason'
     ];
 
     /**
@@ -42,6 +45,8 @@ class Order extends Model
     protected $casts = [
         'location' => 'array',
         'total_amount' => 'decimal:2',
+        'delivery_restaurant_route' => 'array',
+        'delivery_client_route' => 'array',
     ];
 
     public function client()

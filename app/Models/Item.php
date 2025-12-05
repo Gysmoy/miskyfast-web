@@ -27,6 +27,8 @@ class Item extends Model
         'presentations' => 'array',
     ];
 
+    protected $appends = ['is_favorite'];
+
     public function category()
     {
         return $this->hasOne(Category::class, 'id', 'category_id');
@@ -35,5 +37,15 @@ class Item extends Model
     public function restaurant()
     {
         return $this->hasOne(Restaurant::class, 'id', 'restaurant_id');
+    }
+
+    public function favorites()
+    {
+        return $this->hasMany(Favorite::class, 'item_id', 'id');
+    }
+
+    public function getIsFavoriteAttribute()
+    {
+        return $this->favorites()->where('user_id', auth()->user()->id)->exists();
     }
 }

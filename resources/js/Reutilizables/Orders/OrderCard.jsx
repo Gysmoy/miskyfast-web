@@ -1,6 +1,6 @@
 import Number2Currency from "../../Utils/Number2Currency"
 
-const OrderCard = ({ confirmText, cancelText, onConfirm, onCancel, showContact = false, showTotal = false, ...order }) => {
+const OrderCard = ({ confirmText, cancelText, onConfirm, onCancel, showContact = false, showDelivery = false, showTotal = false, ...order }) => {
     return <div className="card mb-2" style={{ borderLeft: `4px solid ${order?.status?.color}` }}>
         <div className="card-body p-2">
             <div className="d-flex justify-content-between align-items-center gap-2 mb-1">
@@ -44,6 +44,15 @@ const OrderCard = ({ confirmText, cancelText, onConfirm, onCancel, showContact =
                     }
                 </li>)}
             </ul>
+            {
+                showDelivery && <>
+                    <hr className="my-2" />
+                    <div className="d-flex gap-2 align-items-center">
+                        <span className="fw-semibold">Entregador:</span>
+                        <span className="text-truncate">{order.delivery?.name} {order.delivery?.lastname}</span>
+                    </div>
+                </>
+            }
         </div>
     </div>
 }

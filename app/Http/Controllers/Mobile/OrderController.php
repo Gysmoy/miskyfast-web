@@ -130,7 +130,7 @@ class OrderController extends BasicController
             DB::commit();
 
             // Ahora SÍ el pedido está "completo"
-            $order->load(['client', 'restaurant', 'delivery', 'status', 'deliveryStatus', 'details']);
+            $order->load(['client', 'restaurant', 'delivery', 'status', 'deliveryStatus', 'details', 'paymentMethod']);
             EventController::notify('order.created', $order->toArray(), ['restaurant_id' => $order->restaurant_id,]);
             EventController::notify('order.created', $order->toArray(), ['user_id' => $order->client_id,]);
 
@@ -153,7 +153,7 @@ class OrderController extends BasicController
     {
         $response = Response::simpleTryCatch(function () use ($mode) {
             $query = Order::select('orders.*')
-                ->with(['client', 'restaurant', 'delivery', 'status', 'deliveryStatus', 'details'])
+                ->with(['client', 'restaurant', 'delivery', 'status', 'deliveryStatus', 'details', 'paymentMethod'])
                 ->join('statuses as status', 'orders.status_id', '=', 'status.id')
                 ->join('statuses as delivery_status', 'orders.delivery_status_id', '=', 'delivery_status.id')
                 ->where(function ($q) {
@@ -218,13 +218,18 @@ class OrderController extends BasicController
                 if ($orderJpa->delivery_status_id !== 'a0618dce-5d1b-4fae-a0bb-735d5c85270b') {
                     throw new Exception('No puedes marcar la ruta al restaurante sin estar previamente asignado');
                 }
+                $orderJpa->delivery_restaurant_route = $request->routeData;
             } elseif ($newStatus === 'a0618dce-61c4-46b1-813e-338332d2d5de') {
                 if ($orderJpa->delivery_status_id !== 'a0618dce-5fe8-4aa8-92c4-1797f9bc5618') {
                     throw new Exception('No puedes marcar la ruta al cliente si el pedido no ha sido recogido');
                 }
+                $orderJpa->delivery_client_route = $request->routeData;
             } elseif (in_array($newStatus, ['a0618dce-62e9-4720-8e1f-10f3208c357e', 'a0618dce-63fc-4e31-8a53-c6dd39ed54d3'])) {
                 if ($orderJpa->delivery_status_id !== 'a0618dce-61c4-46b1-813e-338332d2d5de') {
                     throw new Exception('No puedes marcar el pedido como entregado/no entregado');
+                }
+                if ($newStatus === 'a0618dce-63fc-4e31-8a53-c6dd39ed54d3' && $request->rejected_reason) {
+                    $orderJpa->rejected_reason = $request->rejected_reason;
                 }
             }
 
