@@ -28,6 +28,10 @@ export default {
             fontStyle: {
                 'oblique-light': 'oblique 5deg',
             },
+            colors: {
+                primary: '#FF4D4F',
+                secondary: '#facc15'
+            }
         },
     },
     plugins: [

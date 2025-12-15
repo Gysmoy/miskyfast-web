@@ -24,7 +24,7 @@ const Brands = () => {
         <section className="py-16 bg-white relative overflow-hidden">
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 ">
                 <div className="text-center animate-fade-in-up">
-                    <div className="inline-flex items-center gap-2 bg-gradient-to-r from-red-600 to-yellow-400 text-white px-6 py-3 rounded-full mb-4">
+                    <div className="inline-flex items-center gap-2 bg-gradient-to-r from-primary to-secondary text-white px-6 py-3 rounded-full mb-4">
                         <Icon path={mdiStoreOutline} size={1} className="w-5 h-5" />
                         <span className="font-bold">Marcas Asociadas</span>
                     </div>

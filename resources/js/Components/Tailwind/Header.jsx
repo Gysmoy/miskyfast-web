@@ -5,6 +5,7 @@ import {
     mdiClose,
     mdiSilverwareForkKnife
 } from "@mdi/js";
+import Global from "../../Utils/Global";
 
 const Header = () => {
     const [scrolled, setScrolled] = useState(false);
@@ -28,14 +29,10 @@ const Header = () => {
                     {/* Logo con rebote */}
                     <div className="flex items-center gap-3 group cursor-pointer" bis_skin_checked="1">
                         <div
-                            className={`p-2 rounded-xl transition-all duration-300 ${scrolled ? "bg-gradient-to-r from-red-600 to-yellow-400" : "bg-white/20 backdrop-blur-md"} ${scrolled ? "scale-90" : "scale-100 group-hover:scale-110"}`}
+                            className={`p-2 rounded-xl transition-all duration-300 ${scrolled ? "bg-primary" : "bg-white/20 backdrop-blur-md"} ${scrolled ? "scale-90" : "scale-100 group-hover:scale-110"}`}
                             bis_skin_checked="1"
                         >
-                            <Icon
-                                path={mdiSilverwareForkKnife}
-                                size={1.5}
-                                className={`transition-all duration-500 ease-out text-white`}
-                            />
+                            <img src="/assets/img/isotipo.svg" alt={Global.APP_NAME} className="h-8" />
                         </div>
                         <div bis_skin_checked="1">
                             <h1
