@@ -13,7 +13,7 @@ const Banner = () => {
             <div class="absolute inset-0 bg-black/20">
             </div>
             <div class="absolute inset-0 opacity-10" style={{
-                backgroundImage: "url(/assets/img/main-burger.jpeg)",
+                backgroundImage: "url(/assets/img/backgrounds/main-burger.jpeg)",
                 backgroundSize: 'cover',
                 backgroundPosition: 'center center'
             }}>

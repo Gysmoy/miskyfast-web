@@ -9,7 +9,7 @@ const Menu = ({ session, hasRole }) => {
   const mainRole = session.roles[0];
 
   return (
-    <div className= "left-side-menu">
+    <div className="left-side-menu">
       <div className="h-100" data-simplebar>
         <div className="user-box text-center">
           <img
@@ -102,6 +102,10 @@ const Menu = ({ session, hasRole }) => {
                 <MenuItem href="/admin/users/delivery" icon="mdi mdi-moped">Deliveries</MenuItem>
                 <MenuItem href="/admin/users/client" icon="mdi mdi-account-multiple">Clientes</MenuItem>
               </MenuItemContainer>
+
+              <li className="menu-title">Landing Page</li>
+              <MenuItem href="/admin/testimonials" icon="mdi mdi-comment-text">Testimonios</MenuItem>
+              <MenuItem href="/admin/brands" icon="mdi mdi-tag-multiple">Marcas asociadas</MenuItem>
 
               <li className="menu-title">Aplicación</li>
 

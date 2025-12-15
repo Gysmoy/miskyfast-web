@@ -65,7 +65,7 @@ const Login = ({ }) => {
             <div className="col-md-8 col-lg-6 col-xl-4">
               <div className="text-center">
                 <Link href="/">
-                  <img src='/assets/resources/logo.png' alt="" className="mx-auto" style={{ height: '40px' }} onError={(e) => {
+                  <img src='/assets/img/isotipo.svg' alt="" className="mx-auto" style={{ height: '40px' }} onError={(e) => {
                     e.target.onerror = null;
                     e.target.src = '/assets/img/logo-bk.svg';
                   }} />
