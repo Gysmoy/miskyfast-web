@@ -1,60 +1,164 @@
 import React from "react";
+import Icon from "@mdi/react";
+import {
+  mdiFacebook,
+  mdiInstagram,
+  mdiTwitter,
+  mdiYoutube,
+  mdiFileDocumentOutline,
+  mdiBookOutline,
+  mdiMapMarker,
+  mdiPhone,
+  mdiEmail,
+  mdiSilverwareForkKnife,
+} from "@mdi/js";
 
 const Footer = ({ }) => {
-    return <footer className="bg-white border-t border-gray-200 py-12">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid md:grid-cols-3 gap-12">
-                <div>
-                    <div className="flex items-center space-x-3 mb-4">
-                        <div className="bg-orange-500 p-2 rounded-lg">
-                            <span className="mdi mdi-truck text-white text-2xl leading-none"></span>
-                        </div>
-                        <span className="text-xl font-bold text-gray-900">MiskyFast</span>
-                    </div>
-                    <p className="text-gray-600 text-sm leading-relaxed">
-                        Conectamos restaurantes, clientes y repartidores para hacer el delivery más rápido y eficiente.
-                    </p>
-                </div>
-
-                <div>
-                    <h3 className="font-semibold text-gray-900 mb-4">Contacto</h3>
-                    <div className="space-y-3">
-                        <div className="flex items-center space-x-3">
-                            <span className="mdi mdi-phone text-gray-400 text-base leading-none"></span>
-                            <span className="text-gray-600 text-sm">+51 999 888 777</span>
-                        </div>
-                        <div className="flex items-center space-x-3">
-                            <span className="mdi mdi-email text-gray-400 text-base leading-none"></span>
-                            <span className="text-gray-600 text-sm">contacto@miskyfast.com</span>
-                        </div>
-                        <div className="flex items-center space-x-3">
-                            <span className="mdi mdi-map-marker text-gray-400 text-base leading-none"></span>
-                            <span className="text-gray-600 text-sm">Lima, Perú</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <h3 className="font-semibold text-gray-900 mb-4">Síguenos</h3>
-                    <div className="flex space-x-3">
-                        <a href="#" className="bg-gray-100 p-2 rounded-lg hover:bg-gray-200 transition">
-                            <span className="mdi mdi-facebook text-gray-600 text-xl leading-none"></span>
-                        </a>
-                        <a href="#" className="bg-gray-100 p-2 rounded-lg hover:bg-gray-200 transition">
-                            <span className="mdi mdi-instagram text-gray-600 text-xl leading-none"></span>
-                        </a>
-                        <a href="#" className="bg-gray-100 p-2 rounded-lg hover:bg-gray-200 transition">
-                            <span className="mdi mdi-twitter text-gray-600 text-xl leading-none"></span>
-                        </a>
-                    </div>
-                </div>
+  return (
+    <footer className="bg-gray-900 text-white">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="py-12 grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="space-y-4">
+            <div className="flex items-center gap-3">
+              <div className="bg-red-600 p-2 rounded-lg">
+                <Icon path={mdiSilverwareForkKnife} size={1.2} className="text-white" />
+              </div>
+              <div>
+                <h3 className="text-xl font-semibold">Misky Fast</h3>
+                <p className="text-gray-400 text-sm">Delivery de Comida</p>
+              </div>
             </div>
-
-            <div className="border-t border-gray-200 mt-10 pt-8 text-center">
-                <p className="text-gray-500 text-sm">&copy; 2025 MiskyFast. Todos los derechos reservados.</p>
+            <p className="text-gray-400 leading-relaxed">
+              La forma más rápida y confiable de recibir tu comida favorita. Paga contra entrega y disfruta.
+            </p>
+            <div className="flex gap-2">
+              <a
+                href="https://facebook.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-gray-700 hover:bg-red-600 p-2 rounded-full transition"
+              >
+                <Icon path={mdiFacebook} size={1} className="text-white" />
+              </a>
+              <a
+                href="https://instagram.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-gray-700 hover:bg-red-600 p-2 rounded-full transition"
+              >
+                <Icon path={mdiInstagram} size={1} className="text-white" />
+              </a>
+              <a
+                href="https://twitter.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-gray-700 hover:bg-red-600 p-2 rounded-full transition"
+              >
+                <Icon path={mdiTwitter} size={1} className="text-white" />
+              </a>
+              <a
+                href="https://youtube.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="bg-gray-700 hover:bg-red-600 p-2 rounded-full transition"
+              >
+                <Icon path={mdiYoutube} size={1} className="text-white" />
+              </a>
             </div>
+          </div>
+
+          <div>
+            <h4 className="text-lg font-semibold mb-4 text-yellow-400">Enlaces Rápidos</h4>
+            <ul className="space-y-2">
+              <li>
+                <a href="#inicio" className="text-gray-400 hover:text-white transition">Inicio</a>
+              </li>
+              <li>
+                <a href="#como-funciona" className="text-gray-400 hover:text-white transition">Cómo Funciona</a>
+              </li>
+              <li>
+                <a href="#categorias" className="text-gray-400 hover:text-white transition">Categorías</a>
+              </li>
+              <li>
+                <a href="#testimonios" className="text-gray-400 hover:text-white transition">Testimonios</a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-lg font-semibold mb-4 text-yellow-400">Legal</h4>
+            <ul className="space-y-2">
+              <li>
+                <a href="#terminos" className="text-gray-400 hover:text-white transition flex items-center gap-2">
+                  <Icon path={mdiFileDocumentOutline} size={0.9} className="text-red-600" />
+                  Términos y Condiciones
+                </a>
+              </li>
+              <li>
+                <a href="#privacidad" className="text-gray-400 hover:text-white transition flex items-center gap-2">
+                  <Icon path={mdiFileDocumentOutline} size={0.9} className="text-red-600" />
+                  Política de Privacidad
+                </a>
+              </li>
+              <li>
+                <a href="#reclamaciones" className="text-gray-400 hover:text-white transition flex items-center gap-2">
+                  <Icon path={mdiBookOutline} size={0.9} className="text-red-600" />
+                  Libro de Reclamaciones
+                </a>
+              </li>
+              <li>
+                <a href="#cookies" className="text-gray-400 hover:text-white transition flex items-center gap-2">
+                  <Icon path={mdiFileDocumentOutline} size={0.9} className="text-red-600" />
+                  Política de Cookies
+                </a>
+              </li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-lg font-semibold mb-4 text-yellow-400">Contacto</h4>
+            <ul className="space-y-3">
+              <li className="flex items-start gap-2 text-gray-400">
+                <Icon path={mdiMapMarker} size={1} className="text-red-600 mt-1" />
+                <span>Av. Principal 123, Lima, Perú</span>
+              </li>
+              <li className="flex items-center gap-2 text-gray-400">
+                <Icon path={mdiPhone} size={1} className="text-red-600" />
+                <a href="tel:+51999999999" className="hover:text-white transition">+51 999 999 999</a>
+              </li>
+              <li className="flex items-center gap-2 text-gray-400">
+                <Icon path={mdiEmail} size={1} className="text-red-600" />
+                <a href="mailto:contacto@miskyfast.com" className="hover:text-white transition">contacto@miskyfast.com</a>
+              </li>
+            </ul>
+            <div className="mt-4 p-3 bg-gray-800 rounded-lg">
+              <p className="text-sm text-gray-400">Horario de Atención</p>
+              <p className="text-white font-semibold">24/7 - Todos los días</p>
+            </div>
+          </div>
         </div>
+
+        <div className="border-t border-gray-700 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-gray-400 text-sm">2025 Misky Fast. Todos los derechos reservados.</p>
+          <div className="flex items-center gap-4 text-sm text-gray-400">
+            <a href="#terminos" className="hover:text-white transition">Términos</a>
+            <a href="#privacidad" className="hover:text-white transition">Privacidad</a>
+            <a href="#reclamaciones" className="hover:text-white transition">Reclamaciones</a>
+          </div>
+        </div>
+
+        <div className="pb-6 text-center">
+          <a
+            href="#reclamaciones"
+            className="inline-flex items-center gap-2 bg-red-600 hover:bg-red-700 px-4 py-2 rounded-full text-sm font-semibold transition"
+          >
+            <Icon path={mdiBookOutline} size={0.9} />
+            Libro de Reclamaciones Online
+          </a>
+        </div>
+      </div>
     </footer>
+  );
 };
 
 export default Footer;

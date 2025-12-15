@@ -2486,158 +2486,78 @@
       "_index-B6ujFmsw.js"
     ]
   },
-  "resources/js/Components/Home/AboutTrasciende.jsx": {
-    "file": "assets/AboutTrasciende-C0QznGDM.js",
-    "name": "AboutTrasciende",
-    "src": "resources/js/Components/Home/AboutTrasciende.jsx",
+  "resources/js/Components/Home/Banner.jsx": {
+    "file": "assets/Banner-C3iMmXZq.js",
+    "name": "Banner",
+    "src": "resources/js/Components/Home/Banner.jsx",
     "isEntry": true,
     "imports": [
       "resources/js/Components/Adminto/Menu/MenuItemHorizontal.jsx",
-      "_index-BOnQTV8N.js",
-      "_index-yBjzXJbu.js",
-      "__commonjsHelpers-D6-XlEtG.js"
+      "_index-yBjzXJbu.js"
     ]
   },
-  "resources/js/Components/Home/Articles.jsx": {
-    "file": "assets/Articles-YEJrIFdM.js",
-    "name": "Articles",
-    "src": "resources/js/Components/Home/Articles.jsx",
+  "resources/js/Components/Home/Categories.jsx": {
+    "file": "assets/Categories-C3iMmXZq.js",
+    "name": "Categories",
+    "src": "resources/js/Components/Home/Categories.jsx",
     "isEntry": true,
     "imports": [
       "resources/js/Components/Adminto/Menu/MenuItemHorizontal.jsx",
-      "_index-BOnQTV8N.js",
-      "resources/js/Components/About/Strengths.jsx",
-      "_index-yBjzXJbu.js",
-      "__commonjsHelpers-D6-XlEtG.js"
-    ],
-    "css": [
-      "Articles.css",
-      "swiper.css"
+      "_index-yBjzXJbu.js"
     ]
   },
-  "resources/js/Components/Home/Courses.jsx": {
-    "file": "assets/Courses-C0QznGDM.js",
-    "name": "Courses",
-    "src": "resources/js/Components/Home/Courses.jsx",
+  "resources/js/Components/Home/HowItWorks.jsx": {
+    "file": "assets/HowItWorks-C3iMmXZq.js",
+    "name": "HowItWorks",
+    "src": "resources/js/Components/Home/HowItWorks.jsx",
     "isEntry": true,
     "imports": [
       "resources/js/Components/Adminto/Menu/MenuItemHorizontal.jsx",
-      "_index-BOnQTV8N.js",
-      "_index-yBjzXJbu.js",
-      "__commonjsHelpers-D6-XlEtG.js"
-    ]
-  },
-  "resources/js/Components/Home/Indicators.jsx": {
-    "file": "assets/Indicators-C0QznGDM.js",
-    "name": "Indicators",
-    "src": "resources/js/Components/Home/Indicators.jsx",
-    "isEntry": true,
-    "imports": [
-      "resources/js/Components/Adminto/Menu/MenuItemHorizontal.jsx",
-      "_index-BOnQTV8N.js",
-      "_index-yBjzXJbu.js",
-      "__commonjsHelpers-D6-XlEtG.js"
-    ]
-  },
-  "resources/js/Components/Home/MoreCourses.jsx": {
-    "file": "assets/MoreCourses-BDE8o-og.js",
-    "name": "MoreCourses",
-    "src": "resources/js/Components/Home/MoreCourses.jsx",
-    "isEntry": true,
-    "imports": [
-      "resources/js/Components/Adminto/Menu/MenuItemHorizontal.jsx",
-      "_index-BOnQTV8N.js",
-      "resources/js/Components/About/Strengths.jsx",
-      "resources/js/Components/Home/Articles.jsx",
-      "_index-yBjzXJbu.js",
-      "__commonjsHelpers-D6-XlEtG.js"
-    ],
-    "css": [
-      "swiper.css"
-    ]
-  },
-  "resources/js/Components/Home/Sliders.jsx": {
-    "file": "assets/Sliders-C0QznGDM.js",
-    "name": "Sliders",
-    "src": "resources/js/Components/Home/Sliders.jsx",
-    "isEntry": true,
-    "imports": [
-      "resources/js/Components/Adminto/Menu/MenuItemHorizontal.jsx",
-      "_index-BOnQTV8N.js",
-      "_index-yBjzXJbu.js",
-      "__commonjsHelpers-D6-XlEtG.js"
-    ]
-  },
-  "resources/js/Components/Home/Subscribe.jsx": {
-    "file": "assets/Subscribe-C0QznGDM.js",
-    "name": "Subscribe",
-    "src": "resources/js/Components/Home/Subscribe.jsx",
-    "isEntry": true,
-    "imports": [
-      "resources/js/Components/Adminto/Menu/MenuItemHorizontal.jsx",
-      "_index-BOnQTV8N.js",
-      "_index-yBjzXJbu.js",
-      "__commonjsHelpers-D6-XlEtG.js"
+      "_index-yBjzXJbu.js"
     ]
   },
   "resources/js/Components/Home/Testimonies.jsx": {
-    "file": "assets/Testimonies-CHU454hz.js",
+    "file": "assets/Testimonies-BVfm9x2n.js",
     "name": "Testimonies",
     "src": "resources/js/Components/Home/Testimonies.jsx",
     "isEntry": true,
     "imports": [
       "resources/js/Components/Adminto/Menu/MenuItemHorizontal.jsx",
-      "_index-BOnQTV8N.js",
-      "resources/js/Components/About/Strengths.jsx",
-      "_index-yBjzXJbu.js",
-      "__commonjsHelpers-D6-XlEtG.js"
-    ],
-    "css": [
-      "swiper.css"
+      "__commonjsHelpers-D6-XlEtG.js",
+      "_index-Chjiymov.js",
+      "_index-yBjzXJbu.js"
     ]
-  },
-  "resources/js/Components/Home/Weare.jsx": {
-    "file": "assets/Weare-C0QznGDM.js",
-    "name": "Weare",
-    "src": "resources/js/Components/Home/Weare.jsx",
-    "isEntry": true,
-    "imports": [
-      "resources/js/Components/Adminto/Menu/MenuItemHorizontal.jsx",
-      "_index-BOnQTV8N.js",
-      "_index-yBjzXJbu.js",
-      "__commonjsHelpers-D6-XlEtG.js"
-    ]
-  },
-  "resources/js/Components/Home/images/testimonieImage.png": {
-    "file": "testimonieImage.png",
-    "src": "resources/js/Components/Home/images/testimonieImage.png"
   },
   "resources/js/Components/Tailwind/Base.jsx": {
-    "file": "assets/Base-C0QznGDM.js",
+    "file": "assets/Base-Dd20gH1c.js",
     "name": "Base",
     "src": "resources/js/Components/Tailwind/Base.jsx",
     "isEntry": true,
     "imports": [
       "resources/js/Components/Adminto/Menu/MenuItemHorizontal.jsx",
       "_index-BOnQTV8N.js",
+      "resources/js/Components/Home/Testimonies.jsx",
       "_index-yBjzXJbu.js",
-      "__commonjsHelpers-D6-XlEtG.js"
+      "__commonjsHelpers-D6-XlEtG.js",
+      "_index-Chjiymov.js"
     ]
   },
   "resources/js/Components/Tailwind/Footer.jsx": {
-    "file": "assets/Footer-CZJgN_Wr.js",
+    "file": "assets/Footer-Bjotd6CR.js",
     "name": "Footer",
     "src": "resources/js/Components/Tailwind/Footer.jsx",
     "isEntry": true,
     "imports": [
       "resources/js/Components/Adminto/Menu/MenuItemHorizontal.jsx",
       "_index-BOnQTV8N.js",
+      "resources/js/Components/Home/Testimonies.jsx",
       "_index-yBjzXJbu.js",
-      "__commonjsHelpers-D6-XlEtG.js"
+      "__commonjsHelpers-D6-XlEtG.js",
+      "_index-Chjiymov.js"
     ]
   },
   "resources/js/Components/Tailwind/Header.jsx": {
-    "file": "assets/Header-C0QznGDM.js",
+    "file": "assets/Header-CCYQgzv-.js",
     "name": "Header",
     "src": "resources/js/Components/Tailwind/Header.jsx",
     "isEntry": true,
@@ -2816,7 +2736,7 @@
     "isEntry": true
   },
   "resources/js/Home.jsx": {
-    "file": "assets/Home-Chps8MwC.js",
+    "file": "assets/Home-CduNB7YA.js",
     "name": "Home",
     "src": "resources/js/Home.jsx",
     "isEntry": true,
@@ -2824,10 +2744,13 @@
       "resources/js/Components/Adminto/Menu/MenuItemHorizontal.jsx",
       "_index-BOnQTV8N.js",
       "resources/js/Utils/ReactAppend.jsx",
+      "resources/js/Components/Tailwind/Base.jsx",
+      "resources/js/Components/Home/Testimonies.jsx",
       "_CreateReactScript-DFqTQv-e.js",
       "_index-yBjzXJbu.js",
       "__commonjsHelpers-D6-XlEtG.js",
       "_index-B6ujFmsw.js",
+      "_index-Chjiymov.js",
       "_index.esm-BBRthS-9.js",
       "____vite-browser-external_commonjs-proxy-DDYoOVPM.js",
       "_main-BH5j8D81.js"
