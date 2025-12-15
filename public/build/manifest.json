@@ -2496,6 +2496,18 @@
       "_index-yBjzXJbu.js"
     ]
   },
+  "resources/js/Components/Home/Brands.jsx": {
+    "file": "assets/Brands-BVfm9x2n.js",
+    "name": "Brands",
+    "src": "resources/js/Components/Home/Brands.jsx",
+    "isEntry": true,
+    "imports": [
+      "resources/js/Components/Adminto/Menu/MenuItemHorizontal.jsx",
+      "__commonjsHelpers-D6-XlEtG.js",
+      "_index-Chjiymov.js",
+      "_index-yBjzXJbu.js"
+    ]
+  },
   "resources/js/Components/Home/Categories.jsx": {
     "file": "assets/Categories-C3iMmXZq.js",
     "name": "Categories",
@@ -2517,55 +2529,58 @@
     ]
   },
   "resources/js/Components/Home/Testimonies.jsx": {
-    "file": "assets/Testimonies-BVfm9x2n.js",
+    "file": "assets/Testimonies-Cd8HNfZK.js",
     "name": "Testimonies",
     "src": "resources/js/Components/Home/Testimonies.jsx",
     "isEntry": true,
     "imports": [
       "resources/js/Components/Adminto/Menu/MenuItemHorizontal.jsx",
+      "resources/js/Components/Home/Brands.jsx",
+      "_index-yBjzXJbu.js",
       "__commonjsHelpers-D6-XlEtG.js",
-      "_index-Chjiymov.js",
-      "_index-yBjzXJbu.js"
+      "_index-Chjiymov.js"
     ]
   },
   "resources/js/Components/Tailwind/Base.jsx": {
-    "file": "assets/Base-Bjotd6CR.js",
+    "file": "assets/Base-C8lmXXXy.js",
     "name": "Base",
     "src": "resources/js/Components/Tailwind/Base.jsx",
     "isEntry": true,
     "imports": [
       "resources/js/Components/Adminto/Menu/MenuItemHorizontal.jsx",
       "_index-BOnQTV8N.js",
-      "resources/js/Components/Home/Testimonies.jsx",
+      "resources/js/Components/Home/Brands.jsx",
       "_index-yBjzXJbu.js",
       "__commonjsHelpers-D6-XlEtG.js",
       "_index-Chjiymov.js"
     ]
   },
   "resources/js/Components/Tailwind/Footer.jsx": {
-    "file": "assets/Footer-Bjotd6CR.js",
+    "file": "assets/Footer-C8lmXXXy.js",
     "name": "Footer",
     "src": "resources/js/Components/Tailwind/Footer.jsx",
     "isEntry": true,
     "imports": [
       "resources/js/Components/Adminto/Menu/MenuItemHorizontal.jsx",
       "_index-BOnQTV8N.js",
-      "resources/js/Components/Home/Testimonies.jsx",
+      "resources/js/Components/Home/Brands.jsx",
       "_index-yBjzXJbu.js",
       "__commonjsHelpers-D6-XlEtG.js",
       "_index-Chjiymov.js"
     ]
   },
   "resources/js/Components/Tailwind/Header.jsx": {
-    "file": "assets/Header-C0QznGDM.js",
+    "file": "assets/Header-C8lmXXXy.js",
     "name": "Header",
     "src": "resources/js/Components/Tailwind/Header.jsx",
     "isEntry": true,
     "imports": [
       "resources/js/Components/Adminto/Menu/MenuItemHorizontal.jsx",
       "_index-BOnQTV8N.js",
+      "resources/js/Components/Home/Brands.jsx",
       "_index-yBjzXJbu.js",
-      "__commonjsHelpers-D6-XlEtG.js"
+      "__commonjsHelpers-D6-XlEtG.js",
+      "_index-Chjiymov.js"
     ]
   },
   "resources/js/Components/accordion/Accordion.jsx": {
@@ -2736,7 +2751,7 @@
     "isEntry": true
   },
   "resources/js/Home.jsx": {
-    "file": "assets/Home-DkPxZAVc.js",
+    "file": "assets/Home-CfIKrbec.js",
     "name": "Home",
     "src": "resources/js/Home.jsx",
     "isEntry": true,
@@ -2744,7 +2759,7 @@
       "resources/js/Components/Adminto/Menu/MenuItemHorizontal.jsx",
       "_index-BOnQTV8N.js",
       "resources/js/Utils/ReactAppend.jsx",
-      "resources/js/Components/Home/Testimonies.jsx",
+      "resources/js/Components/Home/Brands.jsx",
       "_CreateReactScript-DFqTQv-e.js",
       "_index-yBjzXJbu.js",
       "__commonjsHelpers-D6-XlEtG.js",
