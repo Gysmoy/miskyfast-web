@@ -2529,7 +2529,7 @@
     ]
   },
   "resources/js/Components/Tailwind/Base.jsx": {
-    "file": "assets/Base-Dd20gH1c.js",
+    "file": "assets/Base-Bjotd6CR.js",
     "name": "Base",
     "src": "resources/js/Components/Tailwind/Base.jsx",
     "isEntry": true,
@@ -2557,7 +2557,7 @@
     ]
   },
   "resources/js/Components/Tailwind/Header.jsx": {
-    "file": "assets/Header-CCYQgzv-.js",
+    "file": "assets/Header-C0QznGDM.js",
     "name": "Header",
     "src": "resources/js/Components/Tailwind/Header.jsx",
     "isEntry": true,
@@ -2736,7 +2736,7 @@
     "isEntry": true
   },
   "resources/js/Home.jsx": {
-    "file": "assets/Home-CduNB7YA.js",
+    "file": "assets/Home-DkPxZAVc.js",
     "name": "Home",
     "src": "resources/js/Home.jsx",
     "isEntry": true,
@@ -2744,7 +2744,6 @@
       "resources/js/Components/Adminto/Menu/MenuItemHorizontal.jsx",
       "_index-BOnQTV8N.js",
       "resources/js/Utils/ReactAppend.jsx",
-      "resources/js/Components/Tailwind/Base.jsx",
       "resources/js/Components/Home/Testimonies.jsx",
       "_CreateReactScript-DFqTQv-e.js",
       "_index-yBjzXJbu.js",
