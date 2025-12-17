@@ -2521,6 +2521,18 @@
       "_index-yBjzXJbu.js"
     ]
   },
+  "resources/js/Components/Home/DriverModal.jsx": {
+    "file": "assets/DriverModal-C0QznGDM.js",
+    "name": "DriverModal",
+    "src": "resources/js/Components/Home/DriverModal.jsx",
+    "isEntry": true,
+    "imports": [
+      "resources/js/Components/Adminto/Menu/MenuItemHorizontal.jsx",
+      "_index-BOnQTV8N.js",
+      "_index-yBjzXJbu.js",
+      "__commonjsHelpers-D6-XlEtG.js"
+    ]
+  },
   "resources/js/Components/Home/HowItWorks.jsx": {
     "file": "assets/HowItWorks-BjEecTRv.js",
     "name": "HowItWorks",
@@ -2545,6 +2557,18 @@
   "resources/js/Components/Home/Images/image-3.webp": {
     "file": "image-3.webp",
     "src": "resources/js/Components/Home/Images/image-3.webp"
+  },
+  "resources/js/Components/Home/RestaurantModal.jsx": {
+    "file": "assets/RestaurantModal-C0QznGDM.js",
+    "name": "RestaurantModal",
+    "src": "resources/js/Components/Home/RestaurantModal.jsx",
+    "isEntry": true,
+    "imports": [
+      "resources/js/Components/Adminto/Menu/MenuItemHorizontal.jsx",
+      "_index-BOnQTV8N.js",
+      "_index-yBjzXJbu.js",
+      "__commonjsHelpers-D6-XlEtG.js"
+    ]
   },
   "resources/js/Components/Home/Testimonies.jsx": {
     "file": "assets/Testimonies-BjEecTRv.js",
@@ -2769,7 +2793,7 @@
     "isEntry": true
   },
   "resources/js/Home.jsx": {
-    "file": "assets/Home-CMSTUQgM.js",
+    "file": "assets/Home-Bowfrs-l.js",
     "name": "Home",
     "src": "resources/js/Home.jsx",
     "isEntry": true,

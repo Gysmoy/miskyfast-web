@@ -7,7 +7,7 @@ import {
 } from "@mdi/js";
 import Global from "../../Utils/Global";
 
-const Header = () => {
+const Header = ({ onOpenRestaurantForm, onOpenDriverForm }) => {
     const [scrolled, setScrolled] = useState(false);
     const [menuOpen, setMenuOpen] = useState(false);
 
@@ -52,26 +52,20 @@ const Header = () => {
 
                     {/* Navegación con rebote */}
                     <nav className="hidden md:flex items-center gap-8">
-                        <a
-                            href="#home"
-                            className={`font-medium transition-all duration-300 ease-out hover:scale-110 ${scrolled ? "text-gray-700 hover:text-red-600" : "text-white hover:text-yellow-300"}`}
-                        >Inicio</a>
-                        <a
-                            href="#howitworks"
-                            className={`font-medium transition-all duration-300 ease-out hover:scale-110 ${scrolled ? "text-gray-700 hover:text-red-600" : "text-white hover:text-yellow-300"}`}
-                        >
+                        <a href="#home"
+                            className={`font-medium transition-all duration-300 ease-out hover:scale-110 ${scrolled ? "text-gray-700 hover:text-red-600" : "text-white hover:text-yellow-300"}`}>
+                            Inicio
+                        </a>
+                        <a href="#howitworks"
+                            className={`font-medium transition-all duration-300 ease-out hover:scale-110 ${scrolled ? "text-gray-700 hover:text-red-600" : "text-white hover:text-yellow-300"}`}>
                             Cómo funciona
                         </a>
-                        <a
-                            href="#categories"
-                            className={`font-medium transition-all duration-300 ease-out hover:scale-110 ${scrolled ? "text-gray-700 hover:text-red-600" : "text-white hover:text-yellow-300"}`}
-                        >
+                        <a href="#categories"
+                            className={`font-medium transition-all duration-300 ease-out hover:scale-110 ${scrolled ? "text-gray-700 hover:text-red-600" : "text-white hover:text-yellow-300"}`}>
                             Categorías
                         </a>
-                        <a
-                        href="#testimonies"
-                            className={`font-medium transition-all duration-300 ease-out hover:scale-110 ${scrolled ? "text-gray-700 hover:text-red-600" : "text-white hover:text-yellow-300"}`}
-                        >
+                        <a href="#testimonies"
+                            className={`font-medium transition-all duration-300 ease-out hover:scale-110 ${scrolled ? "text-gray-700 hover:text-red-600" : "text-white hover:text-yellow-300"}`}>
                             Testimonios
                         </a>
                     </nav>
@@ -82,6 +76,7 @@ const Header = () => {
                             className={`px-6 py-2 rounded-full font-bold transition-all duration-500 ease-out transform hover:scale-110 ${scrolled
                                 ? "bg-gradient-to-r from-red-600 to-yellow-400 text-white shadow-lg"
                                 : "bg-white text-red-600 shadow-xl hover:shadow-2xl"}`}
+                            onClick={onOpenRestaurantForm}
                         >
                             Restaurantes
                         </button>
@@ -89,6 +84,7 @@ const Header = () => {
                             className={`px-6 py-2 rounded-full font-bold transition-all duration-500 ease-out transform hover:scale-110 ${scrolled
                                 ? "border-2 border-red-600 text-red-600 hover:bg-red-600 hover:text-white"
                                 : "border-2 border-white text-white hover:bg-white hover:text-red-600"}`}
+                            onClick={onOpenDriverForm}
                         >
                             Motorizados
                         </button>
@@ -117,7 +113,7 @@ const Header = () => {
                     </div>
                 }
             </div>
-        </header>
+        </header >
     );
 };
 
