@@ -8,7 +8,7 @@ import Image2 from './Images/image-2.jpeg'
 import Image3 from './Images/image-3.webp'
 
 const Banner = () => {
-    return <div id="inicio">
+    return <div id="home">
         <section section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-primary via-primary to-yellow-300" >
             <div class="absolute inset-0 bg-black/20">
             </div>
@@ -35,7 +35,7 @@ const Banner = () => {
                         <p class="text-xl sm:text-2xl mb-8 text-white/90 leading-relaxed">
                             Pide rápido, recibe rápido, paga contra entrega. La forma más fácil de disfrutar tu comida favorita.
                         </p>
-                        <div class="flex flex-col sm:flex-row gap-4 mb-12">
+                        <div class="flex flex-wrap flex-col sm:flex-row gap-4 mb-12">
                             <button class="group bg-white text-primary px-8 py-4 rounded-full font-bold text-lg hover:bg-yellow-300 hover:text-red-700 transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-yellow-300/50 flex items-center justify-center gap-2">
                                 Registra tu Restaurante
                                 <Icon path={mdiChevronRight} className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
@@ -45,21 +45,21 @@ const Banner = () => {
                                 <Icon path={mdiChevronRight} className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                             </button>
                         </div>
-                        <div class="flex items-center gap-8 text-sm">
+                        <div class="flex flex-wrap items-center justify-center md:justify-start gap-8 text-sm">
                             <div class="flex items-center gap-2">
-                                <div class="w-12 h-12 bg-yellow-300 rounded-full flex items-center justify-center font-bold text-primary text-xl">
+                                <div class="w-16 h-16 bg-yellow-300 rounded-full flex items-center justify-center font-bold text-primary text-xl">
                                     500+
                                 </div>
                                 <span>Restaurantes</span>
                             </div>
                             <div class="flex items-center gap-2">
-                                <div class="w-12 h-12 bg-yellow-300 rounded-full flex items-center justify-center font-bold text-primary text-xl">
+                                <div class="w-16 h-16 bg-yellow-300 rounded-full flex items-center justify-center font-bold text-primary text-xl">
                                     10k+
                                 </div>
                                 <span>Pedidos</span>
                             </div>
                             <div class="flex items-center gap-2">
-                                <div class="w-12 h-12 bg-yellow-300 rounded-full flex items-center justify-center font-bold text-primary text-xl">
+                                <div class="w-16 h-16 bg-yellow-300 rounded-full flex items-center justify-center font-bold text-primary text-xl">
                                     4.9
                                 </div>
                                 <span>Valoración</span>

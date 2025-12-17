@@ -3,7 +3,7 @@ import { mdiFormatQuoteClose, mdiFormatQuoteOpen, mdiStar, mdiStarOutline } from
 
 const Testimonies = () => {
 
-  return <section id="testimonios" className="py-24 bg-gradient-to-b from-white to-gray-50 relative overflow-hidden">
+  return <section id="testimonies" className="py-24 bg-gradient-to-b from-white to-gray-50 relative overflow-hidden">
     <div className="absolute inset-0 opacity-5" bis_skin_checked="1">
       <div className="absolute top-20 left-20 w-96 h-96 bg-red-500 rounded-full blur-3xl" bis_skin_checked="1">
       </div>

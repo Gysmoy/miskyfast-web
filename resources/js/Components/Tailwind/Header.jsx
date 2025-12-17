@@ -52,14 +52,28 @@ const Header = () => {
 
                     {/* Navegación con rebote */}
                     <nav className="hidden md:flex items-center gap-8">
-                        {["Inicio", "Cómo Funciona", "Categorías", "Testimonios"].map((label) => (
-                            <button
-                                key={label}
-                                className={`font-medium transition-all duration-300 ease-out hover:scale-110 ${scrolled ? "text-gray-700 hover:text-red-600" : "text-white hover:text-yellow-300"}`}
-                            >
-                                {label}
-                            </button>
-                        ))}
+                        <a
+                            href="#home"
+                            className={`font-medium transition-all duration-300 ease-out hover:scale-110 ${scrolled ? "text-gray-700 hover:text-red-600" : "text-white hover:text-yellow-300"}`}
+                        >Inicio</a>
+                        <a
+                            href="#howitworks"
+                            className={`font-medium transition-all duration-300 ease-out hover:scale-110 ${scrolled ? "text-gray-700 hover:text-red-600" : "text-white hover:text-yellow-300"}`}
+                        >
+                            Cómo funciona
+                        </a>
+                        <a
+                            href="#categories"
+                            className={`font-medium transition-all duration-300 ease-out hover:scale-110 ${scrolled ? "text-gray-700 hover:text-red-600" : "text-white hover:text-yellow-300"}`}
+                        >
+                            Categorías
+                        </a>
+                        <a
+                        href="#testimonies"
+                            className={`font-medium transition-all duration-300 ease-out hover:scale-110 ${scrolled ? "text-gray-700 hover:text-red-600" : "text-white hover:text-yellow-300"}`}
+                        >
+                            Testimonios
+                        </a>
                     </nav>
 
                     {/* Botones con rebote */}

@@ -87,6 +87,10 @@
         <script type="application/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDikLz7ELBdUFW0TnvkWkcXPK48Wc003U" async></script>
     @endif
     <style>
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             /* background-image: url('/assets/img/maqueta/home-mobile.png');*/
             width: 100%;
@@ -97,9 +101,7 @@
             background-position: top center;
             /* Centra la imagen en la parte superior */
         }
-    </style>
 
-    <style>
         .font-emoji {
             font-family: "Noto Color Emoji", sans-serif;
         }

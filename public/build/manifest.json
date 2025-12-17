@@ -2522,13 +2522,16 @@
     ]
   },
   "resources/js/Components/Home/HowItWorks.jsx": {
-    "file": "assets/HowItWorks-C3iMmXZq.js",
+    "file": "assets/HowItWorks-BjEecTRv.js",
     "name": "HowItWorks",
     "src": "resources/js/Components/Home/HowItWorks.jsx",
     "isEntry": true,
     "imports": [
       "resources/js/Components/Adminto/Menu/MenuItemHorizontal.jsx",
-      "_index-yBjzXJbu.js"
+      "resources/js/Components/Home/Banner.jsx",
+      "_index-yBjzXJbu.js",
+      "__commonjsHelpers-D6-XlEtG.js",
+      "_index-Chjiymov.js"
     ]
   },
   "resources/js/Components/Home/Images/image-1.webp": {
@@ -2766,7 +2769,7 @@
     "isEntry": true
   },
   "resources/js/Home.jsx": {
-    "file": "assets/Home-B7lZdpoe.js",
+    "file": "assets/Home-CMSTUQgM.js",
     "name": "Home",
     "src": "resources/js/Home.jsx",
     "isEntry": true,
