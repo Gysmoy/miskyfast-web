@@ -12,6 +12,7 @@ import {
   mdiEmail,
   mdiSilverwareForkKnife,
 } from "@mdi/js";
+import Global from "../../Utils/Global";
 
 const Footer = ({ }) => {
   return (
@@ -20,8 +21,8 @@ const Footer = ({ }) => {
         <div className="py-12 grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           <div className="space-y-4">
             <div className="flex items-center gap-3">
-              <div className="bg-red-600 p-2 rounded-lg">
-                <Icon path={mdiSilverwareForkKnife} size={1.2} className="text-white" />
+              <div className="bg-primary p-2 rounded-xl">
+                <img src="/assets/img/isotipo.svg" alt={Global.APP_NAME} className="h-8" />
               </div>
               <div>
                 <h3 className="text-xl font-semibold">Misky Fast</h3>

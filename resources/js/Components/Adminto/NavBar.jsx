@@ -36,10 +36,10 @@ const NavBar = ({ session = {}, title = 'Pagina' }) => {
               <i className="mdi mdi-account-key-outline"></i>
               <span>Mi cuenta</span>
             </a>
-            <a href="#" className="dropdown-item notify-item right-bar-toggle dropdown notification-list">
+            {/* <a href="#" className="dropdown-item notify-item right-bar-toggle dropdown notification-list">
               <i className="fe-lock"></i>
               <span>Configuracion</span>
-            </a>
+            </a> */}
 
             <div className="dropdown-divider"></div>
 
@@ -70,7 +70,7 @@ const NavBar = ({ session = {}, title = 'Pagina' }) => {
             }} />
           </span>
           <span className="logo-lg">
-            <img src="/assets/resources/logo.png" alt="" style={{ height: '30px', aspectRatio: 49/8 }} onError={(e) => {
+            <img src="/assets/resources/logo.png" alt="" style={{ height: '30px', aspectRatio: 49 / 8 }} onError={(e) => {
               e.target.onerror = null;
               e.target.src = '/assets/img/banner.svg';
             }} />
@@ -84,7 +84,7 @@ const NavBar = ({ session = {}, title = 'Pagina' }) => {
             }} />
           </span>
           <span className="logo-lg">
-            <img src="/assets/resources/logo.png" alt="" style={{ height: '30px', aspectRatio: 49/8 }} onError={(e) => {
+            <img src="/assets/resources/logo.png" alt="" style={{ height: '30px', aspectRatio: 49 / 8 }} onError={(e) => {
               e.target.onerror = null;
               e.target.src = '/assets/img/banner.svg';
             }} />

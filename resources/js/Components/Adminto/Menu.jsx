@@ -48,11 +48,11 @@ const Menu = ({ session, hasRole }) => {
                 <span>Mi cuenta</span>
               </a>
 
-              <a href="#"
+              {/* <a href="#"
                 className="dropdown-item notify-item right-bar-toggle dropdown notification-list">
                 <i className="fe-settings me-1"></i>
                 <span>Configuracion</span>
-              </a>
+              </a> */}
 
               <a href="#"
                 className="dropdown-item notify-item"
@@ -114,10 +114,6 @@ const Menu = ({ session, hasRole }) => {
               <MenuItem href="/admin/payment-methods" icon="mdi mdi-credit-card">Métodos de pago</MenuItem>
               <MenuItem href="/admin/statuses" icon="mdi mdi-tag-text">Estados</MenuItem>
               <MenuItem href="/admin/messages" icon="mdi mdi-message-text">Mensajes</MenuItem>
-
-              <li className="menu-title">Configuraciones</li>
-              <MenuItem href="/admin/profile" icon="mdi mdi-account-box">Mi perfil</MenuItem>
-              <MenuItem href="/admin/account" icon="mdi mdi-account-key">Mi cuenta</MenuItem>
             </>}
             {hasRole('Restaurant') && <>
               <MenuItem href="/restaurant/home" icon="mdi mdi-home">Dashboard</MenuItem>
@@ -125,29 +121,15 @@ const Menu = ({ session, hasRole }) => {
                 <MenuItem href="/restaurant/orders" icon="mdi mdi-bell-ring-outline">Recepción</MenuItem>
                 <MenuItem href="/restaurant/kitchen" icon="mdi mdi-chef-hat">Cocina</MenuItem>
               </MenuItemContainer>
-              <li className="menu-title">Configuraciones</li>
+              <li className="menu-title">Sistema</li>
               <MenuItem href="/restaurant/items" icon="mdi mdi-shape-outline">Items</MenuItem>
               <MenuItem href="/restaurant/users" icon="mdi mdi-account-group">Usuarios</MenuItem>
             </>}
+            <li className="menu-title">Configuraciones</li>
+            <MenuItem href="/profile" icon="mdi mdi-account-box">Mi perfil</MenuItem>
+            <MenuItem href="/account" icon="mdi mdi-account-key">Mi cuenta</MenuItem>
           </ul>
         </div>
-        {hasRole("Customer") && (
-          <div id="sidebar-menu" className="show">
-            <ul id="side-menu">
-              <li className="menu-title">Panel del Cliente</li>
-
-              {hasRole("Customer") && (
-                <>
-                  <MenuItem href="/customer/orders" icon="mdi mdi-cart-outline">
-                    Mis Pedidos</MenuItem>
-                  <MenuItem href="/customer/albums" icon="mdi mdi-cart-outline">
-                    Mis Albums</MenuItem>
-                </>
-              )}
-            </ul>
-          </div>
-        )}
-
         <div className="clearfix"></div>
       </div>
     </div>

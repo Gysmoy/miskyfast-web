@@ -22,12 +22,12 @@ const Banner = () => {
             <div class="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-20">
                 <div class="grid lg:grid-cols-2 gap-12 items-center">
                     <div class="text-white animate-fade-in-up">
-                        <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full mb-6 animate-bounce-slow">
+                        <button class="inline-flex animate-bounce animate-duration-[2500ms] items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full mb-6 animate-bounce-slow">
                             <Icon path={mdiCellphone} className="w-4 h-4" />
                             <span class="text-sm font-medium">
-                                App disponible pronto
+                                ¡Descarga la app aquí!
                             </span>
-                        </div>
+                        </button>
                         <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
                             Tu comida favorita
                             <span class="block text-yellow-300 animate-pulse-slow">en minutos</span>
@@ -68,16 +68,16 @@ const Banner = () => {
                     </div>
                     <div class="relative hidden lg:block animate-fade-in-right">
                         <div class="relative w-full h-[600px]">
-                            <img src={Image3} alt="Delicious burger" class="absolute top-10 right-20 w-64 h-64 object-cover rounded-3xl shadow-2xl transform rotate-6 hover:rotate-0 transition-transform duration-500 animate-float" />
-                            <img src={Image1} alt="Pizza" class="absolute bottom-20 left-10 w-56 h-56 object-cover rounded-3xl shadow-2xl transform -rotate-6 hover:rotate-0 transition-transform duration-500 animate-float animation-delay-500" />
-                            <img src={Image2} alt="Tacos" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-72 h-72 object-cover rounded-3xl shadow-2xl hover:scale-110 transition-transform duration-500 animate-float animation-delay-1000" />
+                            <img src={Image3} alt="Hamburguesa con palito" class="absolute animate-bounce animate-duration-[5000ms] top-10 right-20 w-64 h-64 object-cover rounded-3xl shadow-2xl transform rotate-6 hover:rotate-0 transition-transform duration-500 animate-float" />
+                            <img src={Image1} alt="Tacos" class="absolute animate-bounce animate-duration-[5000ms] bottom-20 left-10 w-56 h-56 object-cover rounded-3xl shadow-2xl transform -rotate-6 hover:rotate-0 transition-transform duration-500 animate-float animation-delay-500" />
+                            <img src={Image2} alt="Hamburguesa Clásica" class="absolute animate-bounce animate-duration-[5000ms] animate-delay-1000 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-72 h-72 object-cover rounded-3xl shadow-2xl hover:scale-110 transition-transform duration-500 animate-float animation-delay-1000" />
                         </div>
                     </div>
                 </div>
             </div>
-            <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent">
-            </div></section >
-    </div >
+            <div class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-white to-transparent"></div>
+        </section>
+    </div>
 }
 
 export default Banner
