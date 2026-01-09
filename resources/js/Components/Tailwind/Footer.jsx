@@ -72,16 +72,16 @@ const Footer = ({ }) => {
             <h4 className="text-lg font-semibold mb-4 text-yellow-400">Enlaces Rápidos</h4>
             <ul className="space-y-2">
               <li>
-                <a href="#inicio" className="text-gray-400 hover:text-white transition">Inicio</a>
+                <a href="#home" className="text-gray-400 hover:text-white transition">Inicio</a>
               </li>
               <li>
-                <a href="#como-funciona" className="text-gray-400 hover:text-white transition">Cómo Funciona</a>
+                <a href="#howitworks" className="text-gray-400 hover:text-white transition">Cómo Funciona</a>
               </li>
               <li>
-                <a href="#categorias" className="text-gray-400 hover:text-white transition">Categorías</a>
+                <a href="#categories" className="text-gray-400 hover:text-white transition">Categorías</a>
               </li>
               <li>
-                <a href="#testimonios" className="text-gray-400 hover:text-white transition">Testimonios</a>
+                <a href="#testimonies" className="text-gray-400 hover:text-white transition">Testimonios</a>
               </li>
             </ul>
           </div>
@@ -140,7 +140,11 @@ const Footer = ({ }) => {
         </div>
 
         <div className="border-t border-gray-700 py-6 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-gray-400 text-sm">2025 Misky Fast. Todos los derechos reservados.</p>
+          <p className="text-gray-400 text-sm">
+            2025 Misky Fast &copy;.
+            Todos los derechos reservados.
+            Powered by <a href="https://mundoweb.pe" className="text-white hover:text-yellow-400 transition">Mundo Web</a>
+          </p>
           <div className="flex items-center gap-4 text-sm text-gray-400">
             <a href="#terminos" className="hover:text-white transition">Términos</a>
             <a href="#privacidad" className="hover:text-white transition">Privacidad</a>

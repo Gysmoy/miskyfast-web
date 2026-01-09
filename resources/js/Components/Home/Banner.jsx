@@ -7,7 +7,7 @@ import Image1 from './Images/image-1.webp'
 import Image2 from './Images/image-2.jpeg'
 import Image3 from './Images/image-3.webp'
 
-const Banner = () => {
+const Banner = ({ onOpenRestaurantForm, onOpenDriverForm }) => {
     return <div id="home">
         <section section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-primary via-primary to-yellow-300" >
             <div className="absolute inset-0 bg-black/20">
@@ -39,11 +39,11 @@ const Banner = () => {
                             Pide rápido, recibe rápido, paga contra entrega. La forma más fácil de disfrutar tu comida favorita.
                         </p>
                         <div className="flex flex-wrap flex-col sm:flex-row gap-4 mb-12">
-                            <button className="group bg-white text-primary px-8 py-4 rounded-full font-bold text-lg hover:bg-yellow-300 hover:text-red-700 transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-yellow-300/50 flex items-center justify-center gap-2">
+                            <button className="group bg-white text-primary px-8 py-4 rounded-full font-bold text-lg hover:bg-yellow-300 hover:text-red-700 transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-yellow-300/50 flex items-center justify-center gap-2" onClick={onOpenRestaurantForm}>
                                 Registra tu Restaurante
                                 <Icon path={mdiChevronRight} className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                             </button>
-                            <button className="group bg-yellow-300 text-primary px-8 py-4 rounded-full font-bold text-lg hover:bg-white transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-white/50 flex items-center justify-center gap-2">
+                            <button className="group bg-yellow-300 text-primary px-8 py-4 rounded-full font-bold text-lg hover:bg-white transition-all duration-300 transform hover:scale-105 shadow-2xl hover:shadow-white/50 flex items-center justify-center gap-2" onClick={onOpenDriverForm}>
                                 Trabaja con Nosotros
                                 <Icon path={mdiChevronRight} className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                             </button>

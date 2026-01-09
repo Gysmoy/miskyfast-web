@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import Base from './Components/Tailwind/Base';
 import CreateReactScript from './Utils/CreateReactScript';
@@ -16,8 +16,16 @@ const Home = (properties) => {
   const [isRestaurantModalOpen, setIsRestaurantModalOpen] = useState(false);
   const [isDriverModalOpen, setIsDriverModalOpen] = useState(false);
 
+  useEffect(() => {
+    if (isRestaurantModalOpen || isDriverModalOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+  }, [isRestaurantModalOpen, isDriverModalOpen])
+
   return <Base {...properties} onOpenRestaurantForm={() => setIsRestaurantModalOpen(true)} onOpenDriverForm={() => setIsDriverModalOpen(true)}>
-    <Banner />
+    <Banner onOpenRestaurantForm={() => setIsRestaurantModalOpen(true)} onOpenDriverForm={() => setIsDriverModalOpen(true)} />
     <HowItWorks />
     <Categories items={categories} />
     <Testimonies />
