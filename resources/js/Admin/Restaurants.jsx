@@ -192,13 +192,24 @@ const Restaurants = ({ prefixes, gmaps_api_key }) => {
     const onDeleteClicked = async (id) => {
         const { isConfirmed } = await Swal.fire({
             title: "Eliminar registro",
-            text: "¿Estas seguro de eliminar este registro?",
+            text: "¿Estás seguro de eliminar este restaurante? Esta acción también eliminará todos sus items asociados.",
             icon: "warning",
             showCancelButton: true,
-            confirmButtonText: "Si, eliminar",
+            confirmButtonText: "Sí, eliminar",
             cancelButtonText: "Cancelar",
         });
         if (!isConfirmed) return;
+
+        const { isConfirmed: isConfirmed2 } = await Swal.fire({
+            title: "Confirmar eliminación",
+            text: "¿Estás completamente seguro? Esta acción es irreversible y eliminará el restaurante y todos sus items asociados permanentemente. Si solo deseas ocultar el restaurante, ponlo como no visible, de este modo no aparecerá en la aplicación.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonText: "Sí, eliminar permanentemente",
+            cancelButtonText: "Cancelar",
+        });
+        if (!isConfirmed2) return;
+
         const result = await restaurantsRest.delete(id);
         if (!result) return;
         $(gridRef.current).dxDataGrid("instance").refresh();

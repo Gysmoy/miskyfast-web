@@ -57,7 +57,7 @@ class BasicController extends Controller
       if ($snake_case === 'item_image') {
         $snake_case = 'item';
       }
-     
+
       if (Text::has($uuid, '.')) {
         $route = "images/{$snake_case}/{$uuid}";
       } else {
@@ -144,7 +144,7 @@ class BasicController extends Controller
       $instance = $this->setPaginationInstance($request, $this->model)->with($withRelations);
 
       $originalInstance = clone $instance;
-      
+
       $originalInstance = clone $instance;
 
       if ($request->group != null) {
@@ -164,9 +164,9 @@ class BasicController extends Controller
         if (Schema::hasColumn($table, 'status')) {
           // Filtrar registros con status que sean nulos, 0 o false
           $statusField = $this->prefix4filter ? $this->prefix4filter . '.status' : 'status';
-          $instance->where(function($query) use ($statusField) {
+          $instance->where(function ($query) use ($statusField) {
             $query->where($statusField, '=', 1)
-                  ->orWhere($statusField, '=', true);
+              ->orWhere($statusField, '=', true);
           });
         }
       }
@@ -222,7 +222,7 @@ class BasicController extends Controller
       $response->summary = $this->setPaginationSummary($request, $instance, $originalInstance);
       $response->totalCount = $totalCount;
     } catch (\Throwable $th) {
-     // dump($th);
+      // dump($th);
       $response->message = $th->getMessage() . ' Ln.' . $th->getLine();
     } finally {
       return response(
@@ -233,17 +233,16 @@ class BasicController extends Controller
   }
 
   public function beforeSave(Request $request)
-  {    
+  {
     return $request->all();
   }
 
   public function save(Request $request): HttpResponse|ResponseFactory
   {
-    $response = new Response();
-    try {
-
+    DB::beginTransaction();
+    $response = Response::simpleTryCatch(function () use ($request) {
       $body = $this->beforeSave($request);
-      
+
       $snake_case = Text::camelToSnakeCase(str_replace('App\\Models\\', '', $this->model));
       if ($snake_case === "item_image") {
         $snake_case = 'item';
@@ -256,18 +255,18 @@ class BasicController extends Controller
         $ext = $full->getClientOriginalExtension();
         $path = "images/{$snake_case}/{$uuid}.{$ext}";
         Storage::put($path, file_get_contents($full));
-        
+
         // ✅ FIJO: Establecer permisos 777 después de guardar
         $fullPath = storage_path('app/' . $path);
         if (file_exists($fullPath)) {
           chmod($fullPath, 0777);
         }
-        
+
         $body[$field] = "{$uuid}.{$ext}";
       }
 
       $jpa = $this->model::find(isset($body['id']) ? $body['id'] : null);
-      
+
       // Debug logging
       Log::info('BasicController save - Model find result: ' . ($jpa ? 'Encontrado ID: ' . $jpa->id : 'No encontrado'));
 
@@ -288,42 +287,31 @@ class BasicController extends Controller
         $slugBase = $jpa->name;
         // Si existe el campo 'color' y tiene valor, añadirlo al slug
         if (Schema::hasColumn($table, 'color') && !empty($jpa->color)) {
-            $slugBase .= '-' . $jpa->color;
+          $slugBase .= '-' . $jpa->color;
         }
 
         if (Schema::hasColumn($table, 'size') && !empty($jpa->size)) {
-            $slugBase .= '-' . $jpa->size;
+          $slugBase .= '-' . $jpa->size;
         }
 
         $slug = Str::slug($slugBase);
         // Verificar si el slug ya existe para otro registro
         $slugExists = $this->model::where('slug', $slug)
-            ->where('id', '<>', $jpa->id)
-            ->exists();
+          ->where('id', '<>', $jpa->id)
+          ->exists();
         // Si existe, añadir un identificador único corto
         if ($slugExists) {
-            $slug = $slug . '-' . Crypto::short();
+          $slug = $slug . '-' . Crypto::short();
         }
         // Actualizar el slug
         $jpa->update(['slug' => $slug]);
       }
 
       $data = $this->afterSave($request, $jpa, $isNew);
-      if ($data) {
-        $response->data = $data;
-      }
-
-      $response->status = 200;
-      $response->message = 'Operacion correcta';
-    } catch (\Throwable $th) {
-      $response->status = 400;
-      $response->message = $th->getMessage();
-    } finally {
-      return response(
-        $response->toArray(),
-        $response->status
-      );
-    }
+      DB::commit();
+      return $data;
+    }, fn() => DB::rollBack());
+    return response($response->toArray(), $response->status);
   }
 
   public function afterSave(Request $request, object $jpa, ?bool $isNew)
@@ -394,20 +382,19 @@ class BasicController extends Controller
 
       $dataBeforeDelete = $this->model::find($id);
       if (!$dataBeforeDelete) throw new Exception('El registro que intenta eliminar no existe');
-      
+
       // Verificar si la tabla tiene el campo 'status' antes de hacer soft delete
       $table = (new $this->model)->getTable();
       $hasStatusColumn = Schema::hasColumn($table, 'status');
-      
-      // Primero intentamos eliminar el registro, independientemente del softDeletion
-      $deleted = $this->model::where('id', $id)
-          ->delete();
-      
+
       // Si el soft deletion está habilitado y el modelo tiene un campo status, pero el borrado no funcionó,
       // entonces intentamos hacer soft delete actualizando status=false
-      if (!$deleted && $this->softDeletion && $hasStatusColumn) {
+      if ($this->softDeletion && $hasStatusColumn) {
         $deleted = $this->model::where('id', $id)
           ->update(\array_merge(['status' => false], $body));
+      } else {
+        $deleted = $this->model::where('id', $id)
+          ->delete();
       }
       if ($deleted) {
         $snake_case = Text::camelToSnakeCase(str_replace('App\\Models\\', '', $this->model));
