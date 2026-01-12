@@ -5,31 +5,32 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\Notifiable;
 
 class Message extends Model
 {
-    use HasFactory, HasUuids, Notifiable;
+    use HasFactory, HasUuids;
 
     public $incrementing = false;
     protected $keyType = 'string';
 
     protected $fillable = [
-        'name',
-        'phone',
+        'type',
+        'address',
         'email',
-        'subject',
-        'description',
-        'seen',
+        'latitude',
+        'longitude',
+        'owner_name',
+        'phone',
+        'phone_prefix',
+        'reference',
+        'restaurant_name',
         'status',
+        'vehicle_type',
+        'plate_number',
+        'license_number'
     ];
-    /**
-     * Route notifications for the mail channel.
-     *
-     * @return string
-     */
-    public function routeNotificationForMail($notification)
-    {
-        return $this->email;
-    }
+
+    protected $casts = [
+        'status' => 'boolean',
+    ];
 }

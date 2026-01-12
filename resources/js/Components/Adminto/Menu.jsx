@@ -94,6 +94,7 @@ const Menu = ({ session, hasRole }) => {
             {hasRole("Admin") && <>
               {/* Administración */}
               <MenuItem href="/admin/home" icon="mdi mdi-home">Dashboard</MenuItem>
+              <MenuItem href="/admin/messages" icon="mdi mdi-message-text-outline">Solicitudes</MenuItem>
 
               <MenuItem href="/admin/restaurants" icon="mdi mdi-silverware">Restaurantes</MenuItem>
 
@@ -113,7 +114,6 @@ const Menu = ({ session, hasRole }) => {
               <MenuItem href="/admin/items" icon="mdi mdi-shape-outline">Items</MenuItem>
               <MenuItem href="/admin/payment-methods" icon="mdi mdi-credit-card">Métodos de pago</MenuItem>
               <MenuItem href="/admin/statuses" icon="mdi mdi-tag-text">Estados</MenuItem>
-              <MenuItem href="/admin/messages" icon="mdi mdi-message-text">Mensajes</MenuItem>
             </>}
             {hasRole('Restaurant') && <>
               <MenuItem href="/restaurant/home" icon="mdi mdi-home">Dashboard</MenuItem>

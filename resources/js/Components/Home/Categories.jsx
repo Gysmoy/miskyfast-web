@@ -24,7 +24,7 @@ const Categories = ({ items }) => {
                   <p className="text-white/90 text-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">{item.description}</p>
                   {/* <div className="mt-4 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">
                     <div className="bg-yellow-400 text-red-600 px-4 py-2 rounded-full font-bold text-sm">Ver Menú
-                    </div><svg className="w-5 h-5 text-white animate-bounce-horizontal" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                    </div><svg className="w-5 h-5 text-white animate-bounce-horizontal" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path></svg>
                   </div> */}
                 </div>
                 <div className="absolute top-4 right-4 bg-yellow-400 text-red-600 w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform group-hover:rotate-12">{index + 1}</div>
@@ -41,7 +41,7 @@ const Categories = ({ items }) => {
             <div className="absolute bottom-0 left-0 right-0 p-6 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300"><h3 className="text-3xl font-bold text-white mb-2 transform group-hover:scale-110 transition-transform duration-300 origin-left">Hamburguesas</h3><p className="text-white/90 text-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">Jugosas y deliciosas</p>
               <div className="mt-4 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">
                 <div className="bg-yellow-400 text-red-600 px-4 py-2 rounded-full font-bold text-sm">Ver Menú
-                </div><svg className="w-5 h-5 text-white animate-bounce-horizontal" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                </div><svg className="w-5 h-5 text-white animate-bounce-horizontal" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path></svg>
               </div>
             </div>
             <div className="absolute top-4 right-4 bg-yellow-400 text-red-600 w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform group-hover:rotate-12">1
@@ -57,7 +57,7 @@ const Categories = ({ items }) => {
             <div className="absolute bottom-0 left-0 right-0 p-6 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300"><h3 className="text-3xl font-bold text-white mb-2 transform group-hover:scale-110 transition-transform duration-300 origin-left">Pollo a la Brasa</h3><p className="text-white/90 text-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">Dorado y crujiente</p>
               <div className="mt-4 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">
                 <div className="bg-yellow-400 text-red-600 px-4 py-2 rounded-full font-bold text-sm">Ver Menú
-                </div><svg className="w-5 h-5 text-white animate-bounce-horizontal" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                </div><svg className="w-5 h-5 text-white animate-bounce-horizontal" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path></svg>
               </div>
             </div>
             <div className="absolute top-4 right-4 bg-yellow-400 text-red-600 w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform group-hover:rotate-12">2
@@ -73,7 +73,7 @@ const Categories = ({ items }) => {
             <div className="absolute bottom-0 left-0 right-0 p-6 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300"><h3 className="text-3xl font-bold text-white mb-2 transform group-hover:scale-110 transition-transform duration-300 origin-left">Tacos</h3><p className="text-white/90 text-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">Auténtico sabor mexicano</p>
               <div className="mt-4 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">
                 <div className="bg-yellow-400 text-red-600 px-4 py-2 rounded-full font-bold text-sm">Ver Menú
-                </div><svg className="w-5 h-5 text-white animate-bounce-horizontal" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                </div><svg className="w-5 h-5 text-white animate-bounce-horizontal" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path></svg>
               </div>
             </div>
             <div className="absolute top-4 right-4 bg-yellow-400 text-red-600 w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform group-hover:rotate-12">3
@@ -89,7 +89,7 @@ const Categories = ({ items }) => {
             <div className="absolute bottom-0 left-0 right-0 p-6 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300"><h3 className="text-3xl font-bold text-white mb-2 transform group-hover:scale-110 transition-transform duration-300 origin-left">Pizza</h3><p className="text-white/90 text-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">Recién horneada</p>
               <div className="mt-4 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">
                 <div className="bg-yellow-400 text-red-600 px-4 py-2 rounded-full font-bold text-sm">Ver Menú
-                </div><svg className="w-5 h-5 text-white animate-bounce-horizontal" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                </div><svg className="w-5 h-5 text-white animate-bounce-horizontal" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path></svg>
               </div>
             </div>
             <div className="absolute top-4 right-4 bg-yellow-400 text-red-600 w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform group-hover:rotate-12">4
@@ -105,7 +105,7 @@ const Categories = ({ items }) => {
             <div className="absolute bottom-0 left-0 right-0 p-6 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300"><h3 className="text-3xl font-bold text-white mb-2 transform group-hover:scale-110 transition-transform duration-300 origin-left">Parrilla</h3><p className="text-white/90 text-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">Carnes premium</p>
               <div className="mt-4 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">
                 <div className="bg-yellow-400 text-red-600 px-4 py-2 rounded-full font-bold text-sm">Ver Menú
-                </div><svg className="w-5 h-5 text-white animate-bounce-horizontal" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                </div><svg className="w-5 h-5 text-white animate-bounce-horizontal" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path></svg>
               </div>
             </div>
             <div className="absolute top-4 right-4 bg-yellow-400 text-red-600 w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform group-hover:rotate-12">5
@@ -121,7 +121,7 @@ const Categories = ({ items }) => {
             <div className="absolute bottom-0 left-0 right-0 p-6 transform translate-y-2 group-hover:translate-y-0 transition-transform duration-300"><h3 className="text-3xl font-bold text-white mb-2 transform group-hover:scale-110 transition-transform duration-300 origin-left">Comida Rápida</h3><p className="text-white/90 text-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300">Tu favorita siempre</p>
               <div className="mt-4 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 delay-100">
                 <div className="bg-yellow-400 text-red-600 px-4 py-2 rounded-full font-bold text-sm">Ver Menú
-                </div><svg className="w-5 h-5 text-white animate-bounce-horizontal" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                </div><svg className="w-5 h-5 text-white animate-bounce-horizontal" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path></svg>
               </div>
             </div>
             <div className="absolute top-4 right-4 bg-yellow-400 text-red-600 w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl shadow-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform group-hover:rotate-12">6

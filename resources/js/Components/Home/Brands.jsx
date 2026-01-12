@@ -70,7 +70,7 @@ const Brands = () => {
                 </div>
             </div>
 
-            <style jsx>{`
+            <style jsx='true'>{`
                 @keyframes scroll-infinite {
                     0% {
                         transform: translateX(0);

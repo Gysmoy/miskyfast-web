@@ -22,10 +22,8 @@ const Banner = ({ onOpenRestaurantForm, onOpenDriverForm }) => {
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10 pt-20">
                 <div className="grid lg:grid-cols-2 gap-12 items-center">
                     <div className="text-white animate-fade-in-up">
-                        <a
-                            href="https://expo.dev/artifacts/eas/FyaApcDf82P3CmPSxYJ3P.apk"
-                            className="inline-flex animate-bounce animate-duration-[2500ms] items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full mb-6 animate-bounce-slow"
-                        >
+                        <a href="https://expo.dev/artifacts/eas/FyaApcDf82P3CmPSxYJ3P.apk"
+                            className="inline-flex animate-bounce animate-duration-[2500ms] items-center gap-2 bg-white/10 backdrop-blur-md px-4 py-2 rounded-full mb-6 animate-bounce-slow" >
                             <Icon path={mdiCellphone} className="w-4 h-4" />
                             <span className="text-sm font-medium">
                                 ¡Descarga la app aquí!

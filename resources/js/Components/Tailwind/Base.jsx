@@ -1,6 +1,7 @@
 import React, { Suspense } from "react"
 import Header from "./Header";
 import Footer from "./Footer";
+import { Toaster } from "sonner";
 
 const Base = ({ children, summary, socials, generals, onOpenRestaurantForm, onOpenDriverForm }) => {
   return <main className="min-h-screen bg-white">
@@ -9,6 +10,7 @@ const Base = ({ children, summary, socials, generals, onOpenRestaurantForm, onOp
       {children}
     </div>
     <Footer />
+    <Toaster />
   </main>
 }
 

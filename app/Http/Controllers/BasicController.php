@@ -38,6 +38,7 @@ class BasicController extends Controller
   public $throwMediaError = false;
   public $reactData = null;
   public $with4get = [];
+  public $filterStatus = true;
 
   public function get(Request $request, string $id)
   {
@@ -158,7 +159,7 @@ class BasicController extends Controller
           ->groupBy($selector);
       }
 
-      if (Auth::check()) {
+      if (Auth::check() && $this->filterStatus) {
         $table = $this->prefix4filter ? $this->prefix4filter : (new $this->model)->getTable();
         if (Schema::hasColumn($table, 'status')) {
           // Filtrar registros con status que sean nulos, 0 o false

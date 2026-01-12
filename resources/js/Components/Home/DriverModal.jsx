@@ -1,19 +1,55 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { X, Bike, User, Mail, Phone, CreditCard, CheckCircle } from 'lucide-react';
-// import { supabase } from '../lib/supabase';
+import MessagesRest from '../../Actions/MessagesRest';
 
-const DriverModal = ({ isOpen, onClose }) => {
+const messagesRest = new MessagesRest()
+
+const vehicleOptions = [
+    { value: 'moto', label: 'Motocicleta', icon: 'mdi mdi-motorbike' },
+    { value: 'bicicleta', label: 'Bicicleta', icon: 'mdi mdi-bicycle' },
+    { value: 'scooter', label: 'Scooter Eléctrico', icon: 'mdi mdi-scooter' },
+    { value: 'auto', label: 'Auto', icon: 'mdi mdi-car' },
+];
+
+const DriverModal = ({ isOpen, onClose, prefixes }) => {
     const [formData, setFormData] = useState({
-        full_name: '',
+        owner_name: '',
         email: '',
+        phone_prefix: '51',
         phone: '',
         license_number: '',
         vehicle_type: '',
-        has_vehicle: true,
+        plate_number: '',
     });
     const [loading, setLoading] = useState(false);
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState('');
+    const [prefixDropdownOpen, setPrefixDropdownOpen] = useState(false);
+    const [vehicleDropdownOpen, setVehicleDropdownOpen] = useState(false);
+    const prefixDropdownRef = useRef(null);
+    const vehicleDropdownRef = useRef(null);
+
+    // Set default prefix on mount
+    useEffect(() => {
+        if (prefixes && prefixes.length > 0 && !formData.phone_prefix) {
+            const defaultPrefix = prefixes.find(p => p.realCode === '+51') || prefixes[0];
+            setFormData(prev => ({ ...prev, phone_prefix: defaultPrefix.realCode }));
+        }
+    }, [prefixes]);
+
+    // Close dropdown when clicking outside
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (prefixDropdownRef.current && !prefixDropdownRef.current.contains(event.target)) {
+                setPrefixDropdownOpen(false);
+            }
+            if (vehicleDropdownRef.current && !vehicleDropdownRef.current.contains(event.target)) {
+                setVehicleDropdownOpen(false);
+            }
+        };
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => document.removeEventListener('mousedown', handleClickOutside);
+    }, []);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -21,25 +57,24 @@ const DriverModal = ({ isOpen, onClose }) => {
         setError('');
 
         try {
-            // const { error: submitError } = await supabase
-            //     .from('driver_registrations')
-            //     .insert([formData]);
+            const result = await messagesRest.save({ ...formData, type: 'driver' });
 
-            // if (submitError) throw submitError;
+            if (!result) throw new Error('Error al enviar el formulario. Por favor, intenta de nuevo.');
 
-            // setSuccess(true);
-            // setTimeout(() => {
-            //     onClose();
-            //     setSuccess(false);
-            //     setFormData({
-            //         full_name: '',
-            //         email: '',
-            //         phone: '',
-            //         license_number: '',
-            //         vehicle_type: '',
-            //         has_vehicle: true,
-            //     });
-            // }, 2000);
+            setSuccess(true);
+            setTimeout(() => {
+                onClose();
+                setSuccess(false);
+                setFormData({
+                    owner_name: '',
+                    email: '',
+                    phone_prefix: '51',
+                    phone: '',
+                    license_number: '',
+                    vehicle_type: '',
+                    plate_number: '',
+                });
+            }, 2000);
         } catch (err) {
             setError('Error al enviar el formulario. Por favor, intenta de nuevo.');
         } finally {
@@ -57,6 +92,15 @@ const DriverModal = ({ isOpen, onClose }) => {
             [e.target.name]: value,
         });
     };
+
+    // Determine if plate number is required
+    const isPlateRequired = formData.vehicle_type === 'moto' || formData.vehicle_type === 'auto';
+
+    // Get selected prefix object
+    const selectedPrefix = prefixes?.find(p => p.realCode === formData.phone_prefix) || prefixes?.[0] || { flag: '🇵🇪', beautyCode: '+51', realCode: '+51' };
+
+    // Get selected vehicle object
+    const selectedVehicle = vehicleOptions.find(v => v.value === formData.vehicle_type) || { label: 'Selecciona una opción', icon: 'mdi mdi-bike' };
 
     if (!isOpen) return null;
 
@@ -97,24 +141,6 @@ const DriverModal = ({ isOpen, onClose }) => {
                     </div>
                 ) : (
                     <form onSubmit={handleSubmit} className="p-8 space-y-6">
-                        <div className="bg-gradient-to-r from-yellow-50 to-red-50 p-6 rounded-2xl border-2 border-yellow-200">
-                            <h3 className="font-bold text-lg text-gray-800 mb-2">Beneficios:</h3>
-                            <ul className="space-y-2 text-gray-700">
-                                <li className="flex items-center gap-2">
-                                    <div className="w-2 h-2 bg-red-600 rounded-full"></div>
-                                    Gana hasta $1,500 mensuales
-                                </li>
-                                <li className="flex items-center gap-2">
-                                    <div className="w-2 h-2 bg-red-600 rounded-full"></div>
-                                    Horarios flexibles
-                                </li>
-                                <li className="flex items-center gap-2">
-                                    <div className="w-2 h-2 bg-red-600 rounded-full"></div>
-                                    Bonos por rendimiento
-                                </li>
-                            </ul>
-                        </div>
-
                         <div className="space-y-2">
                             <label className="flex items-center gap-2 text-gray-700 font-semibold">
                                 <User className="w-5 h-5 text-yellow-500" />
@@ -122,8 +148,8 @@ const DriverModal = ({ isOpen, onClose }) => {
                             </label>
                             <input
                                 type="text"
-                                name="full_name"
-                                value={formData.full_name}
+                                name="owner_name"
+                                value={formData.owner_name}
                                 onChange={handleChange}
                                 required
                                 className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200 transition-all outline-none"
@@ -131,89 +157,161 @@ const DriverModal = ({ isOpen, onClose }) => {
                             />
                         </div>
 
-                        <div className="grid md:grid-cols-2 gap-6">
-                            <div className="space-y-2">
-                                <label className="flex items-center gap-2 text-gray-700 font-semibold">
-                                    <Mail className="w-5 h-5 text-yellow-500" />
-                                    Email
-                                </label>
-                                <input
-                                    type="email"
-                                    name="email"
-                                    value={formData.email}
-                                    onChange={handleChange}
-                                    required
-                                    className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200 transition-all outline-none"
-                                    placeholder="correo@ejemplo.com"
-                                />
-                            </div>
+                        <div className="space-y-2">
+                            <label className="flex items-center gap-2 text-gray-700 font-semibold">
+                                <Mail className="w-5 h-5 text-yellow-500" />
+                                Email
+                            </label>
+                            <input
+                                type="email"
+                                name="email"
+                                value={formData.email}
+                                onChange={handleChange}
+                                required
+                                className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200 transition-all outline-none"
+                                placeholder="correo@ejemplo.com"
+                            />
+                        </div>
 
-                            <div className="space-y-2">
-                                <label className="flex items-center gap-2 text-gray-700 font-semibold">
-                                    <Phone className="w-5 h-5 text-yellow-500" />
-                                    Teléfono
-                                </label>
+                        <div className="space-y-2">
+                            <label className="flex items-center gap-2 text-gray-700 font-semibold">
+                                <Phone className="w-5 h-5 text-red-600" />
+                                Teléfono
+                            </label>
+                            <div className="grid grid-cols-3 gap-2">
+                                <div className="relative col-span-1" ref={prefixDropdownRef}>
+                                    <button
+                                        type="button"
+                                        onClick={() => setPrefixDropdownOpen(!prefixDropdownOpen)}
+                                        className="w-full px-3 py-3 rounded-xl border-2 border-gray-200 focus:border-red-500 focus:ring-2 focus:ring-red-200 transition-all outline-none bg-white flex items-center justify-between"
+                                    >
+                                        <div className='flex items-center gap-2'>
+                                            <span className="font-emoji">{selectedPrefix.flag}</span>
+                                            <span>{selectedPrefix.beautyCode}</span>
+                                        </div>
+                                        <svg className={`w-4 h-4 ml-2 transition-transform ${prefixDropdownOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                        </svg>
+                                    </button>
+                                    {prefixDropdownOpen && (
+                                        <div className="absolute z-10 w-full mt-1 bg-white border-2 border-gray-200 rounded-xl shadow-lg max-h-48 overflow-y-auto">
+                                            {prefixes.map((prefix) => (
+                                                <button
+                                                    key={prefix.realCode}
+                                                    type="button"
+                                                    onClick={() => {
+                                                        setFormData(prev => ({ ...prev, phone_prefix: prefix.realCode }));
+                                                        setPrefixDropdownOpen(false);
+                                                    }}
+                                                    className="w-full px-3 py-2 text-left hover:bg-gray-100 first:rounded-t-xl last:rounded-b-xl flex items-center gap-2"
+                                                >
+                                                    <span className="font-emoji">{prefix.flag}</span>
+                                                    <span>{prefix.beautyCode}</span>
+                                                </button>
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
                                 <input
                                     type="tel"
                                     name="phone"
                                     value={formData.phone}
                                     onChange={handleChange}
                                     required
-                                    className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200 transition-all outline-none"
-                                    placeholder="+51 999 999 999"
+                                    className="col-span-2 px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-red-500 focus:ring-2 focus:ring-red-200 transition-all outline-none"
+                                    placeholder="999 999 999"
                                 />
                             </div>
                         </div>
 
-                        <div className="space-y-2">
-                            <label className="flex items-center gap-2 text-gray-700 font-semibold">
-                                <CreditCard className="w-5 h-5 text-yellow-500" />
-                                Número de Licencia
-                            </label>
-                            <input
-                                type="text"
-                                name="license_number"
-                                value={formData.license_number}
-                                onChange={handleChange}
-                                required
-                                className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200 transition-all outline-none"
-                                placeholder="Ej: Q12345678"
-                            />
-                        </div>
+                        <div className="grid md:grid-cols-2 gap-6">
+                            <div className="space-y-2">
+                                <label className="flex items-center gap-2 text-gray-700 font-semibold">
+                                    <Bike className="w-5 h-5 text-yellow-500" />
+                                    Tipo de Vehículo
+                                </label>
+                                <div className="relative" ref={vehicleDropdownRef}>
+                                    <button
+                                        type="button"
+                                        onClick={() => setVehicleDropdownOpen(!vehicleDropdownOpen)}
+                                        className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200 transition-all outline-none bg-white flex items-center justify-between"
+                                    >
+                                        <div className="flex items-center gap-2">
+                                            <span className={selectedVehicle.icon}></span>
+                                            <span>{selectedVehicle.label}</span>
+                                        </div>
+                                        <svg className={`w-4 h-4 ml-2 transition-transform ${vehicleDropdownOpen ? 'rotate-180' : ''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                        </svg>
+                                    </button>
+                                    {vehicleDropdownOpen && (
+                                        <div className="absolute z-10 w-full mt-1 bg-white border-2 border-gray-200 rounded-xl shadow-lg max-h-48 overflow-y-auto">
+                                            {vehicleOptions.map((vehicle) => (
+                                                <button
+                                                    key={vehicle.value}
+                                                    type="button"
+                                                    onClick={() => {
+                                                        setFormData(prev => ({ ...prev, vehicle_type: vehicle.value }));
+                                                        setVehicleDropdownOpen(false);
+                                                    }}
+                                                    className="w-full px-4 py-2 text-left hover:bg-gray-100 first:rounded-t-xl last:rounded-b-xl flex items-center gap-2"
+                                                >
+                                                    <span className={vehicle.icon}></span>
+                                                    <span>{vehicle.label}</span>
+                                                </button>
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
 
-                        <div className="space-y-2">
-                            <label className="flex items-center gap-2 text-gray-700 font-semibold">
-                                <Bike className="w-5 h-5 text-yellow-500" />
-                                Tipo de Vehículo
-                            </label>
-                            <select
-                                name="vehicle_type"
-                                value={formData.vehicle_type}
-                                onChange={handleChange}
-                                required
-                                className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200 transition-all outline-none"
-                            >
-                                <option value="">Selecciona una opción</option>
-                                <option value="moto">Motocicleta</option>
-                                <option value="bicicleta">Bicicleta</option>
-                                <option value="scooter">Scooter Eléctrico</option>
-                                <option value="auto">Auto</option>
-                            </select>
+                            {(isPlateRequired) && (
+                                <div className="space-y-2">
+                                    <label className="flex items-center gap-2 text-gray-700 font-semibold">
+                                        <CreditCard className="w-5 h-5 text-yellow-500" />
+                                        Número de Placa
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="plate_number"
+                                        value={formData.plate_number}
+                                        onChange={(e) => {
+                                            const cleaned = e.target.value.replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
+                                            setFormData({
+                                                ...formData,
+                                                plate_number: cleaned,
+                                            });
+                                        }}
+                                        required
+                                        className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200 transition-all outline-none"
+                                        placeholder="Ej: ABC123"
+                                    />
+                                </div>
+                            )}
                         </div>
-
-                        <div className="flex items-center gap-3 bg-gray-50 p-4 rounded-xl">
-                            <input
-                                type="checkbox"
-                                name="has_vehicle"
-                                checked={formData.has_vehicle}
-                                onChange={handleChange}
-                                className="w-5 h-5 text-yellow-500 rounded focus:ring-2 focus:ring-yellow-200"
-                            />
-                            <label className="text-gray-700 font-medium">
-                                Tengo vehículo propio
-                            </label>
-                        </div>
-
+                        {(formData.vehicle_type === 'moto' || formData.vehicle_type === 'auto') && (
+                            <div className="space-y-2">
+                                <label className="flex items-center gap-2 text-gray-700 font-semibold">
+                                    <CreditCard className="w-5 h-5 text-yellow-500" />
+                                    Número de Licencia
+                                </label>
+                                <input
+                                    type="text"
+                                    name="license_number"
+                                    value={formData.license_number}
+                                    onChange={(e) => {
+                                        const cleaned = e.target.value.replace(/[^a-zA-Z0-9]/g, '').toUpperCase();
+                                        setFormData({
+                                            ...formData,
+                                            license_number: cleaned,
+                                        });
+                                    }}
+                                    required
+                                    className="w-full px-4 py-3 rounded-xl border-2 border-gray-200 focus:border-yellow-500 focus:ring-2 focus:ring-yellow-200 transition-all outline-none"
+                                    placeholder="Ej: Q12345678"
+                                />
+                            </div>
+                        )}
                         {error && (
                             <div className="bg-red-50 border-2 border-red-200 rounded-xl p-4">
                                 <p className="text-red-600 font-medium">{error}</p>

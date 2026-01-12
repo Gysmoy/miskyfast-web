@@ -10,9 +10,9 @@ class MessageController extends BasicController
 {
    public $model = Message::class;
    public $reactView = 'Admin/Messages';
+   public $filterStatus = false;
+   public $softDeletion = true;
 
-   public function setPaginationInstance(Request $request, string $model)
-   {
-      return $model::where('status', true);
-   }
+   
+
 }

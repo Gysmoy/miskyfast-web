@@ -12,6 +12,8 @@ use App\Models\Testimony;
 use App\Models\WebDetail;
 use App\Policies\WebDetailPolicy;
 use Illuminate\Http\Request;
+use SoDe\Extend\File;
+use SoDe\Extend\JSON;
 
 class HomeController extends BasicController
 {
@@ -25,9 +27,13 @@ class HomeController extends BasicController
             ->where('visible', true)
             ->where('status', true)
             ->get();
+
+        $prefixes = JSON::parse(File::get('./prefijocelular.json'));
             
         return [
-            'categories' => $categoriesJpa
+            'categories' => $categoriesJpa,
+            'prefixes' => $prefixes,
+            'gmaps_api_key' => env('GMAPS_API_KEY'),
         ];
     }
 }

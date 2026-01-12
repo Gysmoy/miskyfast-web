@@ -17,26 +17,47 @@ class MessageController extends BasicController
     public function beforeSave(Request $request): array
     {
         $messages = [
-            'name.required' => 'El nombre es obligatorio.',
-            'name.string' => 'El nombre debe ser una cadena de texto.',
+            'restaurant_name.required' => 'El nombre del restaurante es obligatorio.',
+            'owner_name.required' => 'El nombre del propietario es obligatorio.',
+            'email.required' => 'El correo electrónico es obligatorio.',
             'email.email' => 'El correo electrónico debe tener el formato user@domain.com.',
             'email.max' => 'El correo electrónico no debe exceder los 320 caracteres.',
-            'subject.required' => 'El asunto es obligatorio.',
-            'subject.string' => 'El asunto debe ser una cadena de texto.',
-            'description.required' => 'El mensaje es obligatorio.',
-            'description.string' => 'El mensaje debe ser una cadena de texto.'
+            'phone_prefix.required' => 'El prefijo del teléfono es obligatorio.',
+            'phone.required' => 'El número de teléfono es obligatorio.',
+            'phone.numeric' => 'El número de teléfono debe ser numérico.',
+            'address.required' => 'La dirección es obligatoria.',
+            'latitude.required' => 'La latitud es obligatoria.',
+            'latitude.numeric' => 'La latitud debe ser numérica.',
+            'longitude.required' => 'La longitud es obligatoria.',
+            'longitude.numeric' => 'La longitud debe ser numérica.',
         ];
 
-        // Validación de los datos
-        $validatedData = $request->validate([
-            'name' => 'required|string',
-            'email' => 'nullable|email|max:320',
-            'phone' => 'numeric',
-            'subject' => 'string',
-            'description' => 'string',
-            // 'subject' => 'required|string',
-            // 'description' => 'required|string',
-        ], $messages);
+        if ($request->type == 'restaurant') {
+            $validatedData = $request->validate([
+                'restaurant_name' => 'required|string',
+                'owner_name' => 'required|string',
+                'email' => 'required|email|max:320',
+                'phone_prefix' => 'required|string',
+                'phone' => 'required|numeric',
+                'address' => 'required|string',
+                'latitude' => 'required|numeric',
+                'longitude' => 'required|numeric',
+            ], $messages);
+        } else {
+            $validatedData = $request->validate([
+                'owner_name' => 'required|string',
+                'email' => 'required|email|max:320',
+                'phone_prefix' => 'required|string',
+                'phone' => 'required|numeric',
+                'vehicle_type' => 'required|string',
+            ], $messages);
+        }
+
+        $validatedData['type'] = $request->type;
+        $validatedData['reference'] = $request->reference;
+        $validatedData['license_number'] = $request->license_number;
+        $validatedData['vehicle_type'] = $request->vehicle_type;
+        $validatedData['plate_number'] = $request->plate_number;
 
         return $validatedData;
     }
@@ -47,18 +68,17 @@ class MessageController extends BasicController
             Log::info('MessageController - Iniciando envío de notificaciones', [
                 'message_id' => $jpa->id,
                 'email' => $jpa->email,
-                'name' => $jpa->name,
-                'subject' => $jpa->subject
+                'owner_name' => $jpa->owner_name,
+                'type' => $jpa->type
             ]);
 
             // Enviar notificación al cliente y al administrador
             //COMENTANDO MAIL
             //NotificationHelper::sendToClientAndAdmin($jpa, new MessageContactNotification($jpa));
-            
+
             Log::info('MessageController - Notificaciones enviadas exitosamente', [
                 'message_id' => $jpa->id
             ]);
-
         } catch (\Exception $e) {
             Log::error('MessageController - Error enviando notificaciones', [
                 'error' => $e->getMessage(),
