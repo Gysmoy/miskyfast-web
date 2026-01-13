@@ -116,6 +116,15 @@ const Home = ({ totalRestaurants, totalActiveRestaurants, totalDishes, todayOrde
     fetchSalesData();
   }, [viewType, selectedMonth, selectedYear, customStart, customEnd]);
 
+  // Calculate totals from salesData
+  const totalOrders = useMemo(() => {
+    return salesData.reduce((sum, item) => sum + item.orders, 0);
+  }, [salesData]);
+
+  const totalIncome = useMemo(() => {
+    return salesData.reduce((sum, item) => sum + item.amount, 0);
+  }, [salesData]);
+
   return (
     <>
       {/* KPIs Modernos */}
@@ -170,8 +179,8 @@ const Home = ({ totalRestaurants, totalActiveRestaurants, totalDishes, todayOrde
                   <i className="fas fa-shopping-cart text-primary fs-4"></i>
                 </div>
                 <div>
-                  <div className="fs-4 fw-bold text-dark">{todayOrders || '—'}</div>
-                  <div className="text-muted small">{thisMonthOrders || '—'} <span className="ms-1">Desde el mes pasado</span></div>
+                  <div className="fs-4 fw-bold text-dark">{totalOrders}</div>
+                  <div className="text-muted small">{totalOrders} <span className="ms-1">en el periodo filtrado</span></div>
                 </div>
               </div>
             </div>
@@ -189,8 +198,8 @@ const Home = ({ totalRestaurants, totalActiveRestaurants, totalDishes, todayOrde
                   <span className="text-success fs-4">S/</span>
                 </div>
                 <div>
-                  <div className="fs-4 fw-bold text-dark">S/ {formatIncome(incomeToday) || '—'}</div>
-                  <div className="text-success small fw-semibold"><i className="fas fa-arrow-up me-1"></i>32% <span className="text-muted ms-1">en todo el mes</span></div>
+                  <div className="fs-4 fw-bold text-dark">S/ {formatIncome(totalIncome) || '—'}</div>
+                  {/* <div className="text-success small fw-semibold"><i className="fas fa-arrow-up me-1"></i>32% <span className="text-muted ms-1">en todo el mes</span></div> */}
                 </div>
               </div>
             </div>
