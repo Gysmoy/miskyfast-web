@@ -14,8 +14,8 @@ class ItemController extends BasicController
 {
     public $model = Item::class;
     public $reactView = 'Restaurant/Items';
-    public $prefix4filter = 'items';
     public $imageFields = ['image'];
+    public $prefix4filter = 'items';
 
     public function setReactViewProperties(Request $request)
     {
