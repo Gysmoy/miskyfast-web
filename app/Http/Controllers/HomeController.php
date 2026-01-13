@@ -89,7 +89,7 @@ class HomeController extends BasicController
                     ];
                 })->toArray();
             } elseif ($type === 'yearly') {
-                $results = $query->selectRaw("DATE_FORMAT(created_at, '%Y-%m') as label, COUNT(id) as count, SUM(total_amount) as amount")
+                $results = $query->selectRaw("DATE_FORMAT(created_at, '%Y') as label, COUNT(id) as count, SUM(total_amount) as amount")
                     ->groupBy('label')
                     ->orderBy('label')
                     ->get();
