@@ -433,6 +433,7 @@ const Restaurants = ({ prefixes, gmaps_api_key }) => {
                         eRef={emailRef}
                         label="Email"
                         required
+                        disabled={isEditing}
                     />
 
                     <div className="col-md-4">

@@ -1382,7 +1382,7 @@
     ]
   },
   "resources/js/Admin/Restaurants.jsx": {
-    "file": "assets/Restaurants-CjI-BaDu.js",
+    "file": "assets/Restaurants-BQKnJ8zg.js",
     "name": "Restaurants",
     "src": "resources/js/Admin/Restaurants.jsx",
     "isEntry": true,
@@ -3080,14 +3080,13 @@
     ]
   },
   "resources/js/Restaurant/Users.jsx": {
-    "file": "assets/Users-BDRFVX9x.js",
+    "file": "assets/Users-BecgVZJf.js",
     "name": "Users",
     "src": "resources/js/Restaurant/Users.jsx",
     "isEntry": true,
     "imports": [
       "resources/js/Components/Adminto/Menu/MenuItemHorizontal.jsx",
       "_Base-CI5QnTTW.js",
-      "_SwitchFormGroup-BlKfVbKy.js",
       "_index-BOnQTV8N.js",
       "resources/js/Utils/ReactAppend.jsx",
       "_sweetalert2.esm.all-CH_YVA8w.js",
@@ -3096,7 +3095,6 @@
       "_Table-BNq1-l85.js",
       "_DxButton-DV0H-ZcL.js",
       "_CreateReactScript-DFqTQv-e.js",
-      "_ReactAppend-Vm5G2nof.js",
       "_BasicRest-DAfE3q42.js",
       "_PasswordFormGroup-C_VuJYIx.js",
       "_SelectFormGroup-hfTZ7kW_.js",

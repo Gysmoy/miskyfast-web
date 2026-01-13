@@ -191,28 +191,15 @@ const Users = ({ role }) => {
           }
         },
         {
-          dataField: 'status',
-          caption: 'Estado',
-          dataType: 'boolean',
-          cellTemplate: (container, { data }) => {
-            $(container).empty()
-            const isActive = data.status === 'active'
-            ReactAppend(container, <SwitchFormGroup checked={isActive} onChange={() => onStatusChange({
-              id: data.id,
-              value: isActive ? 'inactive' : 'active'
-            })} />)
-          }
-        },
-        {
           caption: 'Acciones',
           cellTemplate: (container, { data }) => {
             container.css('text-overflow', 'unset')
-            container.append(DxButton({
-              className: 'btn btn-xs btn-soft-primary',
-              title: 'Editar',
-              icon: 'fa fa-pen',
-              onClick: () => onModalOpen(data)
-            }))
+            // container.append(DxButton({
+            //   className: 'btn btn-xs btn-soft-primary',
+            //   title: 'Editar',
+            //   icon: 'fa fa-pen',
+            //   onClick: () => onModalOpen(data)
+            // }))
             // container.append(DxButton({
             //   className: 'btn btn-xs btn-soft-warning',
             //   title: 'Cambiar contraseña',
@@ -221,7 +208,7 @@ const Users = ({ role }) => {
             // }))
             container.append(DxButton({
               className: 'btn btn-xs btn-soft-danger',
-              title: 'Eliminar',
+              title: 'Quitar acceso',
               icon: 'fa fa-trash',
               onClick: () => onDeleteClicked(data.id)
             }))

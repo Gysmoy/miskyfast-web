@@ -258,7 +258,7 @@ const Users = ({ role, prefixes }) => {
           <InputFormGroup eRef={lastnameRef} label='Apellido' required />
         </div>
 
-        <InputFormGroup eRef={emailRef} label='Email' type='email' required />
+        <InputFormGroup eRef={emailRef} label='Email' type='email' required disabled={isEditing} />
 
         {role == 'restaurant' && (
           <div className='col-md-6'>

@@ -8,12 +8,14 @@ use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use SoDe\Extend\Response;
 
 class UserController extends BasicController
 {
     public $model = User::class;
     public $reactView = 'Restaurant/Users';
     public $softDeletion = false;
+    public $filterStatus = false;
 
     public function setPaginationInstance(Request $request, string $model)
     {
@@ -43,5 +45,20 @@ class UserController extends BasicController
         if ($isNew) {
             $jpa->assignRole([$request->role, 'Client']);
         }
+    }
+
+    public function delete(Request $request, string $id)
+    {
+        $response = Response::simpleTryCatch(function () use ($request, $id) {
+            $user = User::query()
+                ->where('restaurant_id', Auth::user()->restaurant_id)
+                ->where('id', $id)
+                ->first();
+            if (!$user) throw new Exception('El usuario no existe o no está vinculado a tu empresa.');
+
+            $user->restaurant_id = null;
+            $user->save();
+        });
+        return response($response->toArray(), $response->status);
     }
 }

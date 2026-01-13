@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use Culqi\Culqi;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use SoDe\Extend\Response;
 
 class HomeController extends BasicController
 {

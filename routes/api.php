@@ -70,6 +70,7 @@ use App\Http\Controllers\ComplaintController;
 use App\Http\Controllers\CoverController;
 use App\Http\Controllers\CouponController;
 use App\Http\Controllers\DeliveryPriceController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\TypeDeliveryController;
 use App\Http\Controllers\ItemImportController;
 use App\Http\Controllers\MessageController;
@@ -230,6 +231,8 @@ Route::middleware('auth')->group(function () {
   Route::post('/profile', [AdminProfileController::class, 'saveProfile']);
   Route::patch('/profile', [AdminProfileController::class, 'save']);
 
+  Route::get('/graph/{type}/{filter}', [HomeController::class, 'graph']);
+
   // Rutas para proyectos de cliente
   Route::prefix('customer')->group(function () {
     Route::get('/projects', [App\Http\Controllers\Customer\ProjectController::class, 'index']);
@@ -259,7 +262,6 @@ Route::middleware('auth')->group(function () {
   });
 
   Route::middleware('can:Admin')->prefix('admin')->group(function () {
-    Route::get('/dashboard', [AdminHomeController::class, 'dashboard']);
     Route::get('/sales/{id}', [AdminSaleController::class, 'get']);
     Route::post('/sales', [AdminSaleController::class, 'save']);
     Route::post('/sales/paginate', [AdminSaleController::class, 'paginate']);
