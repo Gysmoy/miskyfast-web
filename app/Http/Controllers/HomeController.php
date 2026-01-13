@@ -2,21 +2,15 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Aboutus;
 use App\Models\Category;
-use App\Models\Indicator;
-use App\Models\Item;
 use App\Models\Order;
-use App\Models\Post;
-use App\Models\Slider;
 use App\Models\Testimony;
-use App\Models\WebDetail;
-use App\Policies\WebDetailPolicy;
 use Illuminate\Http\Request;
 use SoDe\Extend\File;
 use SoDe\Extend\JSON;
 use Carbon\Carbon;
 use Exception;
+use Illuminate\Support\Facades\Auth;
 use SoDe\Extend\Response;
 
 class HomeController extends BasicController
@@ -55,6 +49,8 @@ class HomeController extends BasicController
             $query = Order::query()
                 ->where('status_id', 'f7b3f073-c8bf-49c9-ba6d-fcdfe82395dc')
                 ->where('delivery_status_id', 'a0618dce-62e9-4720-8e1f-10f3208c357e');
+
+            if (Auth::user()->restaurant_id !== null) $query->where('restaurant_id', Auth::user()->restaurant_id);
 
             if ($type === 'monthly') {
                 // filter: yyyy-mm

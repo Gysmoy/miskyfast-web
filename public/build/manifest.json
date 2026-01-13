@@ -82,6 +82,26 @@
       "_BasicRest-DAfE3q42.js"
     ]
   },
+  "_HomeRest-DZXxe76v.js": {
+    "file": "assets/HomeRest-DZXxe76v.js",
+    "name": "HomeRest",
+    "imports": [
+      "_index-BOnQTV8N.js",
+      "resources/js/Components/Adminto/Menu/MenuItemHorizontal.jsx",
+      "_index-D9sryYpX.js",
+      "__commonjsHelpers-D6-XlEtG.js",
+      "_index-yBjzXJbu.js",
+      "_index-Chjiymov.js",
+      "_BasicRest-DAfE3q42.js"
+    ],
+    "css": [
+      "HomeRest.css"
+    ]
+  },
+  "_HomeRest.css": {
+    "file": "HomeRest.css",
+    "src": "_HomeRest.css"
+  },
   "_HtmlContent-DLJst9aP.js": {
     "file": "assets/HtmlContent-DLJst9aP.js",
     "name": "HtmlContent",
@@ -335,25 +355,6 @@
     "imports": [
       "__commonjsHelpers-D6-XlEtG.js",
       "____vite-browser-external_commonjs-proxy-DDYoOVPM.js"
-    ]
-  },
-  "_react-apexcharts.css": {
-    "file": "react-apexcharts.css",
-    "src": "_react-apexcharts.css"
-  },
-  "_react-apexcharts.min-DQzjFF2q.js": {
-    "file": "assets/react-apexcharts.min-DQzjFF2q.js",
-    "name": "react-apexcharts.min",
-    "imports": [
-      "_index-BOnQTV8N.js",
-      "resources/js/Components/Adminto/Menu/MenuItemHorizontal.jsx",
-      "_index-D9sryYpX.js",
-      "__commonjsHelpers-D6-XlEtG.js",
-      "_index-yBjzXJbu.js",
-      "_index-Chjiymov.js"
-    ],
-    "css": [
-      "react-apexcharts.css"
     ]
   },
   "_sweetalert2.esm.all-CH_YVA8w.js": {
@@ -1046,26 +1047,26 @@
     ]
   },
   "resources/js/Admin/Home.jsx": {
-    "file": "assets/Home-C6BcTY5F.js",
+    "file": "assets/Home-CSHgQf6H.js",
     "name": "Home",
     "src": "resources/js/Admin/Home.jsx",
     "isEntry": true,
     "imports": [
       "resources/js/Components/Adminto/Menu/MenuItemHorizontal.jsx",
       "_index-BOnQTV8N.js",
-      "_react-apexcharts.min-DQzjFF2q.js",
+      "_HomeRest-DZXxe76v.js",
       "resources/js/Utils/ReactAppend.jsx",
       "_CreateReactScript-DFqTQv-e.js",
       "_Base-CI5QnTTW.js",
-      "_BasicRest-DAfE3q42.js",
       "_index-yBjzXJbu.js",
       "__commonjsHelpers-D6-XlEtG.js",
       "_index-D9sryYpX.js",
       "_index-B6ujFmsw.js",
       "_index-Chjiymov.js",
-      "_index.esm-BBRthS-9.js",
-      "____vite-browser-external_commonjs-proxy-DDYoOVPM.js",
+      "_BasicRest-DAfE3q42.js",
       "_main-BH5j8D81.js",
+      "____vite-browser-external_commonjs-proxy-DDYoOVPM.js",
+      "_index.esm-BBRthS-9.js",
       "_Logout-BhGEl0E_.js"
     ],
     "css": [
@@ -2955,14 +2956,14 @@
     ]
   },
   "resources/js/Restaurant/Home.jsx": {
-    "file": "assets/Home-IZpS-40R.js",
+    "file": "assets/Home-DzD0js0g.js",
     "name": "Home",
     "src": "resources/js/Restaurant/Home.jsx",
     "isEntry": true,
     "imports": [
       "resources/js/Components/Adminto/Menu/MenuItemHorizontal.jsx",
       "_index-BOnQTV8N.js",
-      "_react-apexcharts.min-DQzjFF2q.js",
+      "_HomeRest-DZXxe76v.js",
       "resources/js/Utils/ReactAppend.jsx",
       "_CreateReactScript-DFqTQv-e.js",
       "_Base-CI5QnTTW.js",
@@ -2971,9 +2972,10 @@
       "_index-D9sryYpX.js",
       "_index-B6ujFmsw.js",
       "_index-Chjiymov.js",
-      "_index.esm-BBRthS-9.js",
-      "____vite-browser-external_commonjs-proxy-DDYoOVPM.js",
+      "_BasicRest-DAfE3q42.js",
       "_main-BH5j8D81.js",
+      "____vite-browser-external_commonjs-proxy-DDYoOVPM.js",
+      "_index.esm-BBRthS-9.js",
       "_Logout-BhGEl0E_.js"
     ],
     "css": [
