@@ -1778,7 +1778,7 @@
     ]
   },
   "resources/js/Admin/Users.jsx": {
-    "file": "assets/Users-34fzAacB.js",
+    "file": "assets/Users-CFWimlLh.js",
     "name": "Users",
     "src": "resources/js/Admin/Users.jsx",
     "isEntry": true,
@@ -1797,6 +1797,8 @@
       "_CreateReactScript-DFqTQv-e.js",
       "_ReactAppend-Vm5G2nof.js",
       "_BasicRest-DAfE3q42.js",
+      "_SelectAPIFormGroup-CenlOxSx.js",
+      "_SelectFormGroup-hfTZ7kW_.js",
       "_index-yBjzXJbu.js",
       "_Logout-BhGEl0E_.js",
       "_main-BH5j8D81.js",

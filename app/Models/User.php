@@ -28,11 +28,16 @@ class User extends Authenticatable
         'restaurant_id',
         'name',
         'lastname',
+        'fullname',
         'email',
         'email_verified_at',
         'password',
         'status',
         'phone',
+        'phone_prefix',
+        'license_number',
+        'vehicle_type',
+        'plate_number',
         'biography',
         'profile'
     ];
@@ -55,6 +60,7 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
+        'status' => 'boolean',
     ];
 
     public function isRoot()

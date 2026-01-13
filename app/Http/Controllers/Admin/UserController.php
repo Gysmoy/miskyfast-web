@@ -6,6 +6,8 @@ use App\Http\Controllers\BasicController;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use SoDe\Extend\File;
+use SoDe\Extend\JSON;
 
 class UserController extends BasicController
 {
@@ -16,12 +18,17 @@ class UserController extends BasicController
 
     public function setReactViewProperties(Request $request)
     {
-        return ['role' => $request->role];
+        $prefixes = JSON::parse(File::get('./prefijocelular.json'));
+        return [
+            'role' => $request->role,
+            'prefixes' => $prefixes,
+        ];
     }
     public function setPaginationInstance(Request $request, string $model)
     {
         $role = ucfirst($request->role);
         return $model::select('users.*')
+            ->with(['restaurant'])
             ->join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
             ->join('roles', 'model_has_roles.role_id', '=', 'roles.id')
             ->where('roles.name', $role);
