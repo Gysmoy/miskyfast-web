@@ -376,8 +376,8 @@ class BasicController extends Controller
 
   public function delete(Request $request, string $id)
   {
-    $response = new Response();
-    try {
+    DB::beginTransaction();
+    $response = Response::simpleTryCatch(function () use ($request, $id) {
       $body = $this->beforeDelete($request);
 
       $dataBeforeDelete = $this->model::find($id);
@@ -411,17 +411,8 @@ class BasicController extends Controller
       $this->afterDelete($dataBeforeDelete);
 
       if (!$deleted) throw new Exception('No se ha eliminado ningun registro');
-
-      $response->status = 200;
-      $response->message = 'Operacion correcta';
-    } catch (\Throwable $th) {
-      $response->status = 400;
-      $response->message = $th->getMessage();
-    } finally {
-      return response(
-        $response->toArray(),
-        $response->status
-      );
-    }
+      DB::commit();
+    }, fn() => DB::rollBack());
+    return response($response->toArray(), $response->status);
   }
 }

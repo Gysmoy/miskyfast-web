@@ -439,7 +439,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/users/update-promotional-status', [AdminUserController::class, 'updatePromotionalStatus']);
     Route::patch('/users/status', [AdminUserController::class, 'status']);
     Route::patch('/users/{field}', [AdminUserController::class, 'boolean']);
-    Route::delete('/users/{id}', [AdminTagController::class, 'delete']);
+    Route::delete('/users/{id}', [AdminUserController::class, 'delete']);
 
     Route::post('/delivery-zones', [AdminDeliveryZoneController::class, 'save']);
     Route::post('/delivery-zones/paginate', [AdminDeliveryZoneController::class, 'paginate']);

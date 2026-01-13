@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\BasicController;
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
 use SoDe\Extend\File;
@@ -15,6 +16,7 @@ class UserController extends BasicController
     public $reactView = 'Admin/Users';
     public $reactRootView = 'admin';
     public $prefix4filter = 'users';
+    public $softDeletion = false;
 
     public function setReactViewProperties(Request $request)
     {
@@ -32,5 +34,11 @@ class UserController extends BasicController
             ->join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
             ->join('roles', 'model_has_roles.role_id', '=', 'roles.id')
             ->where('roles.name', $role);
+    }
+
+    public function beforeDelete(Request $request)
+    {
+        Order::where('client_id', $request->id)->delete();
+        return $request->all();
     }
 }
