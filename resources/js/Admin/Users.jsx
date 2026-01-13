@@ -114,13 +114,24 @@ const Users = ({ role, prefixes }) => {
   const onDeleteClicked = async (id) => {
     const { isConfirmed } = await Swal.fire({
       title: 'Eliminar registro',
-      text: '¿Estas seguro de eliminar este registro?',
+      text: '¿Estás seguro de eliminar este registro?',
       icon: 'warning',
       showCancelButton: true,
-      confirmButtonText: 'Si, eliminar',
+      confirmButtonText: 'Sí, eliminar',
       cancelButtonText: 'Cancelar'
     })
     if (!isConfirmed) return
+
+    const { isConfirmed: secondConfirm } = await Swal.fire({
+      title: '¿Realmente deseas continuar?',
+      text: 'Se borrarán todos los datos del usuario: órdenes, historial, etc. Si solo quieres desactivar el acceso, puedes cambiar su estado.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, eliminar de todos modos',
+      cancelButtonText: 'Cancelar'
+    })
+    if (!secondConfirm) return
+
     const result = await usersRest.delete(id)
     if (!result) return
     $(gridRef.current).dxDataGrid('instance').refresh()

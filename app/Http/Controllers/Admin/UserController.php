@@ -17,6 +17,7 @@ class UserController extends BasicController
     public $reactRootView = 'admin';
     public $prefix4filter = 'users';
     public $softDeletion = false;
+    public $filterStatus = false;
 
     public function setReactViewProperties(Request $request)
     {
