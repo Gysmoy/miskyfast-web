@@ -179,7 +179,7 @@ const Home = ({ totalRestaurants, totalActiveRestaurants, totalDishes, todayOrde
                   <i className="fas fa-shopping-cart text-primary fs-4"></i>
                 </div>
                 <div>
-                  <div className="fs-4 fw-bold text-dark">{totalOrders}</div>
+                  <div className="fs-4 fw-bold text-dark">{todayOrders} hoy</div>
                   <div className="text-muted small">{totalOrders} <span className="ms-1">en el periodo filtrado</span></div>
                 </div>
               </div>
