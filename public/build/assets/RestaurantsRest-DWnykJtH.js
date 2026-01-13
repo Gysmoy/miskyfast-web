@@ -1,0 +1,1 @@
+var r=Object.defineProperty;var i=(a,s,t)=>s in a?r(a,s,{enumerable:!0,configurable:!0,writable:!0,value:t}):a[s]=t;var e=(a,s,t)=>i(a,typeof s!="symbol"?s+"":s,t);import{B as n}from"./BasicRest-DAfE3q42.js";class o extends n{constructor(){super(...arguments);e(this,"path","admin/restaurants");e(this,"hasFiles",!0)}}export{o as R};

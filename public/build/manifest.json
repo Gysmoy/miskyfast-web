@@ -221,6 +221,13 @@
     "file": "RepositoryRest.css",
     "src": "_RepositoryRest.css"
   },
+  "_RestaurantsRest-DWnykJtH.js": {
+    "file": "assets/RestaurantsRest-DWnykJtH.js",
+    "name": "RestaurantsRest",
+    "imports": [
+      "_BasicRest-DAfE3q42.js"
+    ]
+  },
   "_SaleStatusesRest-D62-x18X.js": {
     "file": "assets/SaleStatusesRest-D62-x18X.js",
     "name": "SaleStatusesRest",
@@ -279,6 +286,13 @@
     "imports": [
       "resources/js/Components/Adminto/Menu/MenuItemHorizontal.jsx",
       "_index-BOnQTV8N.js"
+    ]
+  },
+  "_UsersRest-DZ4bTg8-.js": {
+    "file": "assets/UsersRest-DZ4bTg8-.js",
+    "name": "UsersRest",
+    "imports": [
+      "_BasicRest-DAfE3q42.js"
     ]
   },
   "_WebDetailsRest-79dXcSBK.js": {
@@ -1146,7 +1160,7 @@
     ]
   },
   "resources/js/Admin/Messages.jsx": {
-    "file": "assets/Messages-BEHB8ulH.js",
+    "file": "assets/Messages-DM-3WGg-.js",
     "name": "Messages",
     "src": "resources/js/Admin/Messages.jsx",
     "isEntry": true,
@@ -1162,6 +1176,8 @@
       "_BasicRest-DAfE3q42.js",
       "_Modal-B8hOLBJ7.js",
       "_sweetalert2.esm.all-CH_YVA8w.js",
+      "_RestaurantsRest-DWnykJtH.js",
+      "_UsersRest-DZ4bTg8-.js",
       "_index-yBjzXJbu.js",
       "__commonjsHelpers-D6-XlEtG.js",
       "_index-B6ujFmsw.js",
@@ -1381,7 +1397,7 @@
     ]
   },
   "resources/js/Admin/Restaurants.jsx": {
-    "file": "assets/Restaurants-BQKnJ8zg.js",
+    "file": "assets/Restaurants-GAn9X7G1.js",
     "name": "Restaurants",
     "src": "resources/js/Admin/Restaurants.jsx",
     "isEntry": true,
@@ -1392,7 +1408,7 @@
       "_index-BOnQTV8N.js",
       "resources/js/Utils/ReactAppend.jsx",
       "_sweetalert2.esm.all-CH_YVA8w.js",
-      "_BasicRest-DAfE3q42.js",
+      "_RestaurantsRest-DWnykJtH.js",
       "_ImageFormGroup-CA6NQXmQ.js",
       "_InputFormGroup-CpPyNZzt.js",
       "_Modal-B8hOLBJ7.js",
@@ -1409,7 +1425,8 @@
       "____vite-browser-external_commonjs-proxy-DDYoOVPM.js",
       "_index-D9sryYpX.js",
       "_index-B6ujFmsw.js",
-      "_index.esm-BBRthS-9.js"
+      "_index.esm-BBRthS-9.js",
+      "_BasicRest-DAfE3q42.js"
     ],
     "css": [
       "tippy.css",
@@ -1777,7 +1794,7 @@
     ]
   },
   "resources/js/Admin/Users.jsx": {
-    "file": "assets/Users-K36uWB4V.js",
+    "file": "assets/Users-Bz74A5JQ.js",
     "name": "Users",
     "src": "resources/js/Admin/Users.jsx",
     "isEntry": true,
@@ -1795,7 +1812,7 @@
       "_DxButton-DV0H-ZcL.js",
       "_CreateReactScript-DFqTQv-e.js",
       "_ReactAppend-Vm5G2nof.js",
-      "_BasicRest-DAfE3q42.js",
+      "_UsersRest-DZ4bTg8-.js",
       "_SelectAPIFormGroup-CenlOxSx.js",
       "_SelectFormGroup-hfTZ7kW_.js",
       "_index-yBjzXJbu.js",
@@ -1805,7 +1822,8 @@
       "____vite-browser-external_commonjs-proxy-DDYoOVPM.js",
       "_index-D9sryYpX.js",
       "_index-B6ujFmsw.js",
-      "_index.esm-BBRthS-9.js"
+      "_index.esm-BBRthS-9.js",
+      "_BasicRest-DAfE3q42.js"
     ],
     "css": [
       "tippy.css",

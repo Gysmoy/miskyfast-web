@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Order;
 use App\Models\User;
 use Illuminate\Http\Request;
+use SoDe\Extend\Crypto;
 use SoDe\Extend\File;
 use SoDe\Extend\JSON;
 
@@ -35,6 +36,33 @@ class UserController extends BasicController
             ->join('model_has_roles', 'users.id', '=', 'model_has_roles.model_id')
             ->join('roles', 'model_has_roles.role_id', '=', 'roles.id')
             ->where('roles.name', $role);
+    }
+
+    public function beforeSave(Request $request)
+    {
+        $messages = [
+            'email.unique' => 'El correo electrónico ya está registrado.',
+        ];
+
+        $request->validate([
+            'email' => 'required|email|unique:users,email,' . $request->id,
+        ], $messages);
+
+        return $request->all();
+    }
+
+    public function afterSave(Request $request, object $jpa, ?bool $isNew)
+    {
+        if ($isNew) {
+            $password = Crypto::short();
+            $jpa->assignRole([$request->role, 'Client']);
+            $jpa->password = $password;
+            $jpa->save();
+            return [
+                'email' => $request->email,
+                'password' => $password,
+            ];
+        }
     }
 
     public function beforeDelete(Request $request)
