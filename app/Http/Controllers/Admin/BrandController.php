@@ -10,4 +10,5 @@ class BrandController extends BasicController
     public $model = Brand::class;
     public $reactView = 'Admin/Brands';
     public $imageFields = ['image'];
+    public $softDeletion = false;
 }

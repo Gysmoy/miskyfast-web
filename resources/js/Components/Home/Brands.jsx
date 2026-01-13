@@ -1,24 +1,9 @@
 import Icon from "@mdi/react";
 import { mdiStoreOutline } from "@mdi/js";
 
-const Brands = () => {
-    const brands = [
-        { icon: '🍔', name: 'Burger King' },
-        { icon: '🍕', name: 'Pizza Hut' },
-        { icon: '🍗', name: 'KFC' },
-        { icon: '🌮', name: 'Taco Bell' },
-        { icon: '🥪', name: 'Subway' },
-        { icon: '🍕', name: 'Dominos' },
-        { icon: '🍔', name: 'McDonalds' },
-        { icon: '🍗', name: 'Popeyes' },
-        { icon: '🌶️', name: 'Chilis' },
-        { icon: '☕', name: 'Starbucks' },
-        { icon: '🍩', name: 'Dunkin' },
-        { icon: '🍔', name: 'Wendys' },
-    ];
-
+const Brands = ({ items }) => {
     // Duplicate to enable infinite scroll
-    const duplicated = [...brands, ...brands];
+    const duplicated = [...items, ...items];
 
     return (
         <section className="py-16 bg-white relative overflow-hidden">
@@ -53,9 +38,11 @@ const Brands = () => {
                                 >
                                     <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-8 shadow-md hover:shadow-xl transition-all duration-300 transform hover:scale-110 hover:-translate-y-2 border-2 border-gray-100 group-hover:border-red-300">
                                         <div className="flex flex-col items-center justify-center gap-3">
-                                            <div className="text-5xl group-hover:scale-125 transition-transform duration-300">
-                                                {b.icon}
-                                            </div>
+                                            <img
+                                                src={`/api/brands/media/${b.image}`}
+                                                alt={b.name}
+                                                className="h-12 aspect-square object-contain group-hover:scale-125 transition-transform duration-300"
+                                            />
                                             <div className="text-center">
                                                 <p className="font-bold text-gray-800 text-lg group-hover:text-red-600 transition-colors">
                                                     {b.name}

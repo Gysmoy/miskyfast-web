@@ -14,18 +14,7 @@ class Brand extends Model
     protected $keyType = 'string';
 
     protected $fillable = [
-        'slug',
         'name',
-        'description',
-        'image',
-        'featured',
-        'visible',
-        'status',
+        'image'
     ];
-
-    public function items()
-    {
-        return $this->hasMany(Item::class);
-    }
-
 }

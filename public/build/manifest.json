@@ -477,7 +477,7 @@
     ]
   },
   "resources/js/Admin/Banners.jsx": {
-    "file": "assets/Banners-Cw2Jebyn.js",
+    "file": "assets/Banners-Bt25dFfC.js",
     "name": "Banners",
     "src": "resources/js/Admin/Banners.jsx",
     "isEntry": true,
@@ -495,7 +495,6 @@
       "_Modal-B8hOLBJ7.js",
       "_Table-BNq1-l85.js",
       "_DxButton-DV0H-ZcL.js",
-      "_InputFormGroup-CpPyNZzt.js",
       "_CreateReactScript-DFqTQv-e.js",
       "_ReactAppend-Vm5G2nof.js",
       "_index-yBjzXJbu.js",
@@ -513,15 +512,13 @@
     ]
   },
   "resources/js/Admin/Brands.jsx": {
-    "file": "assets/Brands-BaWqrEmP.js",
+    "file": "assets/Brands-D8RfM_Sk.js",
     "name": "Brands",
     "src": "resources/js/Admin/Brands.jsx",
     "isEntry": true,
     "imports": [
       "resources/js/Components/Adminto/Menu/MenuItemHorizontal.jsx",
       "_Base-CI5QnTTW.js",
-      "_SwitchFormGroup-BlKfVbKy.js",
-      "_TextareaFormGroup-Cf6Q-Iyt.js",
       "_index-BOnQTV8N.js",
       "resources/js/Utils/ReactAppend.jsx",
       "_sweetalert2.esm.all-CH_YVA8w.js",
@@ -2820,7 +2817,7 @@
     "isEntry": true
   },
   "resources/js/Home.jsx": {
-    "file": "assets/Home-FlQo_VHE.js",
+    "file": "assets/Home-CQIFcGHY.js",
     "name": "Home",
     "src": "resources/js/Home.jsx",
     "isEntry": true,

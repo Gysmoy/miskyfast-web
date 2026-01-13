@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Order;
 use App\Models\Testimony;
@@ -29,12 +30,14 @@ class HomeController extends BasicController
             ->where('visible', true)
             ->where('status', true)
             ->get();
+        $brandsJpa = Brand::all();
 
         $prefixes = JSON::parse(File::get('./prefijocelular.json'));
 
         return [
             'categories' => $categoriesJpa,
             'testimonies' => $testimoniesJpa,
+            'brands' => $brandsJpa,
             'prefixes' => $prefixes,
             'gmaps_api_key' => env('GMAPS_API_KEY'),
         ];

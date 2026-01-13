@@ -11,7 +11,7 @@ import DriverModal from './Components/Home/DriverModal';
 import RestaurantModal from './Components/Home/RestaurantModal';
 
 const Home = (properties) => {
-  const { categories, testimonies, prefixes, gmaps_api_key } = properties
+  const { categories, testimonies, brands, prefixes, gmaps_api_key } = properties
 
   const [isRestaurantModalOpen, setIsRestaurantModalOpen] = useState(false);
   const [isDriverModalOpen, setIsDriverModalOpen] = useState(false);
@@ -29,7 +29,7 @@ const Home = (properties) => {
     <HowItWorks />
     <Categories items={categories} />
     <Testimonies items={testimonies} />
-    <Brands />
+    <Brands items={brands}/>
     <RestaurantModal isOpen={isRestaurantModalOpen} onClose={() => setIsRestaurantModalOpen(false)} prefixes={prefixes} gmaps_api_key={gmaps_api_key} />
     <DriverModal isOpen={isDriverModalOpen} onClose={() => setIsDriverModalOpen(false)} prefixes={prefixes} />
   </Base>

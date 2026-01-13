@@ -1,6 +1,4 @@
 import BaseAdminto from '@Adminto/Base';
-import SwitchFormGroup from '@Adminto/form/SwitchFormGroup';
-import TextareaFormGroup from '@Adminto/form/TextareaFormGroup';
 import React, { useRef, useState } from 'react';
 import { createRoot } from 'react-dom/client';
 import Swal from 'sweetalert2';
@@ -23,7 +21,6 @@ const Brands = () => {
   // Form elements ref
   const idRef = useRef()
   const nameRef = useRef()
-  const descriptionRef = useRef()
   const imageRef = useRef()
 
   const [isEditing, setIsEditing] = useState(false)
@@ -34,7 +31,6 @@ const Brands = () => {
 
     idRef.current.value = data?.id ?? ''
     nameRef.current.value = data?.name ?? ''
-    descriptionRef.current.value = data?.description ?? ''
     imageRef.image.src = `/storage/images/brand/${data?.image}`
     imageRef.current.value = null
 
@@ -47,7 +43,6 @@ const Brands = () => {
     const request = {
       id: idRef.current.value || undefined,
       name: nameRef.current.value,
-      description: descriptionRef.current.value,
     }
 
     const formData = new FormData()
@@ -64,18 +59,6 @@ const Brands = () => {
 
     $(gridRef.current).dxDataGrid('instance').refresh()
     $(modalRef.current).modal('hide')
-  }
-
-  const onFeaturedChange = async ({ id, value }) => {
-    const result = await brandsRest.boolean({ id, field: 'featured', value })
-    if (!result) return
-    $(gridRef.current).dxDataGrid('instance').refresh()
-  }
-
-  const onVisibleChange = async ({ id, value }) => {
-    const result = await brandsRest.boolean({ id, field: 'visible', value })
-    if (!result) return
-    $(gridRef.current).dxDataGrid('instance').refresh()
   }
 
   const onDeleteClicked = async (id) => {
@@ -123,12 +106,7 @@ const Brands = () => {
         {
           dataField: 'name',
           caption: 'Marca',
-          width: '30%',
-        },
-        {
-          dataField: 'description',
-          caption: 'Descripción',
-          width: '50%',
+          width: '70%',
         },
         {
           dataField: 'image',
@@ -137,30 +115,6 @@ const Brands = () => {
           allowFiltering: false,
           cellTemplate: (container, { data }) => {
             ReactAppend(container, <img src={`/storage/images/brand/${data.image}`} style={{ width: '80px', height: '48px', objectFit: 'cover', objectPosition: 'center', borderRadius: '4px' }} onError={e => e.target.src = '/api/cover/thumbnail/null'} />)
-          }
-        },
-        {
-          dataField: 'featured',
-          caption: 'Destacado',
-          dataType: 'boolean',
-          cellTemplate: (container, { data }) => {
-            $(container).empty()
-            ReactAppend(container, <SwitchFormGroup checked={data.featured == 1} onChange={() => onFeaturedChange({
-              id: data.id,
-              value: !data.featured
-            })} />)
-          }
-        },
-        {
-          dataField: 'visible',
-          caption: 'Visible',
-          dataType: 'boolean',
-          cellTemplate: (container, { data }) => {
-            $(container).empty()
-            ReactAppend(container, <SwitchFormGroup checked={data.visible == 1} onChange={() => onVisibleChange({
-              id: data.id,
-              value: !data.visible
-            })} />)
           }
         },
         {
@@ -189,7 +143,6 @@ const Brands = () => {
       <div className='row' id='faqs-container'>
         <input ref={idRef} type='hidden' />
         <InputFormGroup eRef={nameRef} label='Marca' col='col-12' required />
-        <TextareaFormGroup eRef={descriptionRef} label='Descripción' rows={3} />
       </div>
     </Modal>
   </>

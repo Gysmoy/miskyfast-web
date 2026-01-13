@@ -7,6 +7,7 @@ use App\Http\Controllers\Admin\HomeController as AdminHomeController;
 use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
 use App\Http\Controllers\Admin\AccountController as AdminAccountController;
+use App\Http\Controllers\Admin\BrandController as AdminBrandController;
 use App\Http\Controllers\Admin\ItemController as AdminItemController;
 use App\Http\Controllers\Admin\MessageController as AdminMessageController;
 use App\Http\Controllers\Admin\PaymentMethodController as AdminPaymentMethodController;
@@ -30,6 +31,7 @@ use App\Http\Controllers\Mobile\AddressController as MobileAddressController;
 
 // Public 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BrandController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MessageController;
 use App\Http\Controllers\TestimonyController;
@@ -61,8 +63,9 @@ Route::middleware('auth')->group(function () {
         Route::get('/restaurants', [AdminRestaurantController::class, 'reactView'])->name('Admin/Restaurants.jsx');
         Route::get('/payment-methods', [AdminPaymentMethodController::class, 'reactView'])->name('Admin/PaymentMethods.jsx');
         Route::get('/statuses', [AdminStatusController::class, 'reactView'])->name('Admin/Statuses.jsx');
-        Route::get('/messages', [AdminMessageController::class, 'reactView'])->name('Admin/Messages.jsx');   
-        Route::get('/testimonies', [AdminTestimonyController::class, 'reactView'])->name('Admin/Testimonies.jsx');   
+        Route::get('/messages', [AdminMessageController::class, 'reactView'])->name('Admin/Messages.jsx');
+        Route::get('/testimonies', [AdminTestimonyController::class, 'reactView'])->name('Admin/Testimonies.jsx');
+        Route::get('/brands', [AdminBrandController::class, 'reactView'])->name('Admin/Brands.jsx');
 
         Route::get('/users/{role}', [AdminUserController::class, 'reactView'])->name('Admin/Users.jsx');
     });
@@ -73,7 +76,7 @@ Route::middleware('auth')->group(function () {
 
         Route::get('/orders', [RestaurantOrderController::class, 'reactView'])->name('Restaurant/Orders.jsx');
         Route::get('/kitchen', [RestaurantKitchenController::class, 'reactView'])->name('Restaurant/Kitchen.jsx');
-        
+
         Route::get('/items', [RestaurantItemController::class, 'reactView'])->name('Restaurant/Items.jsx');
         Route::get('/users', [RestaurantUserController::class, 'reactView'])->name('Restaurant/Users.jsx');
     });

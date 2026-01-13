@@ -23,12 +23,7 @@ const Banners = ({ pages }) => {
     // Form elements ref
     const idRef = useRef();
     const nameRef = useRef();
-    const descriptionRef = useRef();
-    const backgroundRef = useRef();
     const imageRef = useRef();
-    const buttonTextRef = useRef();
-    const buttonLinkRef = useRef();
-    const absoluteRef = useRef();
 
     const [isEditing, setIsEditing] = useState(false);
 
@@ -38,17 +33,8 @@ const Banners = ({ pages }) => {
 
         idRef.current.value = banner?.id ?? "";
         nameRef.current.value = banner?.data?.name ?? "";
-        descriptionRef.current.value = banner?.data?.description ?? "";
-        backgroundRef.current.value = null;
-        backgroundRef.image.src = `/storage/images/system/${banner?.data?.background}`;
         imageRef.current.value = null;
         imageRef.image.src = `/storage/images/system/${banner?.data?.image}`;
-        buttonTextRef.current.value = banner?.data?.button_text ?? "";
-        buttonLinkRef.current.value = banner?.data?.button_link ?? "";
-
-        if (absoluteRef.current) {
-            absoluteRef.current.checked = banner?.data?.contenedor === 'absoluto';
-        }
 
         $(modalRef.current).modal("show");
     };
@@ -59,10 +45,6 @@ const Banners = ({ pages }) => {
         const request = {
             id: idRef.current.value || undefined,
             name: nameRef.current.value,
-            description: descriptionRef.current.value,
-            button_text: buttonTextRef.current.value,
-            button_link: buttonLinkRef.current.value,
-            contenedor: absoluteRef.current?.checked ? 'absoluto' : 'relativo'
         };
 
         const formData = new FormData();
@@ -70,10 +52,6 @@ const Banners = ({ pages }) => {
             formData.append(key, request[key]);
         }
 
-        const background = backgroundRef.current.files[0];
-        if (background) {
-            formData.append("background", background);
-        }
         const image = imageRef.current.files[0];
         if (image) {
             formData.append("image", image);
@@ -170,31 +148,6 @@ const Banners = ({ pages }) => {
                         caption: "Despues de",
                     },
                     {
-                        dataField: "background",
-                        caption: "Fondo",
-                        width: "90px",
-                        allowFiltering: false,
-                        cellTemplate: (container, { data }) => {
-                            ReactAppend(
-                                container,
-                                <img
-                                    src={`/storage/images/system/${data?.data?.background}`}
-                                    style={{
-                                        width: "80px",
-                                        height: "48px",
-                                        objectFit: "cover",
-                                        objectPosition: "center",
-                                        borderRadius: "4px",
-                                    }}
-                                    onError={(e) =>
-                                        (e.target.src =
-                                            "/api/cover/thumbnail/null")
-                                    }
-                                />
-                            );
-                        },
-                    },
-                    {
                         dataField: "image",
                         caption: "Imagen",
                         width: "90px",
@@ -272,53 +225,16 @@ const Banners = ({ pages }) => {
                 size="md"
             >
                 <input ref={idRef} type="hidden" />
-                <ImageFormGroup eRef={backgroundRef} label="Fondo" />
-                <div className="row">
-                    <div className="col-sm-6">
-                        <ImageFormGroup
-                            eRef={imageRef}
-                            label="Imagen"
-                            aspect={1}
-                        />
-                    </div>
-                    <div className="col-sm-6">
-                        <TextareaFormGroup
-                            eRef={nameRef}
-                            label="Titulo"
-                            rows={2}
-                        />
-                        <TextareaFormGroup
-                            eRef={descriptionRef}
-                            label="Descripción"
-                            rows={2}
-                        />
-                        <InputFormGroup
-                            eRef={buttonTextRef}
-                            label="Texto botón"
-                        />
-                    </div>
-                </div>
-                <InputFormGroup eRef={buttonLinkRef} label="URL botón" />
-                
-                <div className="form-group row">
-                    <label className="col-sm-3 col-form-label">Posición</label>
-                    <div className="col-sm-9">
-                        <div className="custom-control custom-switch">
-                            <input 
-                                type="checkbox" 
-                                className="custom-control-input" 
-                                id="absoluteSwitch"
-                                ref={absoluteRef}
-                            />
-                            <label className="custom-control-label" htmlFor="absoluteSwitch">
-                                Imagen absoluta
-                            </label>
-                        </div>
-                        <small className="form-text text-muted">
-                            Marca esta opción para posicionamiento absoluto de la imagen
-                        </small>
-                    </div>
-                </div>
+                <ImageFormGroup
+                    eRef={imageRef}
+                    label="Imagen"
+                    aspect={1}
+                />
+                <TextareaFormGroup
+                    eRef={nameRef}
+                    label="Titulo"
+                    rows={2}
+                />
             </Modal>
         </>
     );
