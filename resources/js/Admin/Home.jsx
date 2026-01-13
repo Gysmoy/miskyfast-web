@@ -83,7 +83,7 @@ const Home = ({ totalRestaurants, totalActiveRestaurants, totalDishes, todayOrde
             <div className="card-body d-flex flex-column justify-content-between">
               <div className="d-flex align-items-center justify-content-between mb-2">
                 <span className="text-muted fw-semibold">Platos Totales</span>
-                <i className="fas fa-ellipsis-v text-muted small"></i>
+                <i className="fas fa-pizza-slice text-muted small"></i>
               </div>
               <div className="d-flex align-items-center mb-2">
                 <div className="rounded-circle d-flex align-items-center justify-content-center me-3" style={{ width: 48, height: 48, background: '#d1fae5' }}>
@@ -102,7 +102,7 @@ const Home = ({ totalRestaurants, totalActiveRestaurants, totalDishes, todayOrde
             <div className="card-body d-flex flex-column justify-content-between">
               <div className="d-flex align-items-center justify-content-between mb-2">
                 <span className="text-muted fw-semibold">Pedidos Totales</span>
-                <i className="fas fa-ellipsis-v text-muted small"></i>
+                <i className="fas fa-shopping-cart text-muted small"></i>
               </div>
               <div className="d-flex align-items-center mb-2">
                 <div className="rounded-circle d-flex align-items-center justify-content-center me-3" style={{ width: 48, height: 48, background: '#e0e7ff' }}>
@@ -121,11 +121,11 @@ const Home = ({ totalRestaurants, totalActiveRestaurants, totalDishes, todayOrde
             <div className="card-body d-flex flex-column justify-content-between">
               <div className="d-flex align-items-center justify-content-between mb-2">
                 <span className="text-muted fw-semibold">Ingresos Totales</span>
-                <i className="fas fa-ellipsis-v text-muted small"></i>
+                <small className="text-muted small">S/</small>
               </div>
               <div className="d-flex align-items-center mb-2">
                 <div className="rounded-circle d-flex align-items-center justify-content-center me-3" style={{ width: 48, height: 48, background: '#d1fae5' }}>
-                  <i className="fas fa-dollar-sign text-success fs-4"></i>
+                  <span className="text-success fs-4">S/</span>
                 </div>
                 <div>
                   <div className="fs-4 fw-bold text-dark">S/ {formatIncome(incomeToday) || '—'}</div>
@@ -147,11 +147,37 @@ const Home = ({ totalRestaurants, totalActiveRestaurants, totalDishes, todayOrde
                 <span className="fw-bold">Ventas a través de la App</span>
               </div>
               <div className="d-flex gap-2">
-                <select className="form-select form-select-sm" value={viewType} onChange={(e) => setViewType(e.target.value)} style={{ width: 'auto' }}>
-                  <option value="month">Por Mes (Días)</option>
-                  <option value="year">Por Año (Meses)</option>
-                  <option value="custom">Rango Personalizado</option>
-                </select>
+                {/* Bootstrap 5 Dropdown for view type */}
+                <div className="dropdown">
+                  <button
+                    className="btn btn-sm btn-white dropdown-toggle"
+                    type="button"
+                    id="viewTypeDropdown"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    {viewType === 'month' ? 'Por Mes (Días)' : viewType === 'year' ? 'Por Año (Meses)' : 'Rango Personalizado'}
+                    <i className='mdi mdi-chevron-down ms-1'></i>
+                  </button>
+                  <ul className="dropdown-menu dropdown-menu-end" aria-labelledby="viewTypeDropdown">
+                    <li>
+                      <button className="dropdown-item" onClick={(e) => setViewType('month')}>
+                        Por Mes (Días)
+                      </button>
+                    </li>
+                    <li>
+                      <button className="dropdown-item" onClick={(e) => setViewType('year')}>
+                        Por Año (Meses)
+                      </button>
+                    </li>
+                    <li>
+                      <button className="dropdown-item" onClick={(e) => setViewType('custom')}>
+                        Rango Personalizado
+                      </button>
+                    </li>
+                  </ul>
+                </div>
+
                 {viewType === 'month' && (
                   <DatePicker
                     selected={selectedMonth}
@@ -250,7 +276,7 @@ const Home = ({ totalRestaurants, totalActiveRestaurants, totalDishes, todayOrde
                   }
                 ]}
                 type="line"
-                height={300}
+                height={420}
               />
             </div>
           </div>
