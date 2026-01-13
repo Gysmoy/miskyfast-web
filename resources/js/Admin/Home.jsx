@@ -93,9 +93,9 @@ const Home = ({ totalRestaurants, totalActiveRestaurants, totalDishes, todayOrde
       }
 
       try {
-        const response = await homeRest.graph(type, filter);
-        if (response && response.data) {
-          const apiData = response.data.map(item => ({
+        const result = await homeRest.graph(type, filter);
+        if (result) {
+          const apiData = result.map(item => ({
             date: item.label,
             orders: item.count,
             amount: item.amount
