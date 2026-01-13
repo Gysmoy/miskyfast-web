@@ -1,10 +1,13 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useEffect } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
 import { createRoot } from 'react-dom/client';
 import CreateReactScript from '../Utils/CreateReactScript';
 import BaseAdminto from '../Components/Adminto/Base';
 import Chart from 'react-apexcharts';
+import HomeRest from '../Actions/HomeRest';
+
+const homeRest = new HomeRest()
 
 const Home = ({ totalRestaurants, totalActiveRestaurants, totalDishes, todayOrders, thisMonthOrders, incomeToday }) => {
 
@@ -14,45 +17,103 @@ const Home = ({ totalRestaurants, totalActiveRestaurants, totalDishes, todayOrde
   const [selectedYear, setSelectedYear] = useState(new Date());
   const [customStart, setCustomStart] = useState(new Date(Date.now() - 29 * 24 * 60 * 60 * 1000));
   const [customEnd, setCustomEnd] = useState(new Date());
+  const [salesData, setSalesData] = useState([]);
 
   const formatIncome = (value) => {
     const numValue = Number(value) || 0;
     return numValue.toFixed(2);
   };
 
-  // Generar datos ficticios de ventas según el tipo de vista
-  const salesData = useMemo(() => {
-    const data = [];
-    if (viewType === 'month') {
-      const daysInMonth = new Date(selectedMonth.getFullYear(), selectedMonth.getMonth() + 1, 0).getDate();
-      for (let d = 1; d <= daysInMonth; d++) {
-        data.push({
-          date: `${selectedMonth.getFullYear()}-${String(selectedMonth.getMonth() + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`,
-          orders: Math.floor(Math.random() * 50) + 20,
-          amount: Math.floor(Math.random() * 5000) + 1500
-        });
-      }
-    } else if (viewType === 'year') {
-      for (let m = 0; m < 12; m++) {
-        data.push({
-          date: `${selectedYear.getFullYear()}-${String(m + 1).padStart(2, '0')}-01`,
-          orders: Math.floor(Math.random() * 1500) + 500,
-          amount: Math.floor(Math.random() * 150000) + 50000
-        });
-      }
-    } else {
-      // Rango personalizado
-      const start = new Date(customStart);
-      const end = new Date(customEnd);
-      for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1)) {
-        data.push({
-          date: d.toISOString().split('T')[0],
-          orders: Math.floor(Math.random() * 50) + 20,
-          amount: Math.floor(Math.random() * 5000) + 1500
-        });
-      }
+  // Helper to generate full date range
+  const generateFullDateRange = (start, end) => {
+    const dates = [];
+    const current = new Date(start);
+    while (current <= end) {
+      dates.push(new Date(current));
+      current.setDate(current.getDate() + 1);
     }
-    return data;
+    return dates;
+  };
+
+  // Helper to generate full month range
+  const generateFullMonthRange = (year) => {
+    const months = [];
+    for (let i = 0; i < 12; i++) {
+      months.push(new Date(year, i));
+    }
+    return months;
+  };
+
+  // Process data to fill gaps with zeros
+  const processSalesData = (data, type, start, end) => {
+    const dataMap = new Map();
+    data.forEach(item => {
+      dataMap.set(item.date, { orders: item.orders, amount: item.amount });
+    });
+
+    const fullRange = type === 'year'
+      ? generateFullMonthRange(start.getFullYear())
+      : generateFullDateRange(start, end);
+
+    return fullRange.map(date => {
+      const key = type === 'year'
+        ? date.toISOString().slice(0, 7) // yyyy-mm
+        : date.toISOString().split('T')[0]; // yyyy-mm-dd
+      const entry = dataMap.get(key);
+      return {
+        date: key,
+        orders: entry ? entry.orders : 0,
+        amount: entry ? entry.amount : 0
+      };
+    });
+  };
+
+  // Fetch real data from API
+  useEffect(() => {
+    const fetchSalesData = async () => {
+      let type, filter;
+      let start, end;
+      if (viewType === 'month') {
+        type = 'monthly';
+        filter = `${selectedMonth.getFullYear()}-${String(selectedMonth.getMonth() + 1).padStart(2, '0')}`;
+        start = new Date(selectedMonth.getFullYear(), selectedMonth.getMonth(), 1);
+        end = new Date(selectedMonth.getFullYear(), selectedMonth.getMonth() + 1, 0);
+      } else if (viewType === 'year') {
+        type = 'yearly';
+        filter = selectedYear.getFullYear().toString();
+        start = new Date(selectedYear.getFullYear(), 0);
+        end = new Date(selectedYear.getFullYear(), 11);
+      } else {
+        type = 'custom';
+        const startStr = customStart.toISOString().split('T')[0];
+        const endStr = customEnd.toISOString().split('T')[0];
+        filter = `${startStr}|${endStr}`;
+        start = new Date(customStart);
+        end = new Date(customEnd);
+      }
+
+      try {
+        const response = await homeRest.graph(type, filter);
+        if (response && response.data) {
+          const apiData = response.data.map(item => ({
+            date: item.label,
+            orders: item.count,
+            amount: item.amount
+          }));
+          const filledData = processSalesData(apiData, type, start, end);
+          setSalesData(filledData);
+        } else {
+          const filledData = processSalesData([], type, start, end);
+          setSalesData(filledData);
+        }
+      } catch (error) {
+        console.error('Error fetching sales data:', error);
+        const filledData = processSalesData([], type, start, end);
+        setSalesData(filledData);
+      }
+    };
+
+    fetchSalesData();
   }, [viewType, selectedMonth, selectedYear, customStart, customEnd]);
 
   return (
@@ -129,7 +190,7 @@ const Home = ({ totalRestaurants, totalActiveRestaurants, totalDishes, todayOrde
                 </div>
                 <div>
                   <div className="fs-4 fw-bold text-dark">S/ {formatIncome(incomeToday) || '—'}</div>
-                  <div className="text-success small fw-semibold"><i className="fas fa-arrow-up me-1"></i>32% <span className="text-muted ms-1">Desde el mes pasado</span></div>
+                  <div className="text-success small fw-semibold"><i className="fas fa-arrow-up me-1"></i>32% <span className="text-muted ms-1">en todo el mes</span></div>
                 </div>
               </div>
             </div>

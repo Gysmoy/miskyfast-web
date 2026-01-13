@@ -1046,7 +1046,7 @@
     ]
   },
   "resources/js/Admin/Home.jsx": {
-    "file": "assets/Home-D7N7XR4Z.js",
+    "file": "assets/Home-BfQRfLb4.js",
     "name": "Home",
     "src": "resources/js/Admin/Home.jsx",
     "isEntry": true,
@@ -1057,6 +1057,7 @@
       "resources/js/Utils/ReactAppend.jsx",
       "_CreateReactScript-DFqTQv-e.js",
       "_Base-CI5QnTTW.js",
+      "_BasicRest-DAfE3q42.js",
       "_index-yBjzXJbu.js",
       "__commonjsHelpers-D6-XlEtG.js",
       "_index-D9sryYpX.js",
