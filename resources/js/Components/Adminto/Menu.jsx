@@ -105,7 +105,7 @@ const Menu = ({ session, hasRole }) => {
               </MenuItemContainer>
 
               <li className="menu-title">Landing Page</li>
-              <MenuItem href="/admin/testimonials" icon="mdi mdi-comment-text">Testimonios</MenuItem>
+              <MenuItem href="/admin/testimonies" icon="mdi mdi-comment-text">Testimonios</MenuItem>
               <MenuItem href="/admin/brands" icon="mdi mdi-tag-multiple">Marcas asociadas</MenuItem>
 
               <li className="menu-title">Aplicación</li>

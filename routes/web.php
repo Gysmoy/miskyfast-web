@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\MessageController as AdminMessageController;
 use App\Http\Controllers\Admin\PaymentMethodController as AdminPaymentMethodController;
 use App\Http\Controllers\Admin\RestaurantController as AdminRestaurantController;
 use App\Http\Controllers\Admin\StatusController as AdminStatusController;
+use App\Http\Controllers\Admin\TestimonyController as AdminTestimonyController;
 use App\Http\Controllers\Admin\UserController as AdminUserController;
 
 // Restaurant
@@ -31,6 +32,7 @@ use App\Http\Controllers\Mobile\AddressController as MobileAddressController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\MessageController;
+use App\Http\Controllers\TestimonyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -60,6 +62,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/payment-methods', [AdminPaymentMethodController::class, 'reactView'])->name('Admin/PaymentMethods.jsx');
         Route::get('/statuses', [AdminStatusController::class, 'reactView'])->name('Admin/Statuses.jsx');
         Route::get('/messages', [AdminMessageController::class, 'reactView'])->name('Admin/Messages.jsx');   
+        Route::get('/testimonies', [AdminTestimonyController::class, 'reactView'])->name('Admin/Testimonies.jsx');   
 
         Route::get('/users/{role}', [AdminUserController::class, 'reactView'])->name('Admin/Users.jsx');
     });

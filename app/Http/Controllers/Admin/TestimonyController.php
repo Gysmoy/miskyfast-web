@@ -14,18 +14,8 @@ use SoDe\Extend\JSON;
 class TestimonyController extends BasicController
 {
     public $model = Testimony::class;
+    public $throwMediaError = true;
     public $reactView = 'Admin/Testimonies';
     public $imageFields = ['image'];
-
-    public function setReactViewProperties(Request $request)
-    {
-        $countries = JSON::parse(File::get('../storage/app/utils/countries.json'));
-        $details = WebDetail::where('page', 'testimonies')->get();
-        return [
-            'countries' => $countries,
-            'details' => $details
-        ];
-    }
-
 
 }

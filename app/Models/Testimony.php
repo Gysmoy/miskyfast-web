@@ -16,25 +16,16 @@ class Testimony extends Model
     protected $fillable = [
         'image',
         'name',
+        'position',
         'description',
-        'country_id',
-        'country',
+        'rating',
         'visible',
-        'status'
+        'status',
     ];
 
-    static function lastTen()
-    {
-        return Testimony::select([
-            'image',
-            'name',
-            'country',
-            'description'
-        ])
-            ->where('visible', true)
-            ->where('status', true)
-            ->orderBy('updated_at', 'desc')
-            ->take(10)
-            ->get();
-    }
+    protected $casts = [
+        'rating' => 'integer',
+        'visible' => 'boolean',
+        'status' => 'boolean',
+    ];
 }

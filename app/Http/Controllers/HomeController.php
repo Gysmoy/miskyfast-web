@@ -27,11 +27,16 @@ class HomeController extends BasicController
             ->where('visible', true)
             ->where('status', true)
             ->get();
+        $testimoniesJpa = Testimony::query()
+            ->where('visible', true)
+            ->where('status', true)
+            ->get();
 
         $prefixes = JSON::parse(File::get('./prefijocelular.json'));
-            
+
         return [
             'categories' => $categoriesJpa,
+            'testimonies' => $testimoniesJpa,
             'prefixes' => $prefixes,
             'gmaps_api_key' => env('GMAPS_API_KEY'),
         ];

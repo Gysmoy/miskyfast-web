@@ -18,7 +18,7 @@ import ReactAppend from "../Utils/ReactAppend";
 
 const testimoniesRest = new TestimoniesRest();
 
-const Testimonies = ({ countries, details }) => {
+const Testimonies = ({ }) => {
     const gridRef = useRef();
     const modalRef = useRef();
 
@@ -28,6 +28,7 @@ const Testimonies = ({ countries, details }) => {
     const descriptionRef = useRef();
     const imageRef = useRef();
     const countryRef = useRef();
+    const ratingRef = useRef();
 
     const [isEditing, setIsEditing] = useState(false);
 
@@ -41,6 +42,7 @@ const Testimonies = ({ countries, details }) => {
             .val(data?.country_id ?? "89")
             .trigger("change");
         descriptionRef.current.value = data?.description ?? "";
+        ratingRef.current.value = data?.rating ?? "5";
         imageRef.image.src = `/storage/images/testimony/${data?.image}`;
         imageRef.current.value = null;
 
@@ -56,17 +58,18 @@ const Testimonies = ({ countries, details }) => {
             country: $(countryRef.current).find("option:selected").text(),
             name: nameRef.current.value,
             description: descriptionRef.current.value,
+            rating: ratingRef.current.value,
         };
 
         const formData = new FormData();
         for (const key in request) {
             formData.append(key, request[key]);
         }
-     
-       const file = imageRef.current.files[0]
-    if (file) {
-      formData.append('image', file)
-    }
+
+        const file = imageRef.current.files[0]
+        if (file) {
+            formData.append('image', file)
+        }
 
         const result = await testimoniesRest.save(formData);
         if (!result) return;
@@ -104,9 +107,6 @@ const Testimonies = ({ countries, details }) => {
         <>
             <Table
                 gridRef={gridRef}
-                title={
-                    <BasicEditing correlative="testimonies" details={details} />
-                }
                 rest={testimoniesRest}
                 toolBar={(container) => {
                     container.unshift({
@@ -147,14 +147,16 @@ const Testimonies = ({ countries, details }) => {
                                     [
                                         <img
                                             className="avatar-xs rounded-circle"
-                                            src={`/storage/images/testimony/${data.image}`}
+                                            src={`/storage/images/testimony/${data.image || "undefined"}`}
                                             alt={data.name}
+                                            onError={(e) => e.target.src = "/api/profile/thumbnail/undefined"}
                                         />,
                                         <p
                                             className="mb-0"
                                             style={{ fontSize: "14px" }}
                                         >
-                                            {data.name}
+                                            <b className="d-block">{data.name}</b>
+                                            <small className="d-block text-muted">{data.position}</small>
                                         </p>,
                                     ],
                                     false
@@ -163,8 +165,43 @@ const Testimonies = ({ countries, details }) => {
                         },
                     },
                     {
-                        dataField: "country",
-                        caption: "Pais",
+                        dataField: "description",
+                        caption: "Testimonio",
+                        cellTemplate: (container, { data }) => {
+                            $(container).empty();
+                            ReactAppend(
+                                container,
+                                <div
+                                    className="mb-0 w-100"
+                                    style={{
+                                        display: "-webkit-box",
+                                        WebkitLineClamp: 2,
+                                        WebkitBoxOrient: "vertical",
+                                        overflow: "hidden",
+                                        textOverflow: "ellipsis",
+                                        lineHeight: "1.4em",
+                                        maxHeight: "2.8em",
+                                        wordBreak: "break-word",
+                                    }}
+                                >
+                                    {data.description}
+                                </div>
+                            );
+                        },
+                    },
+                    {
+                        dataField: "rating",
+                        caption: "Rating",
+                        alignment: "center",
+                        cellTemplate: (container, { data }) => {
+                            $(container).empty();
+                            const stars = Math.max(0, Math.min(5, parseInt(data.rating, 10) || 0));
+                            const starsHtml = "★".repeat(stars) + "☆".repeat(5 - stars);
+                            ReactAppend(
+                                container,
+                                <span style={{ color: "#ffc107", fontSize: "24px" }}>{starsHtml}</span>
+                            );
+                        },
                     },
                     {
                         dataField: "visible",
@@ -234,21 +271,6 @@ const Testimonies = ({ countries, details }) => {
                                     rows={2}
                                     required
                                 />
-                                <SelectFormGroup
-                                    eRef={countryRef}
-                                    label="Pais"
-                                    required
-                                    dropdownParent="#testimony-container"
-                                >
-                                    {countries.map((country, i) => (
-                                        <option
-                                            key={`country-${i}`}
-                                            value={country.id}
-                                        >
-                                            {country.name}
-                                        </option>
-                                    ))}
-                                </SelectFormGroup>
                             </div>
                         </div>
                     </div>
@@ -258,6 +280,18 @@ const Testimonies = ({ countries, details }) => {
                         rows={3}
                         required
                     />
+                    <SelectFormGroup
+                        eRef={ratingRef}
+                        label="Rating"
+                        required
+                        dropdownParent='#testimony-container'
+                    >
+                        <option value="5">5 Estrellas</option>
+                        <option value="4">4 Estrellas</option>
+                        <option value="3">3 Estrellas</option>
+                        <option value="2">2 Estrellas</option>
+                        <option value="1">1 Estrella</option>
+                    </SelectFormGroup>
                 </div>
             </Modal>
         </>
