@@ -165,6 +165,29 @@ const Restaurants = ({ prefixes, gmaps_api_key }) => {
         const result = await restaurantsRest.save(formData);
         if (!result) return;
 
+        if (result !== true && result?.email && result?.password) {
+            await Swal.fire({
+                title: "Credenciales del restaurante",
+                html: `
+                    <p>Guarda estas credenciales en un lugar seguro. Será la única vez que las verás.</p>
+                    <div class="text-start mt-3">
+                        <div class="mb-2">
+                            <strong>Email:</strong> 
+                            <span class="text-primary">${result.email}</span>
+                        </div>
+                        <div class="mb-2">
+                            <strong>Contraseña:</strong> 
+                            <span class="text-danger">${result.password}</span>
+                        </div>
+                    </div>
+                `,
+                icon: "info",
+                confirmButtonText: "He copiado las credenciales",
+                allowOutsideClick: false,
+                allowEscapeKey: false,
+            });
+        }
+
         $(gridRef.current).dxDataGrid("instance").refresh();
         $(modalRef.current).modal("hide");
     };
