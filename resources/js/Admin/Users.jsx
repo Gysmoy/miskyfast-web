@@ -152,15 +152,15 @@ const Users = ({ role, prefixes }) => {
             onClick: () => $(gridRef.current).dxDataGrid('instance').refresh()
           }
         });
-        container.unshift({
-          widget: 'dxButton', location: 'after',
-          options: {
-            icon: 'plus',
-            text: 'Nuevo registro',
-            hint: 'Nuevo registro',
-            onClick: () => onModalOpen()
-          }
-        });
+        // container.unshift({
+        //   widget: 'dxButton', location: 'after',
+        //   options: {
+        //     icon: 'plus',
+        //     text: 'Nuevo registro',
+        //     hint: 'Nuevo registro',
+        //     onClick: () => onModalOpen()
+        //   }
+        // });
       }}
       columns={[
         {
@@ -203,10 +203,9 @@ const Users = ({ role, prefixes }) => {
           dataType: 'boolean',
           cellTemplate: (container, { data }) => {
             $(container).empty()
-            const isActive = data.status
-            ReactAppend(container, <SwitchFormGroup checked={isActive} onChange={() => onStatusChange({
+            ReactAppend(container, <SwitchFormGroup checked={data.status} onChange={() => onStatusChange({
               id: data.id,
-              value: isActive ? 'inactive' : 'active'
+              value: !data.status
             })} />)
           }
         },
@@ -214,19 +213,19 @@ const Users = ({ role, prefixes }) => {
           caption: 'Acciones',
           cellTemplate: (container, { data }) => {
             container.css('text-overflow', 'unset')
-            container.append(DxButton({
-              className: 'btn btn-xs btn-soft-primary',
-              title: 'Editar',
-              icon: 'fa fa-pen',
-              onClick: () => onModalOpen(data)
-            }))
+            // container.append(DxButton({
+            //   className: 'btn btn-xs btn-soft-primary',
+            //   title: 'Editar',
+            //   icon: 'fa fa-pen',
+            //   onClick: () => onModalOpen(data)
+            // }))
             container.append(DxButton({
               className: 'btn btn-xs btn-soft-warning',
               title: 'Cambiar contraseña',
               icon: 'fa fa-key',
               onClick: () => onChangePasswordClicked(data.id)
             }))
-            container.append(DxButton({
+            if (role == 'client' || role == 'delivery') container.append(DxButton({
               className: 'btn btn-xs btn-soft-danger',
               title: 'Eliminar',
               icon: 'fa fa-trash',
