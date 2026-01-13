@@ -100,15 +100,15 @@ const Home = ({ totalRestaurants, totalActiveRestaurants, totalDishes, todayOrde
             orders: item.count,
             amount: item.amount
           }));
-          const filledData = processSalesData(apiData, type, start, end);
+          const filledData = processSalesData(apiData, viewType, start, end);
           setSalesData(filledData);
         } else {
-          const filledData = processSalesData([], type, start, end);
+          const filledData = processSalesData([], viewType, start, end);
           setSalesData(filledData);
         }
       } catch (error) {
         console.error('Error fetching sales data:', error);
-        const filledData = processSalesData([], type, start, end);
+        const filledData = processSalesData([], viewType, start, end);
         setSalesData(filledData);
       }
     };
